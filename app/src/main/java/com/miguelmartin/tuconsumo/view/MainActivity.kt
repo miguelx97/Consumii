@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
@@ -19,11 +22,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
+/*
+        fab.setOnClickListener { _->
 
+        }
+*/
 
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when(checkedId){
+                R.id.rbCustomTrayectos -> etCustomTrayectos.visibility = View.VISIBLE
+                else -> etCustomTrayectos.visibility = View.GONE
+            }
+        }
 
-        fab.setOnClickListener { view ->
+        btnCalcular.setOnClickListener {
             presenter = MainPresenter()
             val resultados = presenter.calcularDatos(getInfoViaje())
             val intent = Intent(this, ResultadoActivity::class.java).apply {
@@ -33,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getInfoViaje():Viaje{
+    private fun getInfoViaje():Viaje{
         val viaje = Viaje()
         viaje.distanciaTrayecto = etDistancia.text.toString().toDouble()
         viaje.coche.consumo = etConsumo.text.toString().toDouble()
