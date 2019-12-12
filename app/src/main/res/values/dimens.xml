@@ -4,6 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margenes_laterales">40dp</dimen>
+    <dimen name="margen_top_layout">30dp</dimen>
     <dimen name="margenes_laterales_items">12dp</dimen>
     <dimen name="margens_items">6dp</dimen>
     <dimen name="items_size">40dp</dimen>

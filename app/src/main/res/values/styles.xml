@@ -49,9 +49,17 @@
     <style name="layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginTop">@dimen/margen_top_layout</item>
         <item name="android:padding">@dimen/margens_items</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tarjeta" parent="layout">
+        <item name="android:background">@drawable/tarjeta</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginTop">@dimen/margen_top_layout</item>
     </style>
 
     <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">

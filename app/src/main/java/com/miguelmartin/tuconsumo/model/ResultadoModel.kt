@@ -11,7 +11,7 @@ class ResultadoModel {
         return oldPasajeros + cambio
     }
 
-    fun calcularCostoPorPasajero(costo: Double, pasajeros: Int): Double = costo/pasajeros
+    fun calcularCostoPorPasajero(costo: Double, pasajeros: Int): Double = Math.round(costo/pasajeros * 100.0) / 100.0
 
     fun generarTextoParaCompartir(resultados: Resultados,numPasajeros: Int, nombreApp:String) =
         "Se han recorrido ${resultados.distancia} Km.\n" +
