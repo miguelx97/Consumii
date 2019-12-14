@@ -5,6 +5,6 @@ import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 
 data class Combustible (
     var tipo: TipoCombustible? = null,
-    var precio: Double = 0.0
+    var precio: Float = 0F
 ):Serializable
 

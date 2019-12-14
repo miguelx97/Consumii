@@ -1,18 +1,18 @@
 package com.miguelmartin.tuconsumo.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import com.miguelmartin.tuconsumo.Entities.Resultados
 import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.R
+import com.miguelmartin.tuconsumo.model.MainModel
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
 
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,13 +22,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        setSupportActionBar(toolbar)
-/*
-        fab.setOnClickListener { _->
+        presenter = MainPresenter(this)
 
-        }
+        val model = MainModel()
+        val jsonInfoGasolineras = model.llamadaRest(this, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/15?Accept=application/json&Content-Type=application/json")
+//        val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
+
+//        presenter.getPreciosCombustibles()
+
+/*        setSupportActionBar(toolbar)
+        fab.setOnClickListener { _->}
 */
-
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
                 R.id.rbCustomTrayectos -> etCustomTrayectos.visibility = View.VISIBLE
@@ -37,20 +41,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnCalcular.setOnClickListener {
-            presenter = MainPresenter()
-            val resultados = presenter.calcularDatos(getInfoViaje())
-            val intent = Intent(this, ResultadoActivity::class.java).apply {
-                putExtra("resultados", resultados)
-            }
-            startActivity(intent)
+            presenter.calcularResultados(getInfoViaje())
         }
+    }
+
+    fun irResultadoActivity(resultados: Resultados){
+        val intent = Intent(this, ResultadoActivity::class.java).apply {
+            putExtra("resultados", resultados)
+        }
+        startActivity(intent)
     }
 
     private fun getInfoViaje():Viaje{
         val viaje = Viaje()
         viaje.distanciaTrayecto = etDistancia.text.toString().toDouble()
         viaje.coche.consumo = etConsumo.text.toString().toDouble()
-        viaje.coche.combustible.precio = etPrecioFuel.text.toString().toDouble()
+        viaje.coche.combustible.precio = etPrecioFuel.text.toString().toFloat()
 
         when {
             rbUnTrayecto.isChecked -> viaje.numeroTrayectos = 1
