@@ -4,6 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLight"
+    android:padding="@dimen/margenes_laterales"
     tools:context=".view.InicioActivity">
+
+    <LinearLayout
+        android:id="@+id/lyTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido a" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyPreguntas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyTitulo">
+
+        <TextView
+            android:id="@+id/tvEntrada"
+            style="@style/textViewInicio"
+            android:text="Cuéntame sobre tu coche" />
+
+        <TextView
+            android:id="@+id/tvCombustibleInicio"
+            style="@style/textViewInicio"
+            android:text="¿Qué combustible usa tu coche?" />
+
+        <EditText
+            android:id="@+id/spCombustiblesInicio"
+            style="@style/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/seleccione_combustible"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvConsumoInicio"
+            style="@style/textViewInicio"
+            android:text="¿Cuánto cunsume por 100km?" />
+
+        <EditText
+            android:id="@+id/etConsumoInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/tvComunidad"
+            style="@style/textViewInicio"
+            android:text="¿Dónde vives?" />
+
+        <EditText
+            android:id="@+id/spComunidadInicio"
+            style="@style/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/seleccione_comunidad"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyBotones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <Button
+            android:id="@+id/btnAceptarInicio"
+            style="@style/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aceptar" />
+
+        <Button
+            android:id="@+id/btnNoCoche"
+            style="@style/buttonSecundario"
+            android:text="No tengo coche" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

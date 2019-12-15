@@ -30,6 +30,14 @@
         <item name="android:textSize">20dp</item>
     </style>
 
+    <style name="textViewInicio" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+    </style>
+
     <style name="customEditText" parent="@style/editText">
         <item name="android:background">@drawable/edittext_circular</item>
         <item name="android:layout_marginTop">5dp</item>
@@ -72,6 +80,32 @@
         <item name="android:layout_margin">@dimen/margens_items</item>
         <item name="android:background">@drawable/boton_circular</item>
         <item name="android:tint">@android:color/white</item>
+    </style>
+
+    <style name="spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:tint">@android:color/darker_gray</item>
+        <item name="android:drawableEnd">@drawable/flecha_abajo</item>
+        <item name="android:editable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="button" parent="@android:style/Widget.Material.Light.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/boton_circular</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="buttonSecundario" parent="@android:style/Widget.Material.Light.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">18dp</item>
     </style>
 
 </resources>

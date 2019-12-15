@@ -30,14 +30,10 @@ class MainModel {
     }
 
     fun llamadaRest(context: Context, url:String):String{
-
         var respuesta = ""
-
         val queue = Volley.newRequestQueue(context)
-        // Request a string response from the provided URL.
         val stringRequest = StringRequest(url,
             Response.Listener<String> { response ->
-                // Display the first 100 characters of the response string.
                 respuesta = response
                 Log.i("Gasolina", "Response is: ${response.substring(0, 100)}")
                 getMediasCombustibles(response)
@@ -50,27 +46,6 @@ class MainModel {
         queue.add(stringRequest)
 
         return respuesta
-
-/*
-        val queue = Volley.newRequestQueue(context)
-        // Request a string response from the provided URL.
-        val stringRequest = StringRequest(url,
-            Response.Listener<String> { response ->
-                // Display the first 100 characters of the response string.
-                Log.i("Gasolina", "Response is: ${response.substring(0, 100)}")
-            },
-            Response.ErrorListener { error ->
-                error.printStackTrace()
-                Log.e("Gasolina", "That didn't work!")
-            })
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest)
-
-
-        return ""
-
-         */
     }
 
     data class MediaPrecioCombustible (var lPrecios:MutableList<Float> = mutableListOf(), var nombre:String = "")
@@ -80,20 +55,15 @@ class MainModel {
         val gson = Gson()
         val jsonObject = gson.fromJson(json, JsonObject::class.java)
         val arrJoListaEESSPrecio = gson.fromJson(jsonObject.get("ListaEESSPrecio"), Array<JsonObject>::class.java)
-//        val gasolineraRest = gson.fromJson(jsonObject.get("ListaEESSPrecio"), Array<GasolineraRest>::class.java)
 
-        val arrCombustibles: Array<MediaPrecioCombustible> = arrayOf(
-            MediaPrecioCombustible(nombre = TipoCombustible.GASOLINA_95.nombreJson),
-            MediaPrecioCombustible(nombre = TipoCombustible.GASOLINA_98.nombreJson),
-            MediaPrecioCombustible(nombre = TipoCombustible.DIESEL.nombreJson),
-            MediaPrecioCombustible(nombre = TipoCombustible.DIESEL_MEJORADO.nombreJson),
-            MediaPrecioCombustible(nombre = TipoCombustible.GLP.nombreJson),
-            MediaPrecioCombustible(nombre = TipoCombustible.GNC.nombreJson)
-        )
+        val arrPreciosByCombustible = Array(TipoCombustible.values().size){ MediaPrecioCombustible() }
 
+        TipoCombustible.values().forEachIndexed { i, it ->
+            arrPreciosByCombustible[i].nombre = it.nombreJson
+        }
 
         arrJoListaEESSPrecio.forEach { js ->
-            arrCombustibles.forEach {
+            arrPreciosByCombustible.forEach {
                 if(!js.get(it.nombre).isJsonNull){
                     it.lPrecios.add(js.get(it.nombre).asString.replace(",", ".").toFloat())
                 }
@@ -101,9 +71,9 @@ class MainModel {
 
         }
 
-        val mediasCombustible = Array(arrCombustibles.size){ Combustible() }
+        val mediasCombustible = Array(arrPreciosByCombustible.size){ Combustible() }
 
-        arrCombustibles.forEachIndexed{ i, it ->
+        arrPreciosByCombustible.forEachIndexed{ i, it ->
             it.lPrecios.sort()
             println("${it.nombre}: ${it.lPrecios.get(it.lPrecios.size/2)}")
             mediasCombustible[i].tipo = TipoCombustible.fromNombreJson(it.nombre)

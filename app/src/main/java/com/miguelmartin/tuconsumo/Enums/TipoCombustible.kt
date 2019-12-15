@@ -9,6 +9,7 @@ enum class TipoCombustible(val nombre: String, val nombreJson: String) {
     GNC("GNC", "Precio Gas Natural Comprimido");
 
     companion object {
+
         val map: MutableMap<String, TipoCombustible> = HashMap()
 
         init {
