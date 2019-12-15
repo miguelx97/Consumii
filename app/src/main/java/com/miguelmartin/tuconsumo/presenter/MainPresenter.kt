@@ -23,4 +23,15 @@ class MainPresenter(view: MainActivity) {
         }
     }
 
+    fun checkTieneCoche() = model.comprobarCoche(view)
+
+    fun bienvenidaSiNuevoUsuario(coche: Boolean?):Boolean {
+        if(coche==null) {
+            view.irBienvenida()
+            return true
+        } else{
+            return false
+        }
+    }
+
 }

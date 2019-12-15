@@ -1,16 +1,16 @@
 package com.miguelmartin.tuconsumo.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.miguelmartin.tuconsumo.Common.TIENE_COCHE
+import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Resultados
 import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.R
-import com.miguelmartin.tuconsumo.model.MainModel
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
 
 import kotlinx.android.synthetic.main.content_main.*
@@ -24,8 +24,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         presenter = MainPresenter(this)
 
-        val model = MainModel()
-        val jsonInfoGasolineras = model.llamadaRest(this, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/15?Accept=application/json&Content-Type=application/json")
+        val coche = presenter.checkTieneCoche()
+        if(presenter.bienvenidaSiNuevoUsuario(coche)) return
+
+        if(coche!!){
+            this.toast("Tiene coche!")
+        }
+
+//        val model = MainModel()
+//        val jsonInfoGasolineras = model.llamadaRest(this, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/15?Accept=application/json&Content-Type=application/json")
 //        val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
 
 //        presenter.getPreciosCombustibles()
@@ -49,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ResultadoActivity::class.java).apply {
             putExtra("resultados", resultados)
         }
+        startActivity(intent)
+    }
+
+    fun irBienvenida(){
+        val intent = Intent(this, BienvenidaActivity::class.java)
         startActivity(intent)
     }
 

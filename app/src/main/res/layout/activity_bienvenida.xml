@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLight"
     android:padding="@dimen/margenes_laterales"
-    tools:context=".view.InicioActivity">
+    tools:context=".view.BienvenidaActivity">
 
     <LinearLayout
         android:id="@+id/lyTitulo"
@@ -43,7 +43,7 @@
         <TextView
             android:id="@+id/tvEntrada"
             style="@style/textViewInicio"
-            android:text="Cuéntame sobre tu coche" />
+            android:text="Unas preguntas para empezar" />
 
         <TextView
             android:id="@+id/tvCombustibleInicio"
@@ -51,7 +51,7 @@
             android:text="¿Qué combustible usa tu coche?" />
 
         <EditText
-            android:id="@+id/spCombustiblesInicio"
+            android:id="@+id/spCombustible"
             style="@style/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,21 +61,22 @@
         <TextView
             android:id="@+id/tvConsumoInicio"
             style="@style/textViewInicio"
-            android:text="¿Cuánto cunsume por 100km?" />
+            android:text="¿Cuánto cunsume su coche?" />
 
         <EditText
-            android:id="@+id/etConsumoInicio"
+            android:id="@+id/etConsumo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:hint="Litros por 100 km"
+            android:inputType="none|numberDecimal" />
 
         <TextView
             android:id="@+id/tvComunidad"
             style="@style/textViewInicio"
-            android:text="¿Dónde vives?" />
+            android:text="¿Dónde vives? (Opcional)" />
 
         <EditText
-            android:id="@+id/spComunidadInicio"
+            android:id="@+id/spComunidad"
             style="@style/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

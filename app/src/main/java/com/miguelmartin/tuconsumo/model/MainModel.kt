@@ -7,10 +7,13 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.miguelmartin.tuconsumo.Common.PREFS_NAME
+import com.miguelmartin.tuconsumo.Common.TIENE_COCHE
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.Resultados
 import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
+import com.miguelmartin.tuconsumo.view.MainActivity
 
 
 class MainModel {
@@ -81,5 +84,13 @@ class MainModel {
         }
 
         return mediasCombustible
+    }
+
+    fun comprobarCoche(view:MainActivity): Boolean? {
+        val sharedPreferences = view.getSharedPreferences(PREFS_NAME, 0)
+        if(sharedPreferences.contains(TIENE_COCHE))
+            return sharedPreferences.getBoolean(TIENE_COCHE, false)
+        else
+            return null
     }
 }

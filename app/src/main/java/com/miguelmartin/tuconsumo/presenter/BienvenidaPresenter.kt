@@ -2,12 +2,12 @@ package com.miguelmartin.tuconsumo.presenter
 
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
-import com.miguelmartin.tuconsumo.model.InicioModel
-import com.miguelmartin.tuconsumo.view.InicioActivity
+import com.miguelmartin.tuconsumo.model.BienvenidaModel
+import com.miguelmartin.tuconsumo.view.BienvenidaActivity
 
-class InicioPresenter(view: InicioActivity) {
+class BienvenidaPresenter(view: BienvenidaActivity) {
     val view = view
-    val model = InicioModel()
+    val model = BienvenidaModel()
     fun cargarCombustibles(){
         val arrNombresCombustibles = TipoCombustible.values().map { it.nombre }.toTypedArray()
         val arrNamesCombustibles = TipoCombustible.values().map { it.name }.toTypedArray()
@@ -19,8 +19,10 @@ class InicioPresenter(view: InicioActivity) {
         view.rellenarSpComunidadesInicio(arrComunidades)
     }
 
-    fun aceptar(datosUsuario: DatosUsuario){
-        model.guardarPreferences(datosUsuario, view)
-        view.irMain()
+    fun accionBotones(tieneCoche:Boolean, datosUsuario: DatosUsuario = DatosUsuario()){
+        if (!tieneCoche || view.camposRellenos(datosUsuario)){
+            model.guardarPreferences(datosUsuario, tieneCoche, view)
+            view.irMain()
+        }
     }
 }

@@ -3,10 +3,10 @@ package com.miguelmartin.tuconsumo.model
 import android.content.Context
 import android.content.SharedPreferences
 import com.miguelmartin.tuconsumo.Common.PREFS_NAME
+import com.miguelmartin.tuconsumo.Common.TIENE_COCHE
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
-import com.miguelmartin.tuconsumo.view.InicioActivity
 
-class InicioModel {
+class BienvenidaModel {
 
     fun getComunidades() = hashMapOf(
         "01" to "Andalucía",
@@ -30,13 +30,20 @@ class InicioModel {
         "19" to "Melilla"
     )
 
-    fun guardarPreferences(datosUsuario: DatosUsuario, context: Context){
-        var sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-        var editor = sharedPreferences.edit()
+    lateinit var sharedPreferences:SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
 
-        editor.putString("consumo", datosUsuario.consumo)
-        editor.putString("combustible", datosUsuario.combustible)
-        editor.putString("comunidad", datosUsuario.comunidad)
+    fun guardarPreferences(datosUsuario: DatosUsuario?, tieneCoche:Boolean, context: Context){
+        sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
+        editor = sharedPreferences.edit()
+
+        editor.putBoolean(TIENE_COCHE, tieneCoche)
+        if(tieneCoche){
+            editor.putFloat("consumo", datosUsuario!!.consumo)
+            editor.putString("combustible", datosUsuario!!.combustible)
+            editor.putString("comunidad", datosUsuario!!.comunidad)
+        }
+
         editor.commit()
     }
 }
