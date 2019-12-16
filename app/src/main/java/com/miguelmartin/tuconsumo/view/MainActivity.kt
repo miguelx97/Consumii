@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.miguelmartin.tuconsumo.Common.TIENE_COCHE
 import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Resultados
 import com.miguelmartin.tuconsumo.Entities.Viaje
@@ -29,17 +28,11 @@ class MainActivity : AppCompatActivity() {
 
         if(coche!!){
             this.toast("Tiene coche!")
+            val datosUsuario = presenter.getDatosUsuario()
+            val idComunidad = presenter.getIdByNombreComunidad(datosUsuario.comunidad)
+            presenter.llamarApiCombustibles(idComunidad, datosUsuario.combustible)
         }
 
-//        val model = MainModel()
-//        val jsonInfoGasolineras = model.llamadaRest(this, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/15?Accept=application/json&Content-Type=application/json")
-//        val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
-
-//        presenter.getPreciosCombustibles()
-
-/*        setSupportActionBar(toolbar)
-        fab.setOnClickListener { _->}
-*/
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
                 R.id.rbCustomTrayectos -> etCustomTrayectos.visibility = View.VISIBLE
@@ -57,6 +50,10 @@ class MainActivity : AppCompatActivity() {
             putExtra("resultados", resultados)
         }
         startActivity(intent)
+    }
+
+    fun setPrecioCombustible(precioCombustible: String){
+        etPrecioFuel.setHint(precioCombustible)
     }
 
     fun irBienvenida(){

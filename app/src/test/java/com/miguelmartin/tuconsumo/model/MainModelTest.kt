@@ -10,13 +10,14 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class MainModelTest {
 
     val mainModel = MainModel()
-    val context = ApplicationProvider.getApplicationContext<Context>()
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     @Test
     fun calcularConsumoTest() {
@@ -28,9 +29,11 @@ class MainModelTest {
 /*
     @Test
     fun llamadaRestTest(){
-        Assert.assertTrue(mainModel.llamadaRest(context,"https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/13?Accept=application/json&Content-Type=application/json"))
+        mainModel.llamadaRest(context,"https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/13?Accept=application/json&Content-Type=application/json")
+
     }
-    */
+*/
+
 
     @Test
     fun parsearAGasolineraRestTest(){

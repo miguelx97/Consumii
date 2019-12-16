@@ -7,16 +7,20 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.miguelmartin.tuconsumo.Common.PREFS_NAME
-import com.miguelmartin.tuconsumo.Common.TIENE_COCHE
+import com.miguelmartin.tuconsumo.Common.*
 import com.miguelmartin.tuconsumo.Entities.Combustible
+import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Entities.Resultados
 import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
+import com.miguelmartin.tuconsumo.presenter.MainPresenter
 import com.miguelmartin.tuconsumo.view.MainActivity
 
 
 class MainModel {
+
+
+
     fun calcularConsumo(viaje: Viaje): Resultados{
         //Datos del viaje
         val distancia = viaje.distanciaTrayecto
@@ -32,14 +36,12 @@ class MainModel {
         return Resultados(distanciaRecorrida, combustibleGastado, coste)
     }
 
-    fun llamadaRest(context: Context, url:String):String{
-        var respuesta = ""
+    fun llamadaRest(context: MainActivity, combustible:String, url:String){
         val queue = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(url,
             Response.Listener<String> { response ->
-                respuesta = response
                 Log.i("Gasolina", "Response is: ${response.substring(0, 100)}")
-                getMediasCombustibles(response)
+                MainPresenter(context).llamadaExitosa(response, combustible)
             },
             Response.ErrorListener { error ->
                 error.printStackTrace()
@@ -47,8 +49,6 @@ class MainModel {
             })
 
         queue.add(stringRequest)
-
-        return respuesta
     }
 
     data class MediaPrecioCombustible (var lPrecios:MutableList<Float> = mutableListOf(), var nombre:String = "")
@@ -71,7 +71,6 @@ class MainModel {
                     it.lPrecios.add(js.get(it.nombre).asString.replace(",", ".").toFloat())
                 }
             }
-
         }
 
         val mediasCombustible = Array(arrPreciosByCombustible.size){ Combustible() }
@@ -92,5 +91,18 @@ class MainModel {
             return sharedPreferences.getBoolean(TIENE_COCHE, false)
         else
             return null
+    }
+
+    fun getDatosUsuario(view:MainActivity):DatosUsuario{
+        val sharedPreferences = view.getSharedPreferences(PREFS_NAME, 0)
+        return DatosUsuario(
+            sharedPreferences.getFloat(CONSUMO, 0F),
+            sharedPreferences.getString(COMBUSTIBLE, ""),
+            sharedPreferences.getString(COMUNIDAD, "")
+        )
+    }
+
+    fun getIdByNombreComunidad(comunidad: String): String {
+        return LISTA_COMUNIDADES.filterValues { it == comunidad }.keys.elementAt(0)
     }
 }

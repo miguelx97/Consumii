@@ -1,4 +1,15 @@
-hacer layout de la bienveniada
-cargar datos de combustibles y comunidades
-crear los properties
-poner en el main que si los properties no están establecidos, vaya a bienvenida
+//hacer layout de la bienveniada
+//cargar datos de combustibles y comunidades
+//crear los properties
+//poner en el main que si los properties no están establecidos, vaya a bienvenida
+
+Retornar json a la vista
+Rellenar edittext con el
+Cargar datos en lista estática
+Crear Dialog con combustibles y precios
+
+
+
+
+
+
