@@ -3,6 +3,6 @@ import java.io.Serializable
 
 data class Coche (
     var nombre:String? = null,
-    var consumo:Double = 0.0,
+    var consumo:Float = 0F,
     var combustible: Combustible = Combustible()
 ):Serializable

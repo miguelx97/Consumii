@@ -3,6 +3,7 @@ package com.miguelmartin.tuconsumo.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.R

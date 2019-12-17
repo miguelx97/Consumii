@@ -3,9 +3,9 @@
 //crear los properties
 //poner en el main que si los properties no están establecidos, vaya a bienvenida
 
-Retornar json a la vista
-Rellenar edittext con el
-Cargar datos en lista estática
+//Retornar json a la vista
+//Rellenar edittext con el
+//Cargar datos en lista estática
 Crear Dialog con combustibles y precios
 
 

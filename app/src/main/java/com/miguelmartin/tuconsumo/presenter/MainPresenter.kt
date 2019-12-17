@@ -1,8 +1,8 @@
 package com.miguelmartin.tuconsumo.presenter
 
-import android.util.Log
+import com.miguelmartin.tuconsumo.Entities.Combustible
+import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Entities.Viaje
-import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.model.ComunModel
 import com.miguelmartin.tuconsumo.model.MainModel
 import com.miguelmartin.tuconsumo.view.MainActivity
@@ -16,16 +16,6 @@ class MainPresenter(view: MainActivity) {
         val resultados = model.calcularConsumo(viaje)
         view.irResultadoActivity(resultados)
     }
-/*
-    fun getPreciosCombustibles(){
-        val jsonInfoGasolineras = model.llamadaRest(view, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/13?Accept=application/json&Content-Type=application/json")
-        if(jsonInfoGasolineras.isEmpty()) return
-        val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
-        arrMediasCombustibles.forEach {
-            Log.w(it.tipo.toString(), it.precio.toString())
-        }
-    }
-    */
 
     fun checkTieneCoche() = model.comprobarCoche(view)
 
@@ -40,18 +30,34 @@ class MainPresenter(view: MainActivity) {
 
     fun getDatosUsuario() = model.getDatosUsuario(view)
 
-    fun llamarApiCombustibles(idComunidad: String, combustible: String) {
-        model.llamadaRest(view, combustible, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
+    fun cargarPrecioCombustible(idComunidad: String, datosUsuario: DatosUsuario) {
+        model.llamadaRest(view, datosUsuario, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
     }
 
-    fun llamadaExitosa(jsonInfoGasolineras: String, combustible: String){
+    fun llamadaExitosa(jsonInfoGasolineras: String, datosUsuario: DatosUsuario){
         val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
 
-        view.setPrecioCombustible(arrMediasCombustibles.filter { it.tipo == TipoCombustible.valueOf(combustible) }.get(0).precio.toString())
-        arrMediasCombustibles.forEach {
-            Log.w(it.tipo.toString(), it.precio.toString())
-        }
+        val precio = model.getPrecioDesdeArray(arrMediasCombustibles, datosUsuario.combustible)
+        view.rellenarPrecioCombustible(precio, datosUsuario)
+        view.cargarListaCombustibles(arrMediasCombustibles)
     }
 
     fun getIdByNombreComunidad(comunidad: String) = model.getIdByNombreComunidad(comunidad)
+
+    fun mostrarDialogCombustibles(arrCombustibles: Array<Combustible>) {
+        val arrElementos = Array(arrCombustibles.size){""}
+        val arrValores = Array(arrCombustibles.size){0F}
+
+        arrCombustibles.forEachIndexed { i, it ->
+            arrElementos[i] = "${it.tipo!!.nombre} (${it.precio}€)"
+            arrValores[i] = it.precio
+        }
+
+        view.crearDialogCombustibles(arrElementos, arrValores)
+    }
+
+    fun cargarConsumoCoche(consumo: Float) {
+        view.rellenarConsumoCoche(consumo)
+    }
+
 }

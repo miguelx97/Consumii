@@ -4,7 +4,7 @@ enum class TipoCombustible(val nombre: String, val nombreJson: String) {
     GASOLINA_95("Gasolina 95", "Precio Gasolina 95 Protección"),
     GASOLINA_98("Gasolina 98", "Precio Gasolina  98"),
     DIESEL("Diesel", "Precio Gasoleo A"),
-    DIESEL_MEJORADO("Diesel mejorado", "Precio Nuevo Gasoleo A"),
+    DIESEL_MEJORADO("Diesel Plus", "Precio Nuevo Gasoleo A"),
     GLP("GLP", "Precio Gases licuados del petróleo"),
     GNC("GNC", "Precio Gas Natural Comprimido");
 

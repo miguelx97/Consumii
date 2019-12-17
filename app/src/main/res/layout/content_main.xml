@@ -14,65 +14,63 @@
         android:layout_below="@+id/tvTitulo"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
-<!--
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
+            style="@style/basic_layout">
+
+            <EditText
                 android:id="@+id/etDistancia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/editText"
+                android:layout_weight="1"
                 android:hint="@string/distancia"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:inputType="number" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/btnAyudaTrayecto"
+                style="@style/imageButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="0dp"
+                android:src="@drawable/flecha_abajo" />
+        </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
+            style="@style/basic_layout">
+
+            <EditText
                 android:id="@+id/etConsumo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/editText"
+                android:layout_weight="1"
                 android:hint="@string/consumo_coche"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:inputType="number" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/btnAyudaConsumo"
+                style="@style/imageButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="0dp"
+                android:src="@drawable/flecha_abajo" />
+        </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
+            style="@style/basic_layout">
+
+            <EditText
                 android:id="@+id/etPrecioFuel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/editText"
+                android:layout_weight="1"
                 android:hint="@string/precio_combustible"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
--->
+                android:inputType="number" />
 
-
-        <EditText
-            android:id="@+id/etDistancia"
-            style="@style/editText"
-            android:hint="@string/distancia"
-            android:inputType="number"/>
-
-        <EditText
-            android:id="@+id/etConsumo"
-            style="@style/editText"
-            android:hint="@string/consumo_coche"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/etPrecioFuel"
-            style="@style/editText"
-            android:hint="@string/precio_combustible"
-            android:inputType="number" />
+            <ImageButton
+                android:id="@+id/btnAyudaCombustible"
+                style="@style/imageButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="0dp"
+                android:src="@drawable/flecha_abajo" />
+        </LinearLayout>
 
     </LinearLayout>
 
