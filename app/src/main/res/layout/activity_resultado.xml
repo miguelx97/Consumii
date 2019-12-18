@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLight"
+    android:paddingStart="@dimen/margenes_laterales"
+    android:paddingTop="@dimen/margenes_laterales"
+    android:paddingEnd="@dimen/margenes_laterales"
+    tools:context=".view.ResultadoActivity">
+
+    <!-- view for AdMob Banner Ad -->
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
+
+
+    <LinearLayout
+        android:id="@+id/lyResultados"
+        style="@style/tarjeta"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTituloResultados"
+            style="@style/textView"
+            android:text="Resultados" />
+
+        <TextView
+            android:id="@+id/tvCombustible"
+            style="@style/textView"
+            android:drawableLeft="@drawable/gota"
+            android:drawablePadding="@dimen/margens_items"
+            android:drawableTint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvDistancia"
+            style="@style/textView"
+            android:drawableLeft="@drawable/distancia"
+            android:drawablePadding="@dimen/margens_items"
+            android:drawableTint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvCoste"
+            style="@style/textView"
+            android:drawableLeft="@drawable/dinero"
+            android:drawablePadding="@dimen/margens_items"
+            android:drawableTint="@color/colorPrimary" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyRepartirGasolina"
+        style="@style/tarjeta"
+        android:layout_below="@+id/lyResultados"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvTituloDividir"
+            style="@style/textView"
+            android:text="Repartir Gasolina" />
+
+        <LinearLayout
+            android:id="@+id/lyPasajeros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvNumPasajeros"
+                style="@style/textView"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/pasajero"
+                android:drawablePadding="@dimen/margens_items"
+                android:drawableTint="@color/colorPrimary"
+                android:text="1" />
+
+            <ImageButton
+                android:id="@+id/btnMenos"
+                style="@style/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                ads:srcCompat="@drawable/restar" />
+
+            <ImageButton
+                android:id="@+id/btnMas"
+                style="@style/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                ads:srcCompat="@drawable/anadir" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lyReparto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/tvPagoPorPasajero"
+                style="@style/textView"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/monedas"
+                android:drawablePadding="@dimen/margens_items"
+                android:drawableTint="@color/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/btnShare"
+                style="@style/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="12dp"
+                android:padding="3dp"
+                android:scaleType="fitCenter"
+                ads:srcCompat="@drawable/compartir" />
+
+            <!--<Space
+                android:id="@+id/espacio"
+                android:layout_width="17dp"
+                android:layout_height="wrap_content" />-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lyGuardar"
+        style="@style/tarjeta"
+        android:layout_below="@id/lyRepartirGasolina"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvGuardar"
+            style="@style/textView"
+            android:text="Guardar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvGuardarViaje"
+                style="@style/textView"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/viaje"
+                android:drawablePadding="@dimen/margens_items"
+                android:drawableTint="@color/colorPrimary"
+                android:text="Viaje" />
+
+            <ImageButton
+                android:id="@+id/btnGuardarViaje"
+                style="@style/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="12dp"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                ads:srcCompat="@drawable/corazon_vacio" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvGuardarCoche"
+                style="@style/textView"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/coche"
+                android:drawablePadding="@dimen/margens_items"
+                android:drawableTint="@color/colorPrimary"
+                android:text="Coche" />
+
+            <ImageButton
+                android:id="@+id/btnGuardarCoche"
+                style="@style/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="12dp"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                ads:srcCompat="@drawable/corazon_vacio" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
