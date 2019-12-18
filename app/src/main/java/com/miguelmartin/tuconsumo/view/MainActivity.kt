@@ -21,8 +21,9 @@ import kotlinx.android.synthetic.main.content_main.etConsumo
 class MainActivity : AppCompatActivity() {
 
     lateinit var presenter:MainPresenter
-    lateinit var arrCombustibles:Array<Combustible>
     lateinit var  viaje:Viaje
+    private var arrCombustibles:Array<Combustible>? = null
+    var datosUsuario: DatosUsuario? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +35,9 @@ class MainActivity : AppCompatActivity() {
         if(presenter.bienvenidaSiNuevoUsuario(coche)) return
 
         if(coche!!){
-            val datosUsuario = presenter.getDatosUsuario()
-            val idComunidad = presenter.getIdByNombreComunidad(datosUsuario.comunidad)
-            presenter.cargarPrecioCombustible(idComunidad, datosUsuario)
-            presenter.cargarConsumoCoche(datosUsuario.consumo)
+            datosUsuario = presenter.getDatosUsuario()
+            presenter.cargarPrecioCombustible(datosUsuario!!)
+            presenter.cargarConsumoCoche(datosUsuario!!.consumo)
         }
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -47,7 +47,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnAyudaCombustible.setOnClickListener { presenter.mostrarDialogCombustibles(arrCombustibles) }
+        btnAyudaCombustible.setOnClickListener { presenter.mostrarDialogCombustibles(arrCombustibles, datosUsuario) }
+
         btnCalcular.setOnClickListener { presenter.calcularResultados(getInfoViaje()) }
     }
 

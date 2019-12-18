@@ -1,5 +1,6 @@
 package com.miguelmartin.tuconsumo.presenter
 
+import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Entities.Viaje
@@ -30,7 +31,8 @@ class MainPresenter(view: MainActivity) {
 
     fun getDatosUsuario() = model.getDatosUsuario(view)
 
-    fun cargarPrecioCombustible(idComunidad: String, datosUsuario: DatosUsuario) {
+    fun cargarPrecioCombustible(datosUsuario: DatosUsuario) {
+        val idComunidad = model.getIdByNombreComunidad(datosUsuario.comunidad)
         model.llamadaRest(view, datosUsuario, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
     }
 
@@ -42,9 +44,12 @@ class MainPresenter(view: MainActivity) {
         view.cargarListaCombustibles(arrMediasCombustibles)
     }
 
-    fun getIdByNombreComunidad(comunidad: String) = model.getIdByNombreComunidad(comunidad)
-
-    fun mostrarDialogCombustibles(arrCombustibles: Array<Combustible>) {
+    fun mostrarDialogCombustibles(arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario?) {
+        if (arrCombustibles == null) {
+            view.toast("Datos no disponibles")
+            if (datosUsuario != null)cargarPrecioCombustible(datosUsuario)
+            return
+        }
         val arrElementos = Array(arrCombustibles.size){""}
         val arrValores = Array(arrCombustibles.size){0F}
 
