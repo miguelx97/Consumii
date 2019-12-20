@@ -33,7 +33,7 @@ class MainPresenter(view: MainActivity) {
 
     fun cargarPrecioCombustible(datosUsuario: DatosUsuario) {
         val idComunidad = model.getIdByNombreComunidad(datosUsuario.comunidad)
-        model.llamadaRest(view, datosUsuario, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
+        model.getInfoCombustiblesRest(view, datosUsuario, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
     }
 
     fun llamadaExitosa(jsonInfoGasolineras: String, datosUsuario: DatosUsuario){

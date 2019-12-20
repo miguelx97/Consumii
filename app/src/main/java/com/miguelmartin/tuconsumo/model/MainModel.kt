@@ -36,16 +36,14 @@ class MainModel {
         return Resultados(distanciaRecorrida, combustibleGastado, coste)
     }
 
-    fun llamadaRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
+    fun getInfoCombustiblesRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
         val queue = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(url,
             Response.Listener<String> { response ->
-                Log.i("Gasolina", "Response is: ${response.substring(0, 100)}")
                 MainPresenter(context).llamadaExitosa(response, datosUsuario)
             },
             Response.ErrorListener { error ->
                 error.printStackTrace()
-                Log.e("Gasolina", "That didn't work!")
             })
 
         queue.add(stringRequest)
@@ -107,4 +105,19 @@ class MainModel {
     }
 
     fun getPrecioDesdeArray(arrMediasCombustibles: Array<Combustible>, combustible:String) = arrMediasCombustibles.filter { it.tipo == TipoCombustible.valueOf(combustible) }[0].precio
+
+
+    fun getInfoDistanciasRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
+        //https://maps.google.com/maps/api/directions/json?origin=40.477047,-3.703539&destination=50.935427,6.9593596&sensor=false&key=AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY
+        val queue = Volley.newRequestQueue(context)
+        val stringRequest = StringRequest(url,
+            Response.Listener<String> { response ->
+                MainPresenter(context).llamadaExitosa(response, datosUsuario)
+            },
+            Response.ErrorListener { error ->
+                error.printStackTrace()
+            })
+
+        queue.add(stringRequest)
+    }
 }
