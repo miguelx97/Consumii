@@ -2,100 +2,118 @@ package com.miguelmartin.tuconsumo.view
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Location
-import android.net.wifi.WifiConfiguration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
-import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.R
+import com.miguelmartin.tuconsumo.presenter.MapPresenter
 import kotlinx.android.synthetic.main.activity_map.*
-import java.util.*
 
+enum class Estado(val etiqueta: Int) {INICIO(R.string.inicio) , DESTINO(R.string.destino)}
+data class InfoMapa (var campo:EditText, var posicion: Estado, var icono:Int)
+data class Posicion(var ubicacion:LatLng? = null, var marker: Marker? = null)
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    lateinit var presenter:MapPresenter
     private lateinit var mMap: GoogleMap
     val PLACE_PICKER_REQUEST = 1234
+    lateinit var infoMapa: InfoMapa
+    var posicionInicio = Posicion()
+    var posicionDestino = Posicion()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+
+        presenter = MapPresenter(this)
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
 
-        if (!Places.isInitialized()) {
+        if (!Places.isInitialized())
             Places.initialize(this.applicationContext, getString(R.string.google_maps_key))
-            val placesClient = Places.createClient(this);
+
+        var fields= listOf(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG)
+
+
+        etInicio.setOnClickListener {
+            infoMapa = InfoMapa(it as EditText, Estado.INICIO, R.drawable.casa)
+            var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
+            startActivityForResult(intent, PLACE_PICKER_REQUEST)
+        }
+        etDestino.setOnClickListener {
+            infoMapa = InfoMapa(it as EditText, Estado.DESTINO, R.drawable.bandera)
+            var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
+            startActivityForResult(intent, PLACE_PICKER_REQUEST)
         }
 
-        val autocompleteFragment =
-            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
-
-//        autocompleteFragment!!.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
-//        autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS);
-
-        var fields=Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG)
-        var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
-        startActivityForResult(intent, PLACE_PICKER_REQUEST)
-
-/*
-        autocompleteFragment!!.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) { // TODO: Get info about the selected place.
-                placeName.text = place.name
-                Log.i("FragmentActivity", "Place: " + place.name + ", " + place.id)
-            }
-
-            override fun onError(status: Status) {
-                placeName.text = status.toString()
-                Log.i("FragmentActivity", "An error occurred: $status")
-            }
-        })
-*/
+        btnAceptarMap.setOnClickListener {
+            if (posicionInicio.ubicacion == null) return@setOnClickListener
+            if (posicionDestino.ubicacion == null) return@setOnClickListener
+            presenter.getDistancia(posicionInicio.ubicacion!!, posicionDestino.ubicacion!!)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-                val place =Autocomplete.getPlaceFromIntent(data!!);
+                val place =Autocomplete.getPlaceFromIntent(data!!)
+                infoMapa.campo.setText(place.name)
+                var posicion:Posicion
+                val ubicacion = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
+                when(infoMapa.posicion){
+                    Estado.INICIO -> posicion = posicionInicio
+                    Estado.DESTINO -> posicion = posicionDestino
+                }
+                posicion.ubicacion = ubicacion
+                posicion.marker?.remove()
+                posicion.marker = mMap.addMarker(MarkerOptions().position(ubicacion)
+                    .title(getString(infoMapa.posicion.etiqueta))
+                    .icon(bitmapDescriptorFromVector(this, infoMapa.icono)))
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(ubicacion))
 
-                val lat = place.latLng?.latitude
-                val lng = place.latLng?.longitude
             }
             else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
                 var status = Autocomplete.getStatusFromIntent(data!!)
-                Log.i("address", status.getStatusMessage());
+                Log.i("address", status.statusMessage);
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-
+    private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+        return ContextCompat.getDrawable(context, vectorResId)?.run {
+            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            draw(Canvas(bitmap))
+            BitmapDescriptorFactory.fromBitmap(bitmap)
+        }
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -106,10 +124,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         location.lastLocation
             .addOnSuccessListener { location : Location ->
-                val ubicacion = LatLng(location.latitude, location.longitude)
 
-                mMap.addMarker(MarkerOptions().position(ubicacion).title("Ubicación Actual"))
+                val ubicacion = LatLng(location.latitude, location.longitude)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16f))
+
             }
             .addOnFailureListener {
                 this.toast("FAIL")

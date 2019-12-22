@@ -99,6 +99,15 @@
         <item name="android:clickable">false</item>
     </style>
 
+    <style name="etMap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:tint">@android:color/darker_gray</item>
+        <item name="android:editable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+    </style>
+
     <style name="button" parent="@android:style/Widget.Material.Light.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

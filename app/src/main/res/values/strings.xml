@@ -31,4 +31,6 @@
 
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
     <string name="title_activity_map">Map</string>
+    <string name="inicio">Inicio</string>
+    <string name="destino">Destino</string>
 </resources>

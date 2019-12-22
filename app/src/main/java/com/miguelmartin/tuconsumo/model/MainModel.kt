@@ -5,6 +5,7 @@ import android.util.Log
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.miguelmartin.tuconsumo.Common.*
@@ -75,7 +76,7 @@ class MainModel {
 
         arrPreciosByCombustible.forEachIndexed{ i, it ->
             it.lPrecios.sort()
-            println("${it.nombre}: ${it.lPrecios.get(it.lPrecios.size/2)}")
+//            println("${it.nombre}: ${it.lPrecios.get(it.lPrecios.size/2)}")
             mediasCombustible[i].tipo = TipoCombustible.fromNombreJson(it.nombre)
             mediasCombustible[i].precio = it.lPrecios.get(it.lPrecios.size/2)
         }
@@ -107,17 +108,5 @@ class MainModel {
     fun getPrecioDesdeArray(arrMediasCombustibles: Array<Combustible>, combustible:String) = arrMediasCombustibles.filter { it.tipo == TipoCombustible.valueOf(combustible) }[0].precio
 
 
-    fun getInfoDistanciasRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
-        //https://maps.google.com/maps/api/directions/json?origin=40.477047,-3.703539&destination=50.935427,6.9593596&sensor=false&key=AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY
-        val queue = Volley.newRequestQueue(context)
-        val stringRequest = StringRequest(url,
-            Response.Listener<String> { response ->
-                MainPresenter(context).llamadaExitosa(response, datosUsuario)
-            },
-            Response.ErrorListener { error ->
-                error.printStackTrace()
-            })
 
-        queue.add(stringRequest)
-    }
 }
