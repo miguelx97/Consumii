@@ -65,4 +65,8 @@ class MainPresenter(view: MainActivity) {
         view.rellenarConsumoCoche(consumo)
     }
 
+    fun getDistancia() {
+        view.irMapa()
+    }
+
 }

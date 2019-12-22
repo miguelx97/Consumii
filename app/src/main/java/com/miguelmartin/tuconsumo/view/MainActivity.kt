@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnAyudaCombustible.setOnClickListener { presenter.mostrarDialogCombustibles(arrCombustibles, datosUsuario) }
+        btnAyudaTrayecto.setOnClickListener { presenter.getDistancia() }
 
         btnCalcular.setOnClickListener { presenter.calcularResultados(getInfoViaje()) }
     }
@@ -75,6 +76,11 @@ class MainActivity : AppCompatActivity() {
 
     fun irBienvenida(){
         val intent = Intent(this, BienvenidaActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun irMapa(){
+        val intent = Intent(this, MapActivity::class.java)
         startActivity(intent)
     }
 

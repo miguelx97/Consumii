@@ -30,4 +30,5 @@
     <string name="seleccione_comunidad">Seleccione su comunidad</string>
 
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    <string name="title_activity_map">Map</string>
 </resources>
