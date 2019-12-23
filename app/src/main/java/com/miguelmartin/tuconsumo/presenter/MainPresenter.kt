@@ -1,5 +1,6 @@
 package com.miguelmartin.tuconsumo.presenter
 
+import android.content.Intent
 import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
@@ -68,5 +69,6 @@ class MainPresenter(view: MainActivity) {
     fun getDistancia() {
         view.irMapa()
     }
+
 
 }

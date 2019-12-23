@@ -26,6 +26,9 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.miguelmartin.tuconsumo.Common.DISTANCIA
+import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
+import com.miguelmartin.tuconsumo.Common.RC_PLACE_AUTOCOMPLETE
 import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MapPresenter
@@ -39,7 +42,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var presenter:MapPresenter
     private lateinit var mMap: GoogleMap
-    val PLACE_PICKER_REQUEST = 1234
     lateinit var infoMapa: InfoMapa
     var posicionInicio = Posicion()
     var posicionDestino = Posicion()
@@ -64,23 +66,23 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         etInicio.setOnClickListener {
             infoMapa = InfoMapa(it as EditText, Estado.INICIO, R.drawable.casa)
             var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
-            startActivityForResult(intent, PLACE_PICKER_REQUEST)
+            startActivityForResult(intent, RC_PLACE_AUTOCOMPLETE)
         }
         etDestino.setOnClickListener {
             infoMapa = InfoMapa(it as EditText, Estado.DESTINO, R.drawable.bandera)
             var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
-            startActivityForResult(intent, PLACE_PICKER_REQUEST)
+            startActivityForResult(intent, RC_PLACE_AUTOCOMPLETE)
         }
 
         btnAceptarMap.setOnClickListener {
             if (posicionInicio.ubicacion == null) return@setOnClickListener
             if (posicionDestino.ubicacion == null) return@setOnClickListener
-            presenter.getDistancia(posicionInicio.ubicacion!!, posicionDestino.ubicacion!!)
+            presenter.getDataFromMapsRest(posicionInicio.ubicacion!!, posicionDestino.ubicacion!!)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
+        if (requestCode == RC_PLACE_AUTOCOMPLETE) {
             if (resultCode == Activity.RESULT_OK) {
                 val place =Autocomplete.getPlaceFromIntent(data!!)
                 infoMapa.campo.setText(place.name)
@@ -153,5 +155,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 123
             )
         }
+    }
+
+    fun returnDistancia(distancia: String) {
+        val intent= Intent()
+        intent.putExtra(DISTANCIA, distancia);
+        setResult(RC_GET_DISTANCIA, intent);
+    }
+
+    fun cerrarMapa() {
+        finish()
     }
 }

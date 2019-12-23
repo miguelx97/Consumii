@@ -9,9 +9,15 @@ class MapPresenter(view:MapActivity) {
     val view = view
     val model = MapModel()
 
-    fun getDistancia(ubicacionInicio: LatLng, ubicacionDestino: LatLng){
+    fun getDataFromMapsRest(ubicacionInicio: LatLng, ubicacionDestino: LatLng){
         val url = model.getUrl(ubicacionInicio, ubicacionDestino, view.getString(R.string.google_maps_key))
         model.getInfoDistanciasRest(view, url)
+    }
+
+    fun llamadaExitosa(json:String){
+        val distancia = model.getDistanciaFromJson(json)
+        view.returnDistancia(distancia)
+        view.cerrarMapa()
     }
 
 }

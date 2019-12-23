@@ -6,6 +6,8 @@ const val TIENE_COCHE = "tieneCoche"
 const val CONSUMO = "consumo"
 const val COMBUSTIBLE = "combustible"
 const val COMUNIDAD = "comunidad"
+const val DISTANCIA = "distancia"
+
 val LISTA_COMUNIDADES = hashMapOf(
     "01" to "Andalucía",
     "02" to "Aragón",
@@ -27,3 +29,6 @@ val LISTA_COMUNIDADES = hashMapOf(
     "18" to "Ceuta",
     "19" to "Melilla"
 )
+
+const val RC_PLACE_AUTOCOMPLETE = 100
+const val RC_GET_DISTANCIA = 101

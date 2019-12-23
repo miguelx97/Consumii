@@ -2,11 +2,13 @@ package com.miguelmartin.tuconsumo.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.miguelmartin.tuconsumo.Common.DISTANCIA
+import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Entities.Resultados
@@ -14,9 +16,8 @@ import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
-
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.content_main.etConsumo
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -81,13 +82,15 @@ class MainActivity : AppCompatActivity() {
 
     fun irMapa(){
         val intent = Intent(this, MapActivity::class.java)
-        startActivity(intent)
+        startActivityForResult(intent, RC_GET_DISTANCIA)
     }
 
     private fun getInfoViaje():Viaje{
         viaje.distanciaTrayecto = etDistancia.text.toString().toDouble()
-        viaje.coche.consumo = etConsumo.text.toString().toFloat()
-        viaje.coche.combustible.precio = etPrecioFuel.text.toString().toFloat()
+        if(etConsumo.text.toString().isNotEmpty())
+            viaje.coche.consumo = etConsumo.text.toString().toFloat()
+        if(etPrecioFuel.text.toString().isNotEmpty())
+            viaje.coche.combustible.precio = etPrecioFuel.text.toString().toFloat()
 
         when {
             rbUnTrayecto.isChecked -> viaje.numeroTrayectos = 1
@@ -118,5 +121,14 @@ class MainActivity : AppCompatActivity() {
             }
             setNeutralButton("Cancel") { dialog, _ -> dialog.cancel() }
         }.create().show()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == RC_GET_DISTANCIA) {
+            val distancia = data?.getStringExtra(DISTANCIA)
+            etDistancia.setText(distancia)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
