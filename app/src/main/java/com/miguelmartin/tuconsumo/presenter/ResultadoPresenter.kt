@@ -22,5 +22,9 @@ class ResultadoPresenter(view: ResultadoActivity) {
         view.shareChooser(textoParaCompartir)
     }
 
+    fun mostrarGuardarCocheDialog() {
+        view.mostrarGuardarCocheDialog()
+    }
+
 
 }

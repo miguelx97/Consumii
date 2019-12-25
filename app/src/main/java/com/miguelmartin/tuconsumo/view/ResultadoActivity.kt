@@ -33,17 +33,10 @@ class ResultadoActivity() : AppCompatActivity() {
             .build()
         adView.loadAd(adRequest)
 
-        btnMas.setOnClickListener {
-            presenter.tratarPasajerosYCostos(tvNumPasajeros.text.toString().toInt(), +1, resultados.costo)
-        }
-
-        btnMenos.setOnClickListener {
-            presenter.tratarPasajerosYCostos(tvNumPasajeros.text.toString().toInt(), -1, resultados.costo)
-        }
-
-        btnShare.setOnClickListener {
-            presenter.compartirReparto(resultados, tvNumPasajeros.text.toString().toInt())
-        }
+        btnMas.setOnClickListener { presenter.tratarPasajerosYCostos(tvNumPasajeros.text.toString().toInt(), +1, resultados.costo) }
+        btnMenos.setOnClickListener { presenter.tratarPasajerosYCostos(tvNumPasajeros.text.toString().toInt(), -1, resultados.costo) }
+        btnShare.setOnClickListener { presenter.compartirReparto(resultados, tvNumPasajeros.text.toString().toInt()) }
+        btnGuardarCoche.setOnClickListener { presenter.mostrarGuardarCocheDialog() }
     }
 
     fun shareChooser(textoParaCompartir:String){
@@ -82,5 +75,9 @@ class ResultadoActivity() : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+
+    fun mostrarGuardarCocheDialog() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 }
