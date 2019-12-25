@@ -3,7 +3,6 @@ import java.io.Serializable
 
 data class Viaje(
     var nombre:String? = null,
-    var distancia:Double = 0.0,
     var distanciaTrayecto:Double = 0.0,
     var numeroTrayectos:Int = 0,
     var coche:Coche = Coche()

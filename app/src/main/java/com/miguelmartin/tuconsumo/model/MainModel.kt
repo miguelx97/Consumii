@@ -1,11 +1,8 @@
 package com.miguelmartin.tuconsumo.model
 
-import android.content.Context
-import android.util.Log
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.miguelmartin.tuconsumo.Common.*
@@ -24,13 +21,13 @@ class MainModel {
 
     fun calcularConsumo(viaje: Viaje): Resultados{
         //Datos del viaje
-        val distancia = viaje.distanciaTrayecto
+        val distanciaTrayecto = viaje.distanciaTrayecto
         val numViajes = viaje.numeroTrayectos
         val consumoCochePor100Km = viaje.coche.consumo
         val precioCombustible = viaje.coche.combustible.precio
 
         //Resultados
-        val distanciaRecorrida = Math.round(distancia * numViajes * 100.0) / 100.0
+        val distanciaRecorrida = Math.round(distanciaTrayecto * numViajes * 100.0) / 100.0
         val combustibleGastado = Math.round(consumoCochePor100Km/100 * distanciaRecorrida * 100.0) / 100.0
         val coste = Math.round(combustibleGastado * precioCombustible * 100.0) / 100.0
 

@@ -22,7 +22,7 @@ class MainModelTest {
     @Test
     fun calcularConsumoTest() {
         val combustible = Combustible(TipoCombustible.GASOLINA_95, 1.4F)
-        val coche = Coche(null, 6.5, combustible)
+        val coche = Coche(0, null, 6.5f, combustible)
         val viaje = Viaje(null, 30.0, 2, coche)
         Assert.assertTrue(mainModel.calcularConsumo(viaje) == Resultados(60.00, 3.90, 5.46))
     }

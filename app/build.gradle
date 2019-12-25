@@ -5,9 +5,8 @@ apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 28
-    testOptions {
-        unitTests.includeAndroidResources = true
-    }
+    testOptions.unitTests.includeAndroidResources = true
+
     defaultConfig {
         applicationId "com.miguelmartin.tuconsumo"
         minSdkVersion 21
