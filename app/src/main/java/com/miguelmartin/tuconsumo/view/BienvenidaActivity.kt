@@ -3,15 +3,9 @@ package com.miguelmartin.tuconsumo.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import com.miguelmartin.tuconsumo.Entities.Coche
-import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
-import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
-import com.miguelmartin.tuconsumo.db.CochePersistencia
 import com.miguelmartin.tuconsumo.presenter.BienvenidaPresenter
 import kotlinx.android.synthetic.main.activity_bienvenida.*
 

@@ -1,6 +1,5 @@
 package com.miguelmartin.tuconsumo.presenter
 
-import android.content.Intent
 import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
@@ -11,7 +10,7 @@ import com.miguelmartin.tuconsumo.view.MainActivity
 
 class MainPresenter(view: MainActivity) {
     val view = view
-    val model = MainModel()
+    val model = MainModel(view)
     val comunModel = ComunModel()
 
     fun calcularResultados(viaje: Viaje){
@@ -19,7 +18,7 @@ class MainPresenter(view: MainActivity) {
         view.irResultadoActivity(resultados)
     }
 
-    fun checkTieneCoche() = model.comprobarCoche(view)
+    fun checkTieneCoche() = model.comprobarCoche()
 
     fun bienvenidaSiNuevoUsuario(coche: Boolean?):Boolean {
         if(coche==null) {
@@ -68,6 +67,13 @@ class MainPresenter(view: MainActivity) {
 
     fun getDistancia() {
         view.irMapa()
+    }
+
+    fun getCoches() {
+        val lCoches = model.getCochesBd()
+        val lFormatCoches = model.getFormatCoches(lCoches)
+        val lValoresConsumos = lCoches.map { it.consumo.toString() }.toTypedArray()
+        view.crearDialogCoches(lFormatCoches, lValoresConsumos)
     }
 
 

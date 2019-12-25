@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="60dp"
+    android:layout_marginEnd="60dp"
+    android:orientation="vertical"
+    android:padding="@dimen/margenes_laterales_items">
+
+    <TextView
+        android:id="@+id/etNuevoCoche"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Nuevo Coche" />
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etConsumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Consumo"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etCombustible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Combustible"
+        android:inputType="textPersonName" />
+</LinearLayout>

@@ -6,17 +6,16 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.miguelmartin.tuconsumo.Common.*
-import com.miguelmartin.tuconsumo.Entities.Combustible
-import com.miguelmartin.tuconsumo.Entities.DatosUsuario
-import com.miguelmartin.tuconsumo.Entities.Resultados
-import com.miguelmartin.tuconsumo.Entities.Viaje
+import com.miguelmartin.tuconsumo.Entities.*
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
+import com.miguelmartin.tuconsumo.db.PersistenciaCoche
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
 import com.miguelmartin.tuconsumo.view.MainActivity
 
 
-class MainModel {
-
+class MainModel(view: MainActivity) {
+    val view = view
+    val persistenciaCoche = PersistenciaCoche(view)
 
 
     fun calcularConsumo(viaje: Viaje): Resultados{
@@ -81,7 +80,7 @@ class MainModel {
         return mediasCombustible
     }
 
-    fun comprobarCoche(view:MainActivity): Boolean? {
+    fun comprobarCoche(): Boolean? {
         val sharedPreferences = view.getSharedPreferences(PREFS_NAME, 0)
         if(sharedPreferences.contains(TIENE_COCHE))
             return sharedPreferences.getBoolean(TIENE_COCHE, false)
@@ -104,6 +103,15 @@ class MainModel {
 
     fun getPrecioDesdeArray(arrMediasCombustibles: Array<Combustible>, combustible:String) = arrMediasCombustibles.filter { it.tipo == TipoCombustible.valueOf(combustible) }[0].precio
 
+    fun getCochesBd() = persistenciaCoche.getAll()
+
+    fun getFormatCoches(lCoches: List<Coche>): Array<String> {
+        var lFormatCoches = Array(lCoches.size){""}
+        lCoches.forEachIndexed { i, it ->
+            lFormatCoches[i] = "${it.nombre} (${it.consumo} l/100km)"
+        }
+        return lFormatCoches
+    }
 
 
 }

@@ -7,7 +7,7 @@ import com.miguelmartin.organizame.bbdd.*
 import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 
-class CochePersistencia(context: Context) {
+class PersistenciaCoche(context: Context) {
     var context = context
     var dbManager = DbManager(context, DB_TABLE_COCHES)
     var columnas = arrayOf(COL_ID, COL_NOMBRE, COL_CONSUMO, COL_COMBUSTIBLE)

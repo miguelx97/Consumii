@@ -9,14 +9,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.miguelmartin.tuconsumo.Common.DISTANCIA
 import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
-import com.miguelmartin.tuconsumo.Entities.Combustible
-import com.miguelmartin.tuconsumo.Entities.DatosUsuario
-import com.miguelmartin.tuconsumo.Entities.Resultados
-import com.miguelmartin.tuconsumo.Entities.Viaje
+import com.miguelmartin.tuconsumo.Entities.*
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
+import kotlinx.android.synthetic.main.activity_bienvenida.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main.etConsumo
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         btnAyudaCombustible.setOnClickListener { presenter.mostrarDialogCombustibles(arrCombustibles, datosUsuario) }
         btnAyudaTrayecto.setOnClickListener { presenter.getDistancia() }
+        btnAyudaConsumo.setOnClickListener { presenter.getCoches() }
 
         btnCalcular.setOnClickListener { presenter.calcularResultados(getInfoViaje()) }
     }
@@ -130,5 +130,18 @@ class MainActivity : AppCompatActivity() {
             etDistancia.setText(distancia)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun crearDialogCoches(arrNombresCoches: Array<String>, arrValores: Array<String>) {
+        AlertDialog.Builder(this).apply {
+            setTitle(getString(R.string.seleccione_coche))
+            setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
+                etConsumo.setText(arrValores[i])
+                dialogInterface.dismiss()
+            }
+            setNeutralButton("Cancel") { dialog, _ ->
+                dialog.cancel()
+            }
+        }.create().show()
     }
 }
