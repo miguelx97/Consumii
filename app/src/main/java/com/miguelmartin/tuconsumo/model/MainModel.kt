@@ -1,5 +1,6 @@
 package com.miguelmartin.tuconsumo.model
 
+import android.content.Context
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -13,10 +14,7 @@ import com.miguelmartin.tuconsumo.presenter.MainPresenter
 import com.miguelmartin.tuconsumo.view.MainActivity
 
 
-class MainModel(view: MainActivity) {
-    val view = view
-    val persistenciaCoche = PersistenciaCoche(view)
-
+class MainModel() {
 
     fun calcularConsumo(viaje: Viaje): Resultados{
         //Datos del viaje
@@ -80,8 +78,8 @@ class MainModel(view: MainActivity) {
         return mediasCombustible
     }
 
-    fun comprobarCoche(): Boolean? {
-        val sharedPreferences = view.getSharedPreferences(PREFS_NAME, 0)
+    fun comprobarCoche(context: Context): Boolean? {
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
         if(sharedPreferences.contains(TIENE_COCHE))
             return sharedPreferences.getBoolean(TIENE_COCHE, false)
         else
@@ -103,7 +101,7 @@ class MainModel(view: MainActivity) {
 
     fun getPrecioDesdeArray(arrMediasCombustibles: Array<Combustible>, combustible:String) = arrMediasCombustibles.filter { it.tipo == TipoCombustible.valueOf(combustible) }[0].precio
 
-    fun getCochesBd() = persistenciaCoche.getAll()
+    fun getCochesBd(context: Context) = PersistenciaCoche(context).getAll()
 
     fun getFormatCoches(lCoches: List<Coche>): Array<String> {
         var lFormatCoches = Array(lCoches.size){""}

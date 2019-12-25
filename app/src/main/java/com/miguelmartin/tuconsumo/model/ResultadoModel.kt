@@ -1,8 +1,10 @@
 package com.miguelmartin.tuconsumo.model
 
 import android.content.Context
+import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Resultados
 import com.miguelmartin.tuconsumo.R
+import com.miguelmartin.tuconsumo.db.PersistenciaCoche
 
 class ResultadoModel {
 
@@ -18,4 +20,6 @@ class ResultadoModel {
         "El consumo ha costado ${resultados.costo}€.\n" +
         "Entre $numPasajeros passajeros, ${calcularCostoPorPasajero(resultados.costo, numPasajeros)}€ cada uno.\n" +
         "***$nombreApp***"
+
+    fun guardarCocheBd(coche: Coche, context: Context) = PersistenciaCoche(context).insert(coche)
 }

@@ -7,19 +7,10 @@
     android:orientation="vertical"
     android:padding="@dimen/margenes_laterales_items">
 
-    <TextView
-        android:id="@+id/etNuevoCoche"
-        style="@style/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Nuevo Coche" />
-
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName" />
 
@@ -27,15 +18,13 @@
         android:id="@+id/etConsumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Consumo"
-        android:inputType="textPersonName" />
+        android:inputType="none|numberDecimal" />
 
-    <EditText
-        android:id="@+id/etCombustible"
-        android:layout_width="match_parent"
+
+    <Spinner
+        android:id="@+id/spCombustible"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Combustible"
-        android:inputType="textPersonName" />
+        android:layout_marginTop="6dp" />
 </LinearLayout>

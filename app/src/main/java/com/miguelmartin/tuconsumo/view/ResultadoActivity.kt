@@ -1,20 +1,30 @@
 package com.miguelmartin.tuconsumo.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
+import com.miguelmartin.tuconsumo.Common.toast
+import com.miguelmartin.tuconsumo.Entities.Coche
+import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.Resultados
+import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.ResultadoPresenter
 import kotlinx.android.synthetic.main.activity_resultado.*
+import kotlinx.android.synthetic.main.guardar_coche_dialog.*
+import kotlinx.android.synthetic.main.guardar_coche_dialog.view.*
 
 class ResultadoActivity() : AppCompatActivity() {
 
     lateinit var presenter: ResultadoPresenter
+    lateinit var arrCombustibleNames:Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +86,53 @@ class ResultadoActivity() : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    fun mostrarGuardarCocheDialog() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun mostrarGuardarCocheDialog():View {
+        val inflater = LayoutInflater.from(this)
+        val view = inflater.inflate(R.layout.guardar_coche_dialog, null)
+        val builder = AlertDialog.Builder(this)
+        builder.setView(view)
+        builder.setTitle("Añadir coche")
+        builder.setPositiveButton("Aceptar"){_, _ ->}
+        builder.setNegativeButton("Cancelar"){_, _ ->}
+        val dialog = builder.create()
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            if(presenter.guardarCoche(view)) dialog.dismiss()
+        }
+
+        return view
+    }
+
+    fun cargarSpinnerCombustibles(arrNombresCombustibles:Array<String>, arrNamesCombustibles:Array<String>, view:View){
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, arrNombresCombustibles)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        view.spCombustible.adapter = adapter
+        arrCombustibleNames = arrNamesCombustibles
+    }
+
+    fun getDataCoche(view: View) =
+        Coche(0, view.etNombre.text.toString(), view.etConsumo.text.toString().toFloat(), Combustible(tipo = TipoCombustible.valueOf(arrCombustibleNames[view.spCombustible.selectedItemPosition])))
+
+    fun camposRellenos(view: View):Boolean{
+        var ok = true
+        if(view.etNombre.text.toString().isEmpty()){
+            view.etNombre.error = "Debe seleccioniar un nombre"
+            view.etNombre.requestFocus()
+            ok =  false
+        } else view.etNombre.error = null
+
+        if (view.etConsumo.text.toString().isEmpty()){
+            view.etConsumo.error = "Debe introducir el consumo"
+            view.etConsumo.requestFocus()
+            ok =  false
+        } else view.etConsumo.error = null
+
+        if(view.spCombustible.selectedItemPosition == 0){
+            view.spCombustible.requestFocus()
+            ok =  false
+        }
+
+        return ok
     }
 
 }

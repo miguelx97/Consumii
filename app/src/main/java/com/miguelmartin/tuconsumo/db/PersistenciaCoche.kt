@@ -45,8 +45,7 @@ class PersistenciaCoche(context: Context) {
 
     fun getValues(coche: Coche): ContentValues {
         var values = ContentValues()
-        pos = 0
-        values.put(columnas[pos++], coche.id)
+        pos = 1
         values.put(columnas[pos++], coche.nombre)
         values.put(columnas[pos++], coche.consumo)
         values.put(columnas[pos++], coche.combustible.tipo!!.name)

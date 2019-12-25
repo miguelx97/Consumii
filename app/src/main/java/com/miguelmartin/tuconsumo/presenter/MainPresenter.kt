@@ -10,15 +10,14 @@ import com.miguelmartin.tuconsumo.view.MainActivity
 
 class MainPresenter(view: MainActivity) {
     val view = view
-    val model = MainModel(view)
-    val comunModel = ComunModel()
+    val model = MainModel()
 
     fun calcularResultados(viaje: Viaje){
         val resultados = model.calcularConsumo(viaje)
         view.irResultadoActivity(resultados)
     }
 
-    fun checkTieneCoche() = model.comprobarCoche()
+    fun checkTieneCoche() = model.comprobarCoche(view)
 
     fun bienvenidaSiNuevoUsuario(coche: Boolean?):Boolean {
         if(coche==null) {
@@ -70,7 +69,7 @@ class MainPresenter(view: MainActivity) {
     }
 
     fun getCoches() {
-        val lCoches = model.getCochesBd()
+        val lCoches = model.getCochesBd(view)
         val lFormatCoches = model.getFormatCoches(lCoches)
         val lValoresConsumos = lCoches.map { it.consumo.toString() }.toTypedArray()
         view.crearDialogCoches(lFormatCoches, lValoresConsumos)
