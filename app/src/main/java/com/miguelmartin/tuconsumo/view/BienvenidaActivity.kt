@@ -24,8 +24,8 @@ class BienvenidaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bienvenida)
 
-        CochePersistencia(this).insert(Coche(0, "Mi coche", 7f, Combustible(TipoCombustible.DIESEL_MEJORADO, 1.5f)))
-        Log.w("Coches", CochePersistencia(this).getAll().toString())
+//        CochePersistencia(this).insert(Coche(0, "Mi coche", 7f, Combustible(TipoCombustible.DIESEL_MEJORADO, 1.5f)))
+//        Log.w("Coches", CochePersistencia(this).getAll().toString())
 
 
         presenter = BienvenidaPresenter(this)
