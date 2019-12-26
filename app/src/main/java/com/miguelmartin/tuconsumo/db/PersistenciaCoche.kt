@@ -39,8 +39,15 @@ class PersistenciaCoche(context: Context) {
 
     fun insert(coche: Coche):Boolean{
         Log.w("insertar",coche.toString())
-        val res = dbManager.insertar(getValues(coche)) > 0
-        return res
+        val res = dbManager.insertar(getValues(coche))
+        return res > 0
+    }
+
+    fun eliminar(coche: Coche): Boolean {
+        Log.w("eliminar" , coche.toString())
+        val selectionArgs= arrayOf(coche.id.toString())
+        val res = dbManager.eliminar("$COL_ID=?", selectionArgs)
+        return res > 0
     }
 
     fun getValues(coche: Coche): ContentValues {
@@ -50,6 +57,11 @@ class PersistenciaCoche(context: Context) {
         values.put(columnas[pos++], coche.consumo)
         values.put(columnas[pos++], coche.combustible.tipo!!.name)
         return values
+    }
+
+    fun eliminarUltimoRegistro(): Boolean {
+        val res = dbManager.customQuery(sqlEliminarUltimoRegistro)
+        return res > 0
     }
 
 }

@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
         btnCalcular.setOnClickListener { presenter.calcularResultados(getInfoViaje()) }
     }
 
-    fun irResultadoActivity(resultados: Resultados){
+    fun irResultadoActivity(viaje: Viaje){
         val intent = Intent(this, ResultadoActivity::class.java).apply {
-            putExtra("resultados", resultados)
+            putExtra("viaje", viaje)
         }
         startActivity(intent)
     }
@@ -132,12 +132,15 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun crearDialogCoches(arrNombresCoches: Array<String>, arrValores: Array<String>) {
+    fun crearDialogCoches(arrNombresCoches: Array<String>, arrValores: Array<Coche>) {
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.seleccione_coche))
             setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
-                etConsumo.setText(arrValores[i])
+                etConsumo.setText(arrValores[i].consumo.toString())
+                viaje.coche.nombre = arrValores[i].nombre
                 dialogInterface.dismiss()
+                viaje.coche.combustible = arrCombustibles!!.filter { it.tipo == arrValores[i].combustible.tipo }[0]
+                etPrecioFuel.setText(viaje.coche.combustible.precio.toString())
             }
             setNeutralButton("Cancel") { dialog, _ ->
                 dialog.cancel()

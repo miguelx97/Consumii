@@ -16,21 +16,6 @@ import com.miguelmartin.tuconsumo.view.MainActivity
 
 class MainModel() {
 
-    fun calcularConsumo(viaje: Viaje): Resultados{
-        //Datos del viaje
-        val distanciaTrayecto = viaje.distanciaTrayecto
-        val numViajes = viaje.numeroTrayectos
-        val consumoCochePor100Km = viaje.coche.consumo
-        val precioCombustible = viaje.coche.combustible.precio
-
-        //Resultados
-        val distanciaRecorrida = Math.round(distanciaTrayecto * numViajes * 100.0) / 100.0
-        val combustibleGastado = Math.round(consumoCochePor100Km/100 * distanciaRecorrida * 100.0) / 100.0
-        val coste = Math.round(combustibleGastado * precioCombustible * 100.0) / 100.0
-
-        return Resultados(distanciaRecorrida, combustibleGastado, coste)
-    }
-
     fun getInfoCombustiblesRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
         val queue = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(url,

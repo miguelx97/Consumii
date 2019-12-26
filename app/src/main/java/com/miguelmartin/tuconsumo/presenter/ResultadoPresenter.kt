@@ -1,8 +1,11 @@
 package com.miguelmartin.tuconsumo.presenter
 
 import android.view.View
+import android.widget.ImageButton
 import com.miguelmartin.tuconsumo.Common.toast
+import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Resultados
+import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.model.ResultadoModel
@@ -24,8 +27,16 @@ class ResultadoPresenter(view: ResultadoActivity) {
         view.shareChooser(textoParaCompartir)
     }
 
-    fun mostrarGuardarCocheDialog() {
-        val dialogView = view.mostrarGuardarCocheDialog()
+    fun comprobarCocheGuardado(coche: Coche, imageButton: ImageButton, cocheCuardado: Boolean) {
+        if(!cocheCuardado){
+            mostrarGuardarCocheDialog(coche)
+        } else{
+            eliminarCoche(coche, imageButton)
+        }
+    }
+
+    private fun mostrarGuardarCocheDialog(coche: Coche) {
+        val dialogView = view.mostrarGuardarCocheDialog(coche)
         val combustibleNombres:MutableList<String> = TipoCombustible.values().map { it.nombre }.toMutableList()
         combustibleNombres.add(0, "Combustible")
         val combustibleNames = TipoCombustible.values().map { it.name }.toMutableList()
@@ -33,15 +44,31 @@ class ResultadoPresenter(view: ResultadoActivity) {
         view.cargarSpinnerCombustibles(combustibleNombres.toTypedArray(), combustibleNames.toTypedArray(), dialogView)
     }
 
-    fun guardarCoche(dialogView:View):Boolean {
+    fun guardarCoche(dialogView: View, btnGuardarCoche: ImageButton):Boolean {
         if (!view.camposRellenos(dialogView)) return false
         val coche = view.getDataCoche(dialogView)
-        if(!model.guardarCocheBd(coche, view)){
+        if(model.guardarCocheBd(coche, view)){
+            view.estadoBoton(btnGuardarCoche, true)
+            view.setCoche(coche)
+            return true
+        } else{
             view.toast("Error al guardar")
             return false
         }
-        return true
+
     }
+
+    private fun eliminarCoche(coche: Coche, imageButton: ImageButton) {
+
+        if(model.eliminarCocheBd(coche, view)){
+            view.estadoBoton(imageButton, false)
+            view.cocheCuardado = false
+        } else{
+            view.toast("Error al eliminar")
+        }
+    }
+
+    fun getResultados(viaje: Viaje) = model.getResultados(viaje)
 
 
 }

@@ -14,3 +14,8 @@ const val sqlCreateTableCoches =
         " $COL_CONSUMO INTEGER, " +
         " $COL_COMBUSTIBLE TEXT " +
       " );"
+
+const val sqlEliminarUltimoRegistro =
+    "DELETE FROM $DB_TABLE_COCHES" +
+       " WHERE $COL_ID = (SELECT MAX($COL_ID)" +
+            " from $DB_TABLE_COCHES)"

@@ -8,12 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
-import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Combustible
-import com.miguelmartin.tuconsumo.Entities.Resultados
+import com.miguelmartin.tuconsumo.Entities.Viaje
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.ResultadoPresenter
@@ -25,6 +25,8 @@ class ResultadoActivity() : AppCompatActivity() {
 
     lateinit var presenter: ResultadoPresenter
     lateinit var arrCombustibleNames:Array<String>
+    lateinit var viaje: Viaje
+    var cocheCuardado = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +34,15 @@ class ResultadoActivity() : AppCompatActivity() {
 
         presenter = ResultadoPresenter(this)
 
-        val resultados = intent.getSerializableExtra("resultados") as Resultados
+        viaje = intent.getSerializableExtra("viaje") as Viaje
+
+        val resultados = presenter.getResultados(viaje)
+
         tvCombustible.text = resultados.combustible.toString() + " l"
         tvDistancia.text = resultados.distancia.toString() + " Km"
         tvCoste.text = resultados.costo.toString() + " €"
+
+        cocheCuardado = viaje.coche.id > 0
 
         // Load an ad into the AdMob banner view.
         val adRequest = AdRequest.Builder()
@@ -46,7 +53,7 @@ class ResultadoActivity() : AppCompatActivity() {
         btnMas.setOnClickListener { presenter.tratarPasajerosYCostos(tvNumPasajeros.text.toString().toInt(), +1, resultados.costo) }
         btnMenos.setOnClickListener { presenter.tratarPasajerosYCostos(tvNumPasajeros.text.toString().toInt(), -1, resultados.costo) }
         btnShare.setOnClickListener { presenter.compartirReparto(resultados, tvNumPasajeros.text.toString().toInt()) }
-        btnGuardarCoche.setOnClickListener { presenter.mostrarGuardarCocheDialog() }
+        btnGuardarCoche.setOnClickListener { presenter.comprobarCocheGuardado(viaje.coche, it as ImageButton, cocheCuardado) }
     }
 
     fun shareChooser(textoParaCompartir:String){
@@ -86,7 +93,7 @@ class ResultadoActivity() : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    fun mostrarGuardarCocheDialog():View {
+    fun mostrarGuardarCocheDialog(coche: Coche):View {
         val inflater = LayoutInflater.from(this)
         val view = inflater.inflate(R.layout.guardar_coche_dialog, null)
         val builder = AlertDialog.Builder(this)
@@ -96,11 +103,26 @@ class ResultadoActivity() : AppCompatActivity() {
         builder.setNegativeButton("Cancelar"){_, _ ->}
         val dialog = builder.create()
         dialog.show();
+        dialog.etNombre.setText(coche.nombre)
+        dialog.etConsumo.setText(coche.consumo.toString())
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if(presenter.guardarCoche(view)) dialog.dismiss()
+            if(presenter.guardarCoche(view, btnGuardarCoche)) dialog.dismiss()
         }
 
         return view
+    }
+
+    fun setCoche(coche: Coche){
+        viaje.coche = coche
+        cocheCuardado = true
+    }
+
+    fun estadoBoton(button: ImageButton, activado:Boolean){
+        val drawable:Int =
+            if (activado) R.drawable.corazon_relleno
+            else R.drawable.corazon_vacio
+
+        button.setImageResource(drawable)
     }
 
     fun cargarSpinnerCombustibles(arrNombresCombustibles:Array<String>, arrNamesCombustibles:Array<String>, view:View){

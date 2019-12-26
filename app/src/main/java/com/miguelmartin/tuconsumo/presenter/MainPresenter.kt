@@ -13,8 +13,7 @@ class MainPresenter(view: MainActivity) {
     val model = MainModel()
 
     fun calcularResultados(viaje: Viaje){
-        val resultados = model.calcularConsumo(viaje)
-        view.irResultadoActivity(resultados)
+        view.irResultadoActivity(viaje)
     }
 
     fun checkTieneCoche() = model.comprobarCoche(view)
@@ -71,7 +70,7 @@ class MainPresenter(view: MainActivity) {
     fun getCoches() {
         val lCoches = model.getCochesBd(view)
         val lFormatCoches = model.getFormatCoches(lCoches)
-        val lValoresConsumos = lCoches.map { it.consumo.toString() }.toTypedArray()
+        val lValoresConsumos = lCoches.toTypedArray()
         view.crearDialogCoches(lFormatCoches, lValoresConsumos)
     }
 
