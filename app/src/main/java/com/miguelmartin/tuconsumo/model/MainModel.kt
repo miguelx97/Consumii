@@ -84,8 +84,6 @@ class MainModel() {
         return LISTA_COMUNIDADES.filterValues { it == comunidad }.keys.elementAt(0)
     }
 
-    fun getPrecioDesdeArray(arrMediasCombustibles: Array<Combustible>, combustible:String) = arrMediasCombustibles.filter { it.tipo == TipoCombustible.valueOf(combustible) }[0].precio
-
     fun getCochesBd(context: Context) = PersistenciaCoche(context).getAll()
 
     fun getFormatCoches(lCoches: List<Coche>): Array<String> {

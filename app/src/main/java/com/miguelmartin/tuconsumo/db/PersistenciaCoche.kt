@@ -64,4 +64,9 @@ class PersistenciaCoche(context: Context) {
         return res > 0
     }
 
+    fun existeCoche(coche: Coche): Boolean {
+        val cursor = dbManager.customQuery(sqlEsisteCoche, arrayOf(coche.id.toString()))
+        return cursor.moveToFirst()
+    }
+
 }

@@ -151,6 +151,7 @@
             style="@style/textView"
             android:text="Guardar" />
 
+<!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,6 +177,7 @@
                 android:scaleType="fitCenter"
                 ads:srcCompat="@drawable/corazon_vacio" />
         </LinearLayout>
+-->
 
         <LinearLayout
             android:layout_width="match_parent"

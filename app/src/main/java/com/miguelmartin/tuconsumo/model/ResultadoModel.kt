@@ -45,4 +45,6 @@ class ResultadoModel {
         else return persistencia.eliminarUltimoRegistro()
     }
 
+    fun existeCoche(coche: Coche, context: Context) = PersistenciaCoche(context).existeCoche(coche)
+
 }

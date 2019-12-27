@@ -10,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.miguelmartin.tuconsumo.Common.DISTANCIA
 import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
 import com.miguelmartin.tuconsumo.Entities.*
-import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
-import kotlinx.android.synthetic.main.activity_bienvenida.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main.etConsumo
 
@@ -51,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         btnAyudaTrayecto.setOnClickListener { presenter.getDistancia() }
         btnAyudaConsumo.setOnClickListener { presenter.getCoches() }
 
-        btnCalcular.setOnClickListener { presenter.calcularResultados(getInfoViaje()) }
+        btnCalcular.setOnClickListener { presenter.calcularResultados() }
     }
 
     fun irResultadoActivity(viaje: Viaje){
@@ -65,13 +63,17 @@ class MainActivity : AppCompatActivity() {
         this.arrCombustibles = arrCombustibles
     }
 
-    fun rellenarPrecioCombustible(precioCombustible: Float, datosUsuario: DatosUsuario){
-        etPrecioFuel.hint = "$precioCombustible€ (${TipoCombustible.valueOf(datosUsuario.combustible).nombre} en ${datosUsuario.comunidad})"
-        viaje.coche.combustible.precio = precioCombustible
+    fun rellenarPrecioCombustible(combustible: Combustible, comunidad:String){
+        etPrecioFuel.hint = "${combustible.precio}€ (${combustible.tipo!!.nombre} en $comunidad)"
+        viaje.coche.combustible = combustible
     }
 
-    fun rellenarConsumoCoche(consumo:Float){
-        etConsumo.hint = "$consumo l/100Km"
+    fun rellenarConsumoCoche(consumo:Float, nombre:String = ""){
+        var nombreParentesis = ""
+        if (nombre.isNotEmpty()){
+            nombreParentesis = "($nombre)"
+        }
+        etConsumo.hint = "$consumo l/100Km $nombreParentesis"
         viaje.coche.consumo = consumo
     }
 
@@ -85,17 +87,27 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, RC_GET_DISTANCIA)
     }
 
-    private fun getInfoViaje():Viaje{
-        viaje.distanciaTrayecto = etDistancia.text.toString().toDouble()
-        if(etConsumo.text.toString().isNotEmpty())
+    fun getInfoViaje():Viaje{
+        if(etDistancia.text.toString().isNotEmpty())
+            viaje.distanciaTrayecto = etDistancia.text.toString().toDouble()
+
+        if(etConsumo.text.toString().isNotEmpty()){
             viaje.coche.consumo = etConsumo.text.toString().toFloat()
-        if(etPrecioFuel.text.toString().isNotEmpty())
-            viaje.coche.combustible.precio = etPrecioFuel.text.toString().toFloat()
+            viaje.coche.id = 0
+        }
+
+        if(etPrecioFuel.text.toString().isNotEmpty()){
+            viaje.coche.combustible = Combustible(precio = etPrecioFuel.text.toString().toFloat())
+        }
+
 
         when {
             rbUnTrayecto.isChecked -> viaje.numeroTrayectos = 1
             rbDosTrayectos.isChecked -> viaje.numeroTrayectos = 2
-            rbCustomTrayectos.isChecked -> viaje.numeroTrayectos = etCustomTrayectos.text.toString().toInt()
+            rbCustomTrayectos.isChecked -> {
+                if(etCustomTrayectos.text.toString().isNotEmpty())
+                    viaje.numeroTrayectos = etCustomTrayectos.text.toString().toInt()
+            }
         }
         return viaje
     }
@@ -112,11 +124,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun crearDialogCombustibles(arrNombres:Array<String>, arrPrecios:Array<Float>){
+    fun crearDialogCombustibles(arrNombres:Array<String>, arrValores: Array<Combustible>){
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.seleccione_combustible))
             setSingleChoiceItems(arrNombres, -1) { dialogInterface, i ->
-                etPrecioFuel.setText(arrPrecios[i].toString())
+                rellenarPrecioCombustible(arrValores[i], datosUsuario!!.comunidad)
                 dialogInterface.dismiss()
             }
             setNeutralButton("Cancel") { dialog, _ -> dialog.cancel() }
@@ -136,15 +148,43 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.seleccione_coche))
             setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
-                etConsumo.setText(arrValores[i].consumo.toString())
-                viaje.coche.nombre = arrValores[i].nombre
+                viaje.coche = arrValores[i]
+                presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario)
                 dialogInterface.dismiss()
-                viaje.coche.combustible = arrCombustibles!!.filter { it.tipo == arrValores[i].combustible.tipo }[0]
-                etPrecioFuel.setText(viaje.coche.combustible.precio.toString())
             }
             setNeutralButton("Cancel") { dialog, _ ->
                 dialog.cancel()
             }
         }.create().show()
+    }
+
+    fun datosRellenos(viaje: Viaje):Boolean {
+        var ok = true
+
+        if(viaje.numeroTrayectos == 0){
+            etCustomTrayectos.error = "Debe introducir el número de trayectos"
+            etCustomTrayectos.requestFocus()
+            ok =  false
+        } else etCustomTrayectos.error = null
+
+        if(viaje.coche.combustible.precio == 0F){
+            etPrecioFuel.error = "Debe introducir el precio del combustible"
+            etPrecioFuel.requestFocus()
+            ok =  false
+        } else etPrecioFuel.error = null
+
+        if(viaje.coche.consumo == 0F){
+            etConsumo.error = "Debe introducir el consumo del coche"
+            etConsumo.requestFocus()
+            ok =  false
+        } else etConsumo.error = null
+
+        if(viaje.distanciaTrayecto == 0.0){
+            etDistancia.error = "Debe introducir la distancia del trayecto"
+            etDistancia.requestFocus()
+            ok =  false
+        } else etDistancia.error = null
+
+        return ok
     }
 }

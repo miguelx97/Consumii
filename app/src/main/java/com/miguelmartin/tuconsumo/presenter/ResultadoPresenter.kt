@@ -70,5 +70,13 @@ class ResultadoPresenter(view: ResultadoActivity) {
 
     fun getResultados(viaje: Viaje) = model.getResultados(viaje)
 
+    fun existeCoche(coche: Coche):Boolean {
+        if (coche.id <= 0){
+            return false
+        }
+        return model.existeCoche(coche, view)
+    }
+
+
 
 }

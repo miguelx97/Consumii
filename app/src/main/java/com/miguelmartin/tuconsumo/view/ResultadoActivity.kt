@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.google.android.gms.ads.AdRequest
 import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Combustible
@@ -42,7 +43,10 @@ class ResultadoActivity() : AppCompatActivity() {
         tvDistancia.text = resultados.distancia.toString() + " Km"
         tvCoste.text = resultados.costo.toString() + " €"
 
-        cocheCuardado = viaje.coche.id > 0
+        cocheCuardado = presenter.existeCoche(viaje.coche)
+
+
+        estadoBoton(btnGuardarCoche, cocheCuardado)
 
         // Load an ad into the AdMob banner view.
         val adRequest = AdRequest.Builder()
@@ -129,6 +133,7 @@ class ResultadoActivity() : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, arrNombresCombustibles)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         view.spCombustible.adapter = adapter
+        view.spCombustible.setSelection(arrNamesCombustibles.indexOf(viaje.coche.combustible.tipo?.name))
         arrCombustibleNames = arrNamesCombustibles
     }
 
