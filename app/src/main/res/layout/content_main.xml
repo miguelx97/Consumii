@@ -4,143 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margenes_laterales"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/lyDatosPrincipales"
-        style="@style/layout"
-        android:layout_below="@+id/tvTitulo"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            style="@style/basic_layout">
+    <include layout="@layout/header" />
 
-            <EditText
-                android:id="@+id/etDistancia"
-                style="@style/editText"
-                android:layout_weight="1"
-                android:hint="@string/distancia"
-                android:inputType="numberDecimal" />
-
-            <ImageButton
-                android:id="@+id/btnAyudaTrayecto"
-                style="@style/imageButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="0dp"
-                android:src="@drawable/flecha_abajo" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/basic_layout">
-
-            <EditText
-                android:id="@+id/etConsumo"
-                style="@style/editText"
-                android:layout_weight="1"
-                android:hint="@string/consumo_coche"
-                android:inputType="numberDecimal"  />
-
-            <ImageButton
-                android:id="@+id/btnAyudaConsumo"
-                style="@style/imageButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="0dp"
-                android:src="@drawable/flecha_abajo" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/basic_layout">
-
-            <EditText
-                android:id="@+id/etPrecioFuel"
-                style="@style/editText"
-                android:layout_weight="1"
-                android:hint="@string/precio_combustible"
-                android:inputType="numberDecimal" />
-
-            <ImageButton
-                android:id="@+id/btnAyudaCombustible"
-                style="@style/imageButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="0dp"
-                android:src="@drawable/flecha_abajo" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lyNumeroTrayectos"
-        style="@style/layout"
-        android:layout_below="@+id/lyDatosPrincipales"
-        android:orientation="vertical">
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/rbDosTrayectos"
-                style="@style/radioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/ida_vuelta" />
-
-            <RadioButton
-                android:id="@+id/rbUnTrayecto"
-                style="@style/radioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/solo_ida" />
-
-            <RadioButton
-                android:id="@+id/rbCustomTrayectos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/definir_viajes" />
-
-            <EditText
-                android:id="@+id/etCustomTrayectos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginEnd="65dp"
-                android:ems="10"
-                android:hint="@string/num_viajes"
-                android:inputType="number"
-                android:visibility="gone" />
-        </RadioGroup>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvTitulo"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="30sp" />
+        android:layout_height="match_parent"
+        android:id="@+id/lyContenido"
+        android:layout_marginTop="60dp"
+        android:padding="@dimen/margenes_laterales">
 
-    <Button
-        android:id="@+id/btnCalcular"
-        style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:text="@string/calcular" />
+
+        <LinearLayout
+            android:id="@+id/lyDatosPrincipales"
+            style="@style/layout"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                style="@style/basic_layout">
+
+                <EditText
+                    android:id="@+id/etDistancia"
+                    style="@style/editText"
+                    android:layout_weight="1"
+                    android:hint="@string/distancia"
+                    android:inputType="numberDecimal" />
+
+                <ImageButton
+                    android:id="@+id/btnAyudaTrayecto"
+                    style="@style/imageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/flecha_abajo" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/basic_layout">
+
+                <EditText
+                    android:id="@+id/etConsumo"
+                    style="@style/editText"
+                    android:layout_weight="1"
+                    android:hint="@string/consumo_coche"
+                    android:inputType="numberDecimal"  />
+
+                <ImageButton
+                    android:id="@+id/btnAyudaConsumo"
+                    style="@style/imageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/flecha_abajo" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/basic_layout">
+
+                <EditText
+                    android:id="@+id/etPrecioFuel"
+                    style="@style/editText"
+                    android:layout_weight="1"
+                    android:hint="@string/precio_combustible"
+                    android:inputType="numberDecimal" />
+
+                <ImageButton
+                    android:id="@+id/btnAyudaCombustible"
+                    style="@style/imageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/flecha_abajo" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyNumeroTrayectos"
+            style="@style/layout"
+            android:layout_below="@+id/lyDatosPrincipales"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/rbDosTrayectos"
+                    style="@style/radioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/ida_vuelta" />
+
+                <RadioButton
+                    android:id="@+id/rbUnTrayecto"
+                    style="@style/radioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/solo_ida" />
+
+                <RadioButton
+                    android:id="@+id/rbCustomTrayectos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/definir_viajes" />
+
+                <EditText
+                    android:id="@+id/etCustomTrayectos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginEnd="65dp"
+                    android:ems="10"
+                    android:hint="@string/num_viajes"
+                    android:inputType="number"
+                    android:visibility="gone" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCalcular"
+            style="@style/button"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/calcular" />
+
+    </RelativeLayout>
+
+
 
 </RelativeLayout>

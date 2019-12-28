@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLight"
-    android:padding="@dimen/margenes_laterales"
     tools:context=".view.BienvenidaActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-110dp"
+        android:src="@drawable/header_bienvenida" />
+
 
     <LinearLayout
         android:id="@+id/lyTitulo"
@@ -20,93 +28,107 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
             android:text="Bienvenido a" />
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/lyPreguntas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyTitulo">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lyContenido"
+        android:layout_marginTop="90dp"
+        android:padding="@dimen/margenes_laterales">
 
-        <TextView
-            android:id="@+id/tvEntrada"
-            style="@style/textViewInicio"
-            android:text="Unas preguntas para empezar" />
 
-        <TextView
-            android:id="@+id/tvCombustibleInicio"
-            style="@style/textViewInicio"
-            android:text="¿Qué combustible usa tu coche?" />
-
-        <EditText
-            android:id="@+id/spCombustible"
-            style="@style/spinner"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/lyPreguntas"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/seleccione_combustible"
-            android:inputType="textPersonName" />
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvConsumoInicio"
-            style="@style/textViewInicio"
-            android:text="¿Cuánto cunsume su coche?" />
+            <TextView
+                android:id="@+id/tvEntrada"
+                style="@style/textViewInicio"
+                android:text="Unas preguntas para empezar" />
 
-        <EditText
-            android:id="@+id/etConsumo"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvCombustibleInicio"
+                style="@style/textViewInicio"
+                android:text="¿Qué combustible usa tu coche?" />
+
+            <EditText
+                android:id="@+id/spCombustible"
+                style="@style/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/seleccione_combustible"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tvConsumoInicio"
+                style="@style/textViewInicio"
+                android:text="¿Cuánto cunsume su coche?" />
+
+            <EditText
+                android:id="@+id/etConsumo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Litros por 100 km"
+                android:inputType="none|numberDecimal" />
+
+            <TextView
+                android:id="@+id/tvComunidad"
+                style="@style/textViewInicio"
+                android:text="¿Dónde vives? (Opcional)" />
+
+            <EditText
+                android:id="@+id/spComunidad"
+                style="@style/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/seleccione_comunidad"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyBotones"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Litros por 100 km"
-            android:inputType="none|numberDecimal" />
-
-        <TextView
-            android:id="@+id/tvComunidad"
-            style="@style/textViewInicio"
-            android:text="¿Dónde vives? (Opcional)" />
-
-        <EditText
-            android:id="@+id/spComunidad"
-            style="@style/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/seleccione_comunidad"
-            android:inputType="textPersonName" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lyBotones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
 
-        <Button
-            android:id="@+id/btnAceptarInicio"
-            style="@style/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Aceptar" />
+            <Button
+                android:id="@+id/btnAceptarInicio"
+                style="@style/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aceptar" />
 
-        <Button
-            android:id="@+id/btnNoCoche"
-            style="@style/buttonSecundario"
-            android:text="No tengo coche" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnNoCoche"
+                style="@style/buttonSecundario"
+                android:text="No tengo coche" />
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
