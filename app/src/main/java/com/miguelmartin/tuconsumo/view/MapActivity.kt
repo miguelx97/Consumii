@@ -122,6 +122,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) checkPermission();
 
+
         val location = LocationServices.getFusedLocationProviderClient(this)
 
         location.lastLocation

@@ -19,7 +19,7 @@ class ResultadoModel {
     fun generarTextoParaCompartir(resultados: Resultados,numPasajeros: Int, nombreApp:String) =
         "Se han recorrido ${resultados.distancia} Km.\n" +
         "El consumo ha costado ${resultados.costo}€.\n" +
-        "Entre $numPasajeros passajeros, ${calcularCostoPorPasajero(resultados.costo, numPasajeros)}€ cada uno.\n" +
+        "Entre $numPasajeros pasajeros, ${calcularCostoPorPasajero(resultados.costo, numPasajeros)}€ cada uno.\n" +
         "***$nombreApp***"
 
     fun guardarCocheBd(coche: Coche, context: Context) = PersistenciaCoche(context).insert(coche)

@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLight"
+    android:background="@drawable/carretera"
     tools:context=".view.BienvenidaActivity">
+    <!--
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/carretera" />
+-->
 
     <ImageView
         android:id="@+id/imageView"
@@ -31,9 +40,9 @@
             style="@style/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
             android:layout_marginTop="10dp"
-            android:text="Bienvenido a" />
+            android:text="Bienvenido a"
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -44,10 +53,9 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lyContenido"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lyContenido"
-        android:layout_marginTop="90dp"
         android:padding="@dimen/margenes_laterales">
 
 
@@ -56,6 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/lyBotones"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#08548D</color>
     <color name="colorLight">#FAFFFF</color>
     <color name="colorAccent">#096EBB</color>
+    <color name="colorPreguntas">#464646</color>
+    <color name="color_custom_hint">#747474</color>
 </resources>

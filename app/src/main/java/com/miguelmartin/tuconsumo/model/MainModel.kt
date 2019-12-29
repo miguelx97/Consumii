@@ -51,13 +51,15 @@ class MainModel() {
             }
         }
 
-        val mediasCombustible = Array(arrPreciosByCombustible.size){ Combustible() }
+        val mediasCombustible = Array(arrPreciosByCombustible.filter { it.lPrecios.isNotEmpty() }.size){ Combustible() }
 
         arrPreciosByCombustible.forEachIndexed{ i, it ->
-            it.lPrecios.sort()
-//            println("${it.nombre}: ${it.lPrecios.get(it.lPrecios.size/2)}")
-            mediasCombustible[i].tipo = TipoCombustible.fromNombreJson(it.nombre)
-            mediasCombustible[i].precio = it.lPrecios.get(it.lPrecios.size/2)
+            if(it.lPrecios.isNotEmpty()){
+                it.lPrecios.sort()
+                mediasCombustible[i].tipo = TipoCombustible.fromNombreJson(it.nombre)
+                mediasCombustible[i].precio = it.lPrecios.get(it.lPrecios.size/2)
+            }
+
         }
 
         return mediasCombustible
