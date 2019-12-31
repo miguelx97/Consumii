@@ -4,7 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import com.miguelmartin.tuconsumo.Entities.Coche
+import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
+import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.BienvenidaPresenter
 import kotlinx.android.synthetic.main.activity_bienvenida.*
@@ -12,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_bienvenida.*
 class BienvenidaActivity : AppCompatActivity() {
 
     lateinit var presenter:BienvenidaPresenter
-    var nameCombustible:String = ""
+    var combustible:TipoCombustible? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,21 +24,20 @@ class BienvenidaActivity : AppCompatActivity() {
 //        CochePersistencia(this).insert(Coche(0, "Mi coche", 7f, Combustible(TipoCombustible.DIESEL_MEJORADO, 1.5f)))
 //        Log.w("Coches", CochePersistencia(this).getAll().toString())
 
-
         presenter = BienvenidaPresenter(this)
 
         spCombustible.setOnClickListener { presenter.cargarCombustibles() }
         spComunidad.setOnClickListener { presenter.cargarComunidades() }
-        btnAceptarInicio.setOnClickListener { presenter.accionBotones(true, getDatos()) }
-        btnNoCoche.setOnClickListener { presenter.accionBotones(false) }
+        btnAceptarInicio.setOnClickListener { presenter.accionBotones() }
+//        btnNoCoche.setOnClickListener { presenter.accionBotones(false) }
     }
 
-    fun rellenarSpCombustiblesInicio(arrNombresCombustibles:Array<String>, arrNamesCombustibles:Array<String>){
+    fun rellenarSpCombustiblesInicio(arrNombresCombustibles:Array<String>, arrNamesCombustibles:Array<TipoCombustible>){
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.seleccione_combustible))
             setSingleChoiceItems(arrNombresCombustibles, -1) { dialogInterface, i ->
                 spCombustible.setText(arrNombresCombustibles[i])
-                nameCombustible = arrNamesCombustibles[i]
+                combustible = arrNamesCombustibles[i]
                 dialogInterface.dismiss()
             }
             setNeutralButton("Cancel") { dialog, _ ->
@@ -62,7 +64,7 @@ class BienvenidaActivity : AppCompatActivity() {
         if(etConsumo.text.toString().isNotEmpty())
             consumo = etConsumo.text.toString().toFloat()
 
-        return DatosUsuario(consumo, nameCombustible, spComunidad.text.toString())
+        return DatosUsuario(spComunidad.text.toString(), Coche(consumo = consumo, combustible = Combustible(tipo = combustible)))
     }
 
     fun irMain(){
@@ -70,6 +72,7 @@ class BienvenidaActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+/*
     fun camposRellenos(datosUsuario: DatosUsuario):Boolean {
         var ok = true
         if(datosUsuario.combustible.isEmpty()){
@@ -88,5 +91,6 @@ class BienvenidaActivity : AppCompatActivity() {
         }
         return ok
     }
+*/
 
 }

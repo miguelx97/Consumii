@@ -1,10 +1,8 @@
 package com.miguelmartin.tuconsumo.presenter
 
 import com.miguelmartin.tuconsumo.Common.LISTA_COMUNIDADES
-import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.model.BienvenidaModel
-import com.miguelmartin.tuconsumo.model.ComunModel
 import com.miguelmartin.tuconsumo.view.BienvenidaActivity
 
 class BienvenidaPresenter(view: BienvenidaActivity) {
@@ -12,7 +10,7 @@ class BienvenidaPresenter(view: BienvenidaActivity) {
     val model = BienvenidaModel()
     fun cargarCombustibles(){
         val arrNombresCombustibles = TipoCombustible.values().map { it.nombre }.toTypedArray()
-        val arrNamesCombustibles = TipoCombustible.values().map { it.name }.toTypedArray()
+        val arrNamesCombustibles = TipoCombustible.values()
         view.rellenarSpCombustiblesInicio(arrNombresCombustibles, arrNamesCombustibles)
     }
     fun cargarComunidades(){
@@ -21,10 +19,11 @@ class BienvenidaPresenter(view: BienvenidaActivity) {
         view.rellenarSpComunidadesInicio(arrComunidades)
     }
 
-    fun accionBotones(tieneCoche:Boolean, datosUsuario: DatosUsuario = DatosUsuario()){
-        if (!tieneCoche || view.camposRellenos(datosUsuario)){
-            model.guardarPreferences(datosUsuario, tieneCoche, view)
-            view.irMain()
-        }
+    fun accionBotones(){
+        val datosUsuario = view.getDatos()
+        model.guardarComunidadPrefferences(datosUsuario.comunidad, view)
+        model.guardarCocheBd(datosUsuario.coche, view)
+        view.irMain()
+
     }
 }

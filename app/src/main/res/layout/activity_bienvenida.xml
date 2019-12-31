@@ -19,9 +19,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="-110dp"
+        android:layout_marginTop="-90dp"
+        android:scaleType="fitXY"
         android:src="@drawable/header_bienvenida" />
 
 
@@ -75,9 +76,21 @@
                 android:text="Unas preguntas para empezar" />
 
             <TextView
+                android:id="@+id/tvConsumoInicio"
+                style="@style/textViewInicio"
+                android:text="¿Cuánto cunsume su coche? (Opcional)" />
+
+            <EditText
+                android:id="@+id/etConsumo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Litros por 100 km"
+                android:inputType="none|numberDecimal" />
+
+            <TextView
                 android:id="@+id/tvCombustibleInicio"
                 style="@style/textViewInicio"
-                android:text="¿Qué combustible usa tu coche?" />
+                android:text="¿Qué combustible usa? (Opcional)" />
 
             <EditText
                 android:id="@+id/spCombustible"
@@ -86,18 +99,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/seleccione_combustible"
                 android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/tvConsumoInicio"
-                style="@style/textViewInicio"
-                android:text="¿Cuánto cunsume su coche?" />
-
-            <EditText
-                android:id="@+id/etConsumo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Litros por 100 km"
-                android:inputType="none|numberDecimal" />
 
             <TextView
                 android:id="@+id/tvComunidad"
@@ -132,10 +133,6 @@
                 android:layout_height="wrap_content"
                 android:text="Aceptar" />
 
-            <Button
-                android:id="@+id/btnNoCoche"
-                style="@style/buttonSecundario"
-                android:text="No tengo coche" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

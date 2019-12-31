@@ -138,7 +138,7 @@ class ResultadoActivity() : AppCompatActivity() {
     }
 
     fun getDataCoche(view: View) =
-        Coche(0, view.etNombre.text.toString(), view.etConsumo.text.toString().toFloat(), Combustible(tipo = TipoCombustible.valueOf(arrCombustibleNames[view.spCombustible.selectedItemPosition])))
+        Coche(0, view.etNombre.text.toString(), view.etConsumo.text.toString().toFloat(), false, Combustible(tipo = TipoCombustible.valueOf(arrCombustibleNames[view.spCombustible.selectedItemPosition])))
 
     fun camposRellenos(view: View):Boolean{
         var ok = true

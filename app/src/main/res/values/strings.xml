@@ -26,8 +26,8 @@
 
     <!--TEST-->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="seleccione_combustible">Seleccione combustible</string>
-    <string name="seleccione_comunidad">Seleccione su comunidad</string>
+    <string name="seleccione_combustible">Combustibles</string>
+    <string name="seleccione_comunidad">Comunidades autónomas</string>
 
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
     <string name="title_activity_map">Map</string>

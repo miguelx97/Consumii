@@ -29,14 +29,12 @@ class MainActivity : AppCompatActivity() {
         presenter = MainPresenter(this)
         viaje = Viaje()
 
-        val coche = presenter.checkTieneCoche()
-        if(presenter.bienvenidaSiNuevoUsuario(coche)) return
+        val userExiste = presenter.userExiste()
+        if(presenter.bienvenidaSiNuevoUsuario(userExiste)) return
 
-        if(coche!!){
-            datosUsuario = presenter.getDatosUsuario()
-            presenter.cargarPrecioCombustible(datosUsuario!!)
-            presenter.cargarConsumoCoche(datosUsuario!!.consumo)
-        }
+        datosUsuario = presenter.getDatosUsuario()
+        presenter.cargarPrecioCombustible(datosUsuario!!)
+        presenter.cargarConsumoCoche(datosUsuario!!.coche.consumo)
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){

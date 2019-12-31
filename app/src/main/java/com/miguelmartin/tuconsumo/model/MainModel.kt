@@ -65,21 +65,14 @@ class MainModel() {
         return mediasCombustible
     }
 
-    fun comprobarCoche(context: Context): Boolean? {
+    fun comprobarUser(context: Context): Boolean {
         val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-        if(sharedPreferences.contains(TIENE_COCHE))
-            return sharedPreferences.getBoolean(TIENE_COCHE, false)
-        else
-            return null
+        return sharedPreferences.contains(EXISTE)
     }
 
-    fun getDatosUsuario(view:MainActivity):DatosUsuario{
+    fun getComunidadFromPrefferences(view:MainActivity):String{
         val sharedPreferences = view.getSharedPreferences(PREFS_NAME, 0)
-        return DatosUsuario(
-            sharedPreferences.getFloat(CONSUMO, 0F),
-            sharedPreferences.getString(COMBUSTIBLE, "")!!,
-            sharedPreferences.getString(COMUNIDAD, "")!!
-        )
+        return sharedPreferences.getString(COMUNIDAD, "")!!
     }
 
     fun getIdByNombreComunidad(comunidad: String): String {
@@ -95,6 +88,8 @@ class MainModel() {
         }
         return lFormatCoches
     }
+
+    fun getDefaultCocheBd(context: Context) = PersistenciaCoche(context).getCocheDefault()
 
 
 }

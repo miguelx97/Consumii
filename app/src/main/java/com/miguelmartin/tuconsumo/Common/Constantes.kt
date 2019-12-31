@@ -7,6 +7,7 @@ const val CONSUMO = "consumo"
 const val COMBUSTIBLE = "combustible"
 const val COMUNIDAD = "comunidad"
 const val DISTANCIA = "distancia"
+const val EXISTE = "existe"
 
 val LISTA_COMUNIDADES = hashMapOf(
     "01" to "Andalucía",

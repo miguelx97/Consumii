@@ -10,7 +10,7 @@ import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 class PersistenciaCoche(context: Context) {
     var context = context
     var dbManager = DbManager(context, DB_TABLE_COCHES)
-    var columnas = arrayOf(COL_ID, COL_NOMBRE, COL_CONSUMO, COL_COMBUSTIBLE)
+    var columnas = arrayOf(COL_ID, COL_NOMBRE, COL_CONSUMO, COL_DEFAULT, COL_COMBUSTIBLE)
     var pos = 0
 
     fun getAll():MutableList<Coche>{
@@ -28,6 +28,7 @@ class PersistenciaCoche(context: Context) {
                 coche.id = cursor.getInt(cursor.getColumnIndex(columnas[pos++]))
                 coche.nombre = cursor.getString(cursor.getColumnIndex(columnas[pos++]))
                 coche.consumo = cursor.getFloat(cursor.getColumnIndex(columnas[pos++]))
+                coche.default = parseDefault(cursor.getInt(cursor.getColumnIndex(columnas[pos++])))
                 coche.combustible.tipo = TipoCombustible.valueOf(cursor.getString(cursor.getColumnIndex(columnas[pos++])))
                 lCoches.add(coche)
 
@@ -35,6 +36,24 @@ class PersistenciaCoche(context: Context) {
         }
 
         return lCoches
+    }
+
+    fun getCocheDefault():Coche{
+
+        val cursor = dbManager.getDatos(columnas, "$COL_DEFAULT = ?", arrayOf("1"), "")
+
+        val coche = Coche()
+
+        if(cursor.moveToFirst()){
+            pos = 0
+            coche.id = cursor.getInt(cursor.getColumnIndex(columnas[pos++]))
+            coche.nombre = cursor.getString(cursor.getColumnIndex(columnas[pos++]))
+            coche.consumo = cursor.getFloat(cursor.getColumnIndex(columnas[pos++]))
+            coche.default = parseDefault(cursor.getInt(cursor.getColumnIndex(columnas[pos++])))
+            coche.combustible.tipo = TipoCombustible.valueOf(cursor.getString(cursor.getColumnIndex(columnas[pos++])))
+        }
+
+        return coche
     }
 
     fun insert(coche: Coche):Boolean{
@@ -55,6 +74,7 @@ class PersistenciaCoche(context: Context) {
         pos = 1
         values.put(columnas[pos++], coche.nombre)
         values.put(columnas[pos++], coche.consumo)
+        values.put(columnas[pos++], parseDefault(coche.default))
         values.put(columnas[pos++], coche.combustible.tipo!!.name)
         return values
     }
@@ -68,5 +88,13 @@ class PersistenciaCoche(context: Context) {
         val cursor = dbManager.customQuery(sqlEsisteCoche, arrayOf(coche.id.toString()))
         return cursor.moveToFirst()
     }
+
+    fun parseDefault(default: Boolean):Int{
+        if(default) return 1
+        else return 0
+    }
+
+    fun parseDefault(default: Int) =
+        default == 1
 
 }

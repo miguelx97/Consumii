@@ -31,7 +31,10 @@ class ResultadoPresenter(view: ResultadoActivity) {
         if(!cocheCuardado){
             mostrarGuardarCocheDialog(coche)
         } else{
-            eliminarCoche(coche, imageButton)
+            if(!coche.default)
+                eliminarCoche(coche, imageButton)
+            else
+                view.toast("El coche principal no puede ser eliminado")
         }
     }
 
