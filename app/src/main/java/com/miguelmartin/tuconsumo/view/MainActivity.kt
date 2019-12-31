@@ -150,9 +150,8 @@ class MainActivity : AppCompatActivity() {
                 presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario)
                 dialogInterface.dismiss()
             }
-            setNeutralButton("Cancel") { dialog, _ ->
-                dialog.cancel()
-            }
+            setNeutralButton("Administrar"){_, _ ->presenter.administrarCoches()}
+            setNegativeButton("Cancelar"){_, _ ->}
         }.create().show()
     }
 
@@ -184,5 +183,10 @@ class MainActivity : AppCompatActivity() {
         } else etDistancia.error = null
 
         return ok
+    }
+
+    fun irAdministradorCoches() {
+        val intent = Intent(this, AdministradorCochesActivity::class.java)
+        startActivity(intent)
     }
 }

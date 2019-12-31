@@ -100,11 +100,13 @@ class ResultadoActivity() : AppCompatActivity() {
     fun mostrarGuardarCocheDialog(coche: Coche):View {
         val inflater = LayoutInflater.from(this)
         val view = inflater.inflate(R.layout.guardar_coche_dialog, null)
-        val builder = AlertDialog.Builder(this)
-        builder.setView(view)
-        builder.setTitle("Añadir coche")
-        builder.setPositiveButton("Aceptar"){_, _ ->}
-        builder.setNegativeButton("Cancelar"){_, _ ->}
+        val builder = AlertDialog.Builder(this).apply {
+            setView(view)
+            setTitle("Añadir coche")
+            setPositiveButton("Aceptar"){_, _ ->}
+            setNegativeButton("Cancelar"){_, _ ->}
+        }
+
         val dialog = builder.create()
         dialog.show();
         dialog.etNombre.setText(coche.nombre)

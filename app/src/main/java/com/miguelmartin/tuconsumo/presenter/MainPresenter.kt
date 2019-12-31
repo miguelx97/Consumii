@@ -4,7 +4,6 @@ import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
-import com.miguelmartin.tuconsumo.Enums.TipoCombustible
 import com.miguelmartin.tuconsumo.model.MainModel
 import com.miguelmartin.tuconsumo.view.MainActivity
 
@@ -87,6 +86,10 @@ class MainPresenter(view: MainActivity) {
             val combustible = arrCombustibles.filter{it.tipo == coche.combustible.tipo}[0]
             view.rellenarPrecioCombustible(combustible, datosUsuario.comunidad)
         }
+    }
+
+    fun administrarCoches() {
+        view.irAdministradorCoches()
     }
 
 

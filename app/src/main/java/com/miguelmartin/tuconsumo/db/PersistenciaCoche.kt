@@ -15,7 +15,7 @@ class PersistenciaCoche(context: Context) {
 
     fun getAll():MutableList<Coche>{
 
-        val cursor = dbManager.getDatos(columnas, "", arrayOf(), "$COL_ID DESC")
+        val cursor = dbManager.getDatos(columnas, "", arrayOf(), "$COL_ID")
 
         val lCoches = mutableListOf<Coche>()
         lateinit var coche:Coche
