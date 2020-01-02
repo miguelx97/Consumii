@@ -33,3 +33,4 @@ val LISTA_COMUNIDADES = hashMapOf(
 
 const val RC_PLACE_AUTOCOMPLETE = 100
 const val RC_GET_DISTANCIA = 101
+const val RC_ADMIN_COCHES = 102

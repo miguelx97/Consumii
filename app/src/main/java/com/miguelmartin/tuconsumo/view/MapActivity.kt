@@ -118,15 +118,54 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+
         mMap = googleMap
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) checkPermission();
+        if(tienePermisos())
+            cargarUbicacion()
+    }
 
+    private fun tienePermisos():Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M )
+            return true
 
+        if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED )
+            return true
+
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ),
+            RC_PLACE_AUTOCOMPLETE
+        )
+
+        return false
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            RC_PLACE_AUTOCOMPLETE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    cargarUbicacion()
+                } else {
+//                    PERMISOS RECHAZADOS
+                }
+                return
+            }
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
+    private fun cargarUbicacion() {
         val location = LocationServices.getFusedLocationProviderClient(this)
 
         location.lastLocation
-            .addOnSuccessListener { location : Location ->
+            .addOnSuccessListener { location: Location ->
 
                 val ubicacion = LatLng(location.latitude, location.longitude)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16f))
@@ -135,27 +174,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             .addOnFailureListener {
                 this.toast("FAIL")
             }
-            .addOnCanceledListener{
+            .addOnCanceledListener {
                 this.toast("CANCEL")
             }
-
-        // Add a marker in Sydney and move the camera
-
-    }
-
-    private fun checkPermission() {
-        if (ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ||
-            ContextCompat.checkSelfPermission( this, Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED )
-        { //Can add more as per requirement
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                RC_PLACE_AUTOCOMPLETE
-            )
-        }
     }
 
     fun returnDistancia(distancia: String) {

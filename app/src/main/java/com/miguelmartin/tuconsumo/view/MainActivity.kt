@@ -1,5 +1,6 @@
 package com.miguelmartin.tuconsumo.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.miguelmartin.tuconsumo.Common.DISTANCIA
+import com.miguelmartin.tuconsumo.Common.RC_ADMIN_COCHES
 import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
 import com.miguelmartin.tuconsumo.Entities.*
 import com.miguelmartin.tuconsumo.R
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var presenter:MainPresenter
     lateinit var  viaje:Viaje
     private var arrCombustibles:Array<Combustible>? = null
-    var datosUsuario: DatosUsuario? = null
+    var datosUsuario:DatosUsuario? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         if(presenter.bienvenidaSiNuevoUsuario(userExiste)) return
 
         datosUsuario = presenter.getDatosUsuario()
-        presenter.cargarPrecioCombustible(datosUsuario!!)
-        presenter.cargarConsumoCoche(datosUsuario!!.coche.consumo)
+        presenter.cargarPrecioCombustible(datosUsuario)
+        presenter.cargarConsumoCoche(datosUsuario?.coche!!.consumo, datosUsuario?.coche!!.nombre)
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
@@ -67,11 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rellenarConsumoCoche(consumo:Float, nombre:String = ""){
-        var nombreParentesis = ""
-        if (nombre.isNotEmpty()){
-            nombreParentesis = "($nombre)"
-        }
-        etConsumo.hint = "$consumo l/100Km $nombreParentesis"
+        etConsumo.hint = "$consumo l/100Km $nombre"
         viaje.coche.consumo = consumo
     }
 
@@ -126,20 +124,11 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.seleccione_combustible))
             setSingleChoiceItems(arrNombres, -1) { dialogInterface, i ->
-                rellenarPrecioCombustible(arrValores[i], datosUsuario!!.comunidad)
+                presenter.cargarPrecioCombustible(arrValores[i], datosUsuario!!.comunidad)
                 dialogInterface.dismiss()
             }
             setNeutralButton("Cancel") { dialog, _ -> dialog.cancel() }
         }.create().show()
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == RC_GET_DISTANCIA) {
-            val distancia = data?.getStringExtra(DISTANCIA)
-            etDistancia.setText(distancia)
-        }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun crearDialogCoches(arrNombresCoches: Array<String>, arrValores: Array<Coche>) {
@@ -147,7 +136,7 @@ class MainActivity : AppCompatActivity() {
             setTitle(getString(R.string.seleccione_coche))
             setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
                 viaje.coche = arrValores[i]
-                presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario)
+                presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario!!)
                 dialogInterface.dismiss()
             }
             setNeutralButton("Administrar"){_, _ ->presenter.administrarCoches()}
@@ -187,6 +176,20 @@ class MainActivity : AppCompatActivity() {
 
     fun irAdministradorCoches() {
         val intent = Intent(this, AdministradorCochesActivity::class.java)
-        startActivity(intent)
+        startActivityForResult(intent, RC_ADMIN_COCHES)
     }
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == RC_GET_DISTANCIA) {
+            val distancia = data?.getStringExtra(DISTANCIA)
+            etDistancia.setText(distancia)
+        } else if(requestCode == RC_ADMIN_COCHES){
+            datosUsuario = presenter.getDatosUsuario()
+            presenter.rellenarDatosByCoche(datosUsuario!!.coche, arrCombustibles, datosUsuario!!)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 }

@@ -69,6 +69,16 @@ class PersistenciaCoche(context: Context) {
         return res > 0
     }
 
+    fun update(coche: Coche):Boolean{
+        Log.w("modificar ${coche.id}:", coche.toString())
+
+        val cv = getValues(coche)
+        val res = dbManager.modificar(cv, "$COL_ID=?", arrayOf(coche.id.toString()))
+
+        return res > 0
+    }
+
+
     fun getValues(coche: Coche): ContentValues {
         var values = ContentValues()
         pos = 1
