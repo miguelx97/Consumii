@@ -1,8 +1,18 @@
 <resources>
-    <string name="app_name">Tu Consumo</string>
+
+    <!--REAL-->
+    <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
+    <!--TEST-->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    
+    <string name="app_name">Consumi</string>
+    <string name="title_activity_map">Mapa</string>
+    <string name="seleccione_coche">Seleccione Coche</string>
+    <string name="title_administracion_coches">Coches favoritos</string>
+    
+    
     <string name="action_settings">Settings</string>
     <string name="title_activity_resultado">ResultadoActivity</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="titulo_main">Datos del trayecto</string>
     <string name="distancia">Distancia del trayecto (Km)</string>
@@ -21,18 +31,15 @@
     <string name="moneda">€</string>
     <string name="idioma">Idioma: ES</string>
 
-    <!--REAL-->
-    <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
-
-    <!--TEST-->
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    
+    
+    
     <string name="seleccione_combustible">Combustibles</string>
     <string name="seleccione_comunidad">Comunidades autónomas</string>
-
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
-    <string name="title_activity_map">Map</string>
     <string name="inicio">Inicio</string>
     <string name="destino">Destino</string>
-    <string name="seleccione_coche">Seleccione Coche</string>
-    <string name="title_administracion_coches">Coches</string>
+    
+    
+    <string name="coches_favoritos">Coches favoritos</string>
 </resources>
