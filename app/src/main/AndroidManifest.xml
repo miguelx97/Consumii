@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.AdministradorCochesActivity"
             android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_administracion_coches"></activity>
 
         <meta-data
