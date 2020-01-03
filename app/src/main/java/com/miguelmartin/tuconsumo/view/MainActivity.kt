@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 
     fun crearDialogCoches(arrNombresCoches: Array<String>, arrValores: Array<Coche>) {
         AlertDialog.Builder(this).apply {
-            setTitle(getString(R.string.seleccione_coche))
+            setTitle(getString(R.string.coches_favoritos))
             setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
                 viaje.coche = arrValores[i]
                 presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario!!)
