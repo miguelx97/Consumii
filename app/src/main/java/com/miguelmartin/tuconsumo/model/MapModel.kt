@@ -35,4 +35,6 @@ class MapModel {
         return distanciaString.removeSuffix(" km")
     }
 
+
+
 }

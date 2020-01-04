@@ -11,7 +11,10 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,23 +37,23 @@ import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MapPresenter
 import kotlinx.android.synthetic.main.activity_map.*
 
-enum class Estado(val etiqueta: Int) {INICIO(R.string.inicio) , DESTINO(R.string.destino)}
-data class InfoMapa (var campo:EditText, var posicion: Estado, var icono:Int)
-data class Posicion(var ubicacion:LatLng? = null, var marker: Marker? = null)
+data class InfoPosicion (var campo:EditText, var limpiarCampo: ImageView, var icono:Int, var etiqueta:Int, var marker: Marker? = null)
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var presenter:MapPresenter
     private lateinit var mMap: GoogleMap
-    lateinit var infoMapa: InfoMapa
-    var posicionInicio = Posicion()
-    var posicionDestino = Posicion()
+    lateinit var posicionInicio:InfoPosicion
+    lateinit var posicionDestino:InfoPosicion
+    lateinit var currentPosicion:InfoPosicion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
         presenter = MapPresenter(this)
+        posicionInicio = InfoPosicion(etInicio, ivLimpiarInicio, R.drawable.casa, R.string.inicio)
+        posicionDestino = InfoPosicion(etDestino, ivLimpiarDestino, R.drawable.bandera, R.string.destino)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -64,48 +67,65 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         etInicio.setOnClickListener {
-            infoMapa = InfoMapa(it as EditText, Estado.INICIO, R.drawable.casa)
+            currentPosicion = posicionInicio
             var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
             startActivityForResult(intent, RC_PLACE_AUTOCOMPLETE)
         }
         etDestino.setOnClickListener {
-            infoMapa = InfoMapa(it as EditText, Estado.DESTINO, R.drawable.bandera)
+            currentPosicion = posicionDestino
             var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
             startActivityForResult(intent, RC_PLACE_AUTOCOMPLETE)
         }
 
         btnAceptarMap.setOnClickListener {
-            if (posicionInicio.ubicacion == null) return@setOnClickListener
-            if (posicionDestino.ubicacion == null) return@setOnClickListener
-            presenter.getDataFromMapsRest(posicionInicio.ubicacion!!, posicionDestino.ubicacion!!)
+            presenter.getDataFromMapsRest(posicionInicio.marker?.position, posicionDestino.marker?.position)
         }
+
+        btnUbicacionActual.setOnClickListener {
+            if(seleccionarPosicion())
+                cargarUbicacion(false)
+        }
+
+        ivLimpiarInicio.setOnClickListener {
+            currentPosicion = posicionInicio
+            ocLimpiarCampo()
+        }
+
+        ivLimpiarDestino.setOnClickListener {
+            currentPosicion = posicionDestino
+            ocLimpiarCampo()
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_PLACE_AUTOCOMPLETE) {
             if (resultCode == Activity.RESULT_OK) {
-                val place =Autocomplete.getPlaceFromIntent(data!!)
-                infoMapa.campo.setText(place.name)
-                var posicion:Posicion
-                val ubicacion = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
-                when(infoMapa.posicion){
-                    Estado.INICIO -> posicion = posicionInicio
-                    Estado.DESTINO -> posicion = posicionDestino
-                }
-                posicion.ubicacion = ubicacion
-                posicion.marker?.remove()
-                posicion.marker = mMap.addMarker(MarkerOptions().position(ubicacion)
-                    .title(getString(infoMapa.posicion.etiqueta))
-                    .icon(bitmapDescriptorFromVector(this, infoMapa.icono)))
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(ubicacion))
+                val place = Autocomplete.getPlaceFromIntent(data!!)
+                val coordenadas = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
+                val nombre = place.name
 
+                cargarPosición(nombre, coordenadas)
             }
+
             else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 var status = Autocomplete.getStatusFromIntent(data!!)
                 Log.i("address", status.statusMessage);
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun cargarPosición(nombre: String?,coordenadas: LatLng) {
+        currentPosicion.campo.setText(nombre)
+        currentPosicion.limpiarCampo.visibility = View.VISIBLE
+        currentPosicion.marker?.remove()
+        currentPosicion.marker = mMap.addMarker(
+            MarkerOptions().position(coordenadas)
+                .title(getString(currentPosicion.etiqueta))
+                .icon(bitmapDescriptorFromVector(this, currentPosicion.icono))
+        )
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosicion.marker!!.position))
     }
 
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
@@ -122,7 +142,31 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         if(tienePermisos())
-            cargarUbicacion()
+            cargarUbicacion(true)
+
+        mMap.setOnMapLongClickListener {
+            if (seleccionarPosicion())
+                cargarPosición("Ubicación personalizada", it)
+        }
+    }
+
+    private fun ocLimpiarCampo() {
+        currentPosicion.campo.setText("")
+        currentPosicion.limpiarCampo.visibility = View.GONE
+        currentPosicion.marker?.remove()
+        currentPosicion.marker = null
+    }
+
+    private fun seleccionarPosicion():Boolean {
+        if(etInicio.text.toString().isEmpty()){
+            currentPosicion = posicionInicio
+        } else if(etDestino.text.toString().isEmpty()) {
+            currentPosicion = posicionDestino
+        } else{
+            toast("Inicio y destino están seleccinados", Toast.LENGTH_LONG)
+            return false
+        }
+        return true
     }
 
     private fun tienePermisos():Boolean {
@@ -149,7 +193,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         when (requestCode) {
             RC_PLACE_AUTOCOMPLETE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    cargarUbicacion()
+                    cargarUbicacion(true)
                 } else {
 //                    PERMISOS RECHAZADOS
                 }
@@ -161,15 +205,18 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun cargarUbicacion() {
+    private fun cargarUbicacion(iniciando:Boolean) {
         val location = LocationServices.getFusedLocationProviderClient(this)
 
         location.lastLocation
             .addOnSuccessListener { location: Location ->
-
                 val ubicacion = LatLng(location.latitude, location.longitude)
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16f))
 
+                if(iniciando){
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16f))
+                } else{
+                    cargarPosición("Ubicación actual", ubicacion)
+                }
             }
             .addOnFailureListener {
                 this.toast("FAIL")

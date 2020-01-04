@@ -111,7 +111,8 @@
     <style name="etMap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:tint">@android:color/darker_gray</item>
+        <item name="android:backgroundTint">#00FFFFFF</item>
+        <item name="android:textColorHint">@color/color_custom_hint</item>
         <item name="android:editable">false</item>
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
@@ -131,6 +132,14 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="floatingactionbutton" parent="@android:style/Widget.Material.Light.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:tint">@android:color/white</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">@dimen/places_autocomplete_button_padding</item>
     </style>
 
 </resources>

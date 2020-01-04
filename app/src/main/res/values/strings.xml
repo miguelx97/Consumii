@@ -5,7 +5,7 @@
     <!--TEST-->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     
-    <string name="app_name">Consumi</string>
+    <string name="app_name">Consumii</string>
     <string name="title_activity_map">Mapa</string>
     <string name="seleccione_coche">Seleccione Coche</string>
     <string name="title_administracion_coches">Coches favoritos</string>
@@ -31,14 +31,17 @@
     <string name="moneda">€</string>
     <string name="idioma">Idioma: ES</string>
 
-    
-    
-    
     <string name="seleccione_combustible">Combustibles</string>
     <string name="seleccione_comunidad">Comunidades autónomas</string>
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+
     <string name="inicio">Inicio</string>
     <string name="destino">Destino</string>
+    <string name="casa">Casa</string>
+
+
+
+
     
     
     <string name="coches_favoritos">Coches favoritos</string>

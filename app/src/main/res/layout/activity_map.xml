@@ -7,48 +7,102 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
     tools:context=".view.MapActivity">
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".view.MapActivity" />
+
+    <LinearLayout
+        android:id="@+id/lyCampos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circulo_borde"
+        android:layout_margin="@dimen/places_autocomplete_button_padding"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lyCampos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etInicio"
                 style="@style/etMap"
-                android:hint="Inicio"
+                android:hint="@string/inicio"
+                android:layout_weight="1"
                 android:inputType="textPersonName" />
+
+            <ImageView
+                android:id="@+id/ivLimpiarInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/cruz"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etDestino"
                 style="@style/etMap"
-                android:hint="Destino"
+                android:hint="@string/destino"
+                android:layout_weight="1"
                 android:inputType="textPersonName" />
-        </LinearLayout>
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".view.MapActivity" />
+            <ImageView
+                android:id="@+id/ivLimpiarDestino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/cruz"
+                android:visibility="gone"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/floatingactionbutton"
+        android:id="@+id/btnUbicacionActual"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="@dimen/places_autocomplete_button_padding"
+        app:fabSize="mini"
+        android:src="@drawable/ubicacion2"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/floatingactionbutton"
+        android:id="@+id/btnCasa"
+        android:layout_toRightOf="@+id/btnUbicacionActual"
+        android:layout_marginStart="@dimen/places_autocomplete_button_padding"
+        app:fabSize="mini"
+        android:src="@drawable/casa"/>
+
+<!--
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/floatingactionbutton"
+        android:id="@+id/btnFav"
+        android:layout_toRightOf="@+id/btnCasa"
+        android:layout_marginStart="@dimen/places_autocomplete_button_padding"
+        app:fabSize="mini"
+        android:src="@drawable/estrella_vacia"/>
+-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/floatingactionbutton"
         android:id="@+id/btnAceptarMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/places_autocomplete_button_padding"
-        android:layout_marginBottom="@dimen/places_autocomplete_button_padding"
-        android:clickable="true"
-        android:src="@drawable/check"
-        android:tint="@android:color/white" />
+        android:src="@drawable/check" />
 
 </RelativeLayout>

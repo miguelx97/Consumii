@@ -7,6 +7,9 @@ const val COL_CONSUMO= "consumo"
 const val COL_DEFAULT= "defecto"
 const val COL_COMBUSTIBLE= "combustible"
 
+const val DB_TABLE_LUGARES= "Lugares"
+const val COL_LATITUD = "latitud"
+const val COL_LONGITUD = "longitud"
 
 const val sqlCreateTableCoches =
     "CREATE TABLE IF NOT EXISTS $DB_TABLE_COCHES (" +
@@ -16,6 +19,14 @@ const val sqlCreateTableCoches =
         " $COL_DEFAULT INTEGER, " +
         " $COL_COMBUSTIBLE TEXT " +
       " );"
+
+const val sqlCreateTableLugares =
+    "CREATE TABLE IF NOT EXISTS $DB_TABLE_LUGARES (" +
+            " $COL_ID INTEGER PRIMARY KEY, " +
+            " $COL_NOMBRE TEXT, " +
+            " $COL_LATITUD INTEGER, " +
+            " $COL_LONGITUD INTEGER " +
+            ");"
 
 const val sqlEliminarUltimoRegistro =
     "DELETE FROM $DB_TABLE_COCHES" +

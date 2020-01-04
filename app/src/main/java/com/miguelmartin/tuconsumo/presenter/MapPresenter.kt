@@ -9,7 +9,9 @@ class MapPresenter(view:MapActivity) {
     val view = view
     val model = MapModel()
 
-    fun getDataFromMapsRest(ubicacionInicio: LatLng, ubicacionDestino: LatLng){
+    fun getDataFromMapsRest(ubicacionInicio: LatLng?, ubicacionDestino: LatLng?){
+        if (ubicacionInicio == null) return
+        if (ubicacionDestino == null) return
         val url = model.getUrl(ubicacionInicio, ubicacionDestino, view.getString(R.string.google_maps_key))
         model.getInfoDistanciasRest(view, url)
     }

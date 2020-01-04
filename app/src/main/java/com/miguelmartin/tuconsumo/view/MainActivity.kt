@@ -64,11 +64,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rellenarPrecioCombustible(combustible: Combustible, comunidad:String){
+        etPrecioFuel.setText("")
         etPrecioFuel.hint = "${combustible.precio}€ (${combustible.tipo!!.nombre} en $comunidad)"
         viaje.coche.combustible = combustible
     }
 
     fun rellenarConsumoCoche(consumo:Float, nombre:String = ""){
+        etConsumo.setText("")
         etConsumo.hint = "$consumo l/100Km $nombre"
         viaje.coche.consumo = consumo
     }

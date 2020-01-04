@@ -2,9 +2,6 @@ package com.miguelmartin.tuconsumo.Common
 
 //SHARE PREFERENCES
 const val PREFS_NAME = "DatosUsuario"
-const val TIENE_COCHE = "tieneCoche"
-const val CONSUMO = "consumo"
-const val COMBUSTIBLE = "combustible"
 const val COMUNIDAD = "comunidad"
 const val DISTANCIA = "distancia"
 const val EXISTE = "existe"

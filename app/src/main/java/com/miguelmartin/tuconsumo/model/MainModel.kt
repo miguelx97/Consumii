@@ -70,9 +70,9 @@ class MainModel() {
         return sharedPreferences.contains(EXISTE)
     }
 
-    fun getComunidadFromPrefferences(view:MainActivity):String{
-        val sharedPreferences = view.getSharedPreferences(PREFS_NAME, 0)
-        return sharedPreferences.getString(COMUNIDAD, "")!!
+    fun getComunidadFromPrefferences(context:Context):String{
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
+        return sharedPreferences.getString(COMUNIDAD, "")
     }
 
     fun getIdByNombreComunidad(comunidad: String): String {
