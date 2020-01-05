@@ -10,13 +10,17 @@
 <!--    <include layout="@layout/content_main" />-->
 
 
-    <include layout="@layout/header" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/header" />
 
     <RelativeLayout
+        android:id="@+id/lyContenido"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lyContenido"
-        android:padding="@dimen/margenes_laterales">
+        android:padding="@dimen/margenes_laterales"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center">
 
 
         <LinearLayout
@@ -40,7 +44,7 @@
                     android:id="@+id/btnAyudaTrayecto"
                     style="@style/imageButton"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="0dp"
                     android:src="@drawable/flecha_abajo" />
             </LinearLayout>

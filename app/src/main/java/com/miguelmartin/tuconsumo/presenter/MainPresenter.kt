@@ -44,7 +44,9 @@ class MainPresenter(view: MainActivity) {
         val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
         view.cargarListaCombustibles(arrMediasCombustibles)
         if(datosUsuario.coche.combustible.tipo == null) return
-        val combustible = arrMediasCombustibles.filter { it.tipo == datosUsuario.coche.combustible.tipo }[0]
+        val lUnCombustible = arrMediasCombustibles.filter { it.tipo == datosUsuario.coche.combustible.tipo }
+        if(lUnCombustible.isEmpty()) return
+        val combustible = lUnCombustible[0]
         cargarPrecioCombustible(combustible, datosUsuario.comunidad)
     }
 

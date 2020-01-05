@@ -1,5 +1,6 @@
 package com.miguelmartin.tuconsumo.model
 
+import android.content.Context
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -7,11 +8,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.miguelmartin.tuconsumo.Entities.Lugar
+import com.miguelmartin.tuconsumo.db.PersistenciaLugares
 import com.miguelmartin.tuconsumo.presenter.MapPresenter
 import com.miguelmartin.tuconsumo.view.MapActivity
 
 
-class MapModel {
+class MapModel(context: Context) {
+    val persistencia = PersistenciaLugares(context)
+
     fun getUrl(ubicacionInicio: LatLng, ubicacionDestino: LatLng, key:String)=
         "https://maps.google.com/maps/api/directions/json?origin=${ubicacionInicio.latitude},${ubicacionInicio.longitude}&destination=${ubicacionDestino.latitude},${ubicacionDestino.longitude}&sensor=false&key=$key"
 
@@ -35,6 +40,11 @@ class MapModel {
         return distanciaString.removeSuffix(" km")
     }
 
+    fun guardarCasaBd(lugar: Lugar) = persistencia.insert(lugar)
+
+    fun getCasaBd() = persistencia.getHome()
+
+    fun actualizarCasaBd(lugar: Lugar) = persistencia.update(lugar)
 
 
 }

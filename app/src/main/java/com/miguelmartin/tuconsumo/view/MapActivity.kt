@@ -2,6 +2,7 @@ package com.miguelmartin.tuconsumo.view
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -29,13 +30,12 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
-import com.miguelmartin.tuconsumo.Common.DISTANCIA
-import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
-import com.miguelmartin.tuconsumo.Common.RC_PLACE_AUTOCOMPLETE
-import com.miguelmartin.tuconsumo.Common.toast
+import com.miguelmartin.tuconsumo.Common.*
+import com.miguelmartin.tuconsumo.Entities.Lugar
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MapPresenter
 import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.coroutines.launch
 
 data class InfoPosicion (var campo:EditText, var limpiarCampo: ImageView, var icono:Int, var etiqueta:Int, var marker: Marker? = null)
 
@@ -68,13 +68,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         etInicio.setOnClickListener {
             currentPosicion = posicionInicio
-            var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
-            startActivityForResult(intent, RC_PLACE_AUTOCOMPLETE)
+            presenter.autocompletar(fields, RC_PLACE_AUTOCOMPLETE)
         }
         etDestino.setOnClickListener {
             currentPosicion = posicionDestino
-            var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
-            startActivityForResult(intent, RC_PLACE_AUTOCOMPLETE)
+            presenter.autocompletar(fields, RC_PLACE_AUTOCOMPLETE)
         }
 
         btnAceptarMap.setOnClickListener {
@@ -96,27 +94,53 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             ocLimpiarCampo()
         }
 
+        btnCasa.setOnClickListener {
+            presenter.cargarCasa(fields)
+        }
+
+        btnCasa.setOnLongClickListener {
+            presenter.autocompletar(fields, RC_PLACE_AUTOCOMPLETE_CASA)
+            true
+        }
+    }
+
+    fun autocompletar(fields: List<Place.Field>, clave:Int) {
+        var intent =
+            Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
+        startActivityForResult(intent, clave)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == RC_PLACE_AUTOCOMPLETE) {
-            if (resultCode == Activity.RESULT_OK) {
-                val place = Autocomplete.getPlaceFromIntent(data!!)
-                val coordenadas = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
-                val nombre = place.name
 
-                cargarPosición(nombre, coordenadas)
-            }
+        if (resultCode == Activity.RESULT_OK) {
 
-            else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                var status = Autocomplete.getStatusFromIntent(data!!)
-                Log.i("address", status.statusMessage);
+            val place = Autocomplete.getPlaceFromIntent(data!!)
+            val coordenadas = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
+            val nombre = place.name
+
+            when(requestCode){
+                RC_PLACE_AUTOCOMPLETE ->{
+                    cargarPosición(nombre, coordenadas)
+                }
+                RC_PLACE_AUTOCOMPLETE_CASA ->{
+                    val lugar = Lugar(0,getString(R.string.casa_nombre), nombre ,coordenadas)
+                    presenter.guardarCasa(lugar)
+                }
+
             }
         }
+
+        else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            var status = Autocomplete.getStatusFromIntent(data!!)
+            Log.i("address", status.statusMessage);
+        }
+
+
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun cargarPosición(nombre: String?,coordenadas: LatLng) {
+    fun cargarPosición(nombre: String?,coordenadas: LatLng) {
         currentPosicion.campo.setText(nombre)
         currentPosicion.limpiarCampo.visibility = View.VISIBLE
         currentPosicion.marker?.remove()
@@ -157,7 +181,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         currentPosicion.marker = null
     }
 
-    private fun seleccionarPosicion():Boolean {
+    fun seleccionarPosicion():Boolean {
         if(etInicio.text.toString().isEmpty()){
             currentPosicion = posicionInicio
         } else if(etDestino.text.toString().isEmpty()) {
@@ -234,5 +258,18 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun cerrarMapa() {
         finish()
+    }
+
+    fun dialogConfirmUpdate(newCasa: Lugar) {
+        AlertDialog.Builder(this).apply {
+            setTitle("Actualizar")
+            setMessage("¿Deseas actualizar la dirección de tu casa?")
+            setPositiveButton("Sí"){_,_ ->
+                presenter.updateCasa(newCasa)
+            }
+            setNegativeButton("No"){_, _ ->
+
+            }
+        }.create().show()
     }
 }

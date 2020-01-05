@@ -30,6 +30,7 @@ class DbManager {
 
         override fun onCreate(db: SQLiteDatabase?) {
             db?.execSQL(sqlCreateTableCoches)
+            db?.execSQL(sqlCreateTableLugares)
         }
 
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

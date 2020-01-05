@@ -19,10 +19,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.AdministradorCochesActivity"
-            android:parentActivityName=".view.MainActivity"
+        <activity android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_administracion_coches"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.AdministradorCochesActivity"
+            android:label="@string/title_administracion_coches"
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -31,13 +41,13 @@
         <activity
             android:name=".view.MapActivity"
             android:label="@string/title_activity_map"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.ResultadoActivity"
             android:label="@string/title_activity_resultado"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" /> <!-- Include the AdActivity configChanges and theme. -->
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Include the AdActivity configChanges and theme. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
