@@ -18,7 +18,7 @@ class MainModelTest {
 
     val mainModel = MainModel()
     val context = InstrumentationRegistry.getInstrumentation().targetContext
-
+/*
     @Test
     fun calcularConsumoTest() {
         val combustible = Combustible(TipoCombustible.GASOLINA_95, 1.4F)
@@ -26,7 +26,7 @@ class MainModelTest {
         val viaje = Viaje(null, 30.0, 2, coche)
         Assert.assertTrue(mainModel.calcularConsumo(viaje) == Resultados(60.00, 3.90, 5.46))
     }
-/*
+
     @Test
     fun llamadaRestTest(){
         mainModel.llamadaRest(context,"https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/13?Accept=application/json&Content-Type=application/json")

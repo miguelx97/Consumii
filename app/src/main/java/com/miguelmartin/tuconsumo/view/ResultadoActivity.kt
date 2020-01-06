@@ -81,7 +81,7 @@ class ResultadoActivity() : AppCompatActivity() {
     }
 
     fun setPagoPorPasajero(pagoPorPasajero:Double){
-        tvPagoPorPasajero.text = pagoPorPasajero.toString() //pagoPorPasajero.toString()
+        tvPagoPorPasajero.text = "$pagoPorPasajero €" //pagoPorPasajero.toString()
     }
 
 

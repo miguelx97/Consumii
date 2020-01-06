@@ -8,9 +8,15 @@
 //Cargar datos en lista estática
 //Crear Dialog con combustibles y precios
 
-inicial en mayusculas para nombre coche
-llamar al dialog coches "Coches favoritos"
-gestion de coches en vertical
+//inicial en mayusculas para nombre coche
+//llamar al dialog coches "Coches favoritos"
+//gestion de coches en vertical
+
+//visibilidad de botones
+//hint para distancia
+
+lugares favoritos
+cambiar comunidad autonoma
 
 
 

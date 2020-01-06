@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/margenes_laterales"
-        app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center">
 
 
@@ -44,7 +43,7 @@
                     android:id="@+id/btnAyudaTrayecto"
                     style="@style/imageButton"
                     android:layout_width="30dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_margin="0dp"
                     android:src="@drawable/flecha_abajo" />
             </LinearLayout>

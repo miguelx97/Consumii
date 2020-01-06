@@ -35,7 +35,7 @@
             <TextView
                 android:id="@+id/tvTituloResultados"
                 style="@style/textView"
-                android:text="Resultados" />
+                android:text="Resultados"/>
 
             <TextView
                 android:id="@+id/tvCombustible"
@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/tvTituloDividir"
                 style="@style/textView"
-                android:text="Repartir Gasolina" />
+                android:text="Repartir Gasolina"/>
 
             <LinearLayout
                 android:id="@+id/lyPasajeros"

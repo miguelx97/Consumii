@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.miguelmartin.tuconsumo.Common.DISTANCIA
-import com.miguelmartin.tuconsumo.Common.RC_ADMIN_COCHES
-import com.miguelmartin.tuconsumo.Common.RC_GET_DISTANCIA
+import com.miguelmartin.tuconsumo.Common.*
 import com.miguelmartin.tuconsumo.Entities.*
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
@@ -21,7 +20,8 @@ import kotlinx.android.synthetic.main.content_main.etConsumo
 class MainActivity : AppCompatActivity() {
 
     lateinit var presenter:MainPresenter
-    lateinit var  viaje:Viaje
+    val viaje = Viaje()
+    val viajeAyudas = Viaje()
     private var arrCombustibles:Array<Combustible>? = null
     var datosUsuario:DatosUsuario? = null
 
@@ -29,14 +29,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter = MainPresenter(this)
-        viaje = Viaje()
 
         val userExiste = presenter.userExiste()
         if(presenter.bienvenidaSiNuevoUsuario(userExiste)) return
 
         datosUsuario = presenter.getDatosUsuario()
         presenter.cargarPrecioCombustible(datosUsuario)
-        presenter.cargarConsumoCoche(datosUsuario?.coche!!.consumo, datosUsuario?.coche!!.nombre)
+        presenter.cargarConsumoCoche(datosUsuario?.coche!!)
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
@@ -66,13 +65,23 @@ class MainActivity : AppCompatActivity() {
     fun rellenarPrecioCombustible(combustible: Combustible, comunidad:String){
         etPrecioFuel.setText("")
         etPrecioFuel.hint = "${combustible.precio}€ (${combustible.tipo!!.nombre} en $comunidad)"
-        viaje.coche.combustible = combustible
+        viajeAyudas.coche.combustible = combustible
     }
 
-    fun rellenarConsumoCoche(consumo:Float, nombre:String = ""){
+    fun rellenarConsumoCoche(coche: Coche){
         etConsumo.setText("")
-        etConsumo.hint = "$consumo l/100Km $nombre"
-        viaje.coche.consumo = consumo
+        var nombre = ""
+        if(!coche.nombre.isNullOrEmpty())  nombre = "(${coche.nombre})"
+        etConsumo.hint = "${coche.consumo} l/100Km $nombre"
+        viajeAyudas.coche = coche
+    }
+
+    fun rellenarDistancia(distancia:Double, inicio:String, destino:String){
+//        var inicio = acortar(inicio, 9)
+//        var destino = acortar(destino, 9)
+        etDistancia.setText("")
+        etDistancia.hint = "${distancia}Km ($inicio - $destino)"
+        viajeAyudas.distanciaTrayecto = distancia
     }
 
     fun irBienvenida(){
@@ -88,15 +97,20 @@ class MainActivity : AppCompatActivity() {
     fun getInfoViaje():Viaje{
         if(etDistancia.text.toString().isNotEmpty())
             viaje.distanciaTrayecto = etDistancia.text.toString().toDouble()
+        else
+            viaje.distanciaTrayecto = viajeAyudas.distanciaTrayecto
 
         if(etConsumo.text.toString().isNotEmpty()){
             viaje.coche.consumo = etConsumo.text.toString().toFloat()
             viaje.coche.id = 0
+        } else{
+            viaje.coche = viajeAyudas.coche
         }
 
-        if(etPrecioFuel.text.toString().isNotEmpty()){
+        if(etPrecioFuel.text.toString().isNotEmpty())
             viaje.coche.combustible = Combustible(precio = etPrecioFuel.text.toString().toFloat())
-        }
+        else
+            viaje.coche.combustible = viajeAyudas.coche.combustible
 
 
         when {
@@ -135,7 +149,7 @@ class MainActivity : AppCompatActivity() {
 
     fun crearDialogCoches(arrNombresCoches: Array<String>, arrValores: Array<Coche>) {
         AlertDialog.Builder(this).apply {
-            setTitle(getString(R.string.coches_favoritos))
+            setTitle(getString(R.string.title_administracion_coches))
             setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
                 viaje.coche = arrValores[i]
                 presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario!!)
@@ -186,7 +200,13 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_GET_DISTANCIA) {
             val distancia = data?.getStringExtra(DISTANCIA)
-            etDistancia.setText(distancia)
+            val inicio = data?.getStringExtra(INICIO)
+            val destino = data?.getStringExtra(DESTINO)
+            if(distancia.isNullOrEmpty()){
+                toast("Error al calcular la distancia", Toast.LENGTH_LONG)
+                return
+            }
+            rellenarDistancia(distancia.toDouble(), inicio!!, destino!!)
         } else if(requestCode == RC_ADMIN_COCHES){
             datosUsuario = presenter.getDatosUsuario()
             presenter.rellenarDatosByCoche(datosUsuario!!.coche, arrCombustibles, datosUsuario!!)

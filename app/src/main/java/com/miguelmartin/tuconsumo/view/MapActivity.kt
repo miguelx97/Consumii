@@ -35,9 +35,9 @@ import com.miguelmartin.tuconsumo.Entities.Lugar
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MapPresenter
 import kotlinx.android.synthetic.main.activity_map.*
-import kotlinx.coroutines.launch
 
 data class InfoPosicion (var campo:EditText, var limpiarCampo: ImageView, var icono:Int, var etiqueta:Int, var marker: Marker? = null)
+enum class FunUbicacion {INICIO, POSICION, CASA}
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -46,13 +46,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var posicionInicio:InfoPosicion
     lateinit var posicionDestino:InfoPosicion
     lateinit var currentPosicion:InfoPosicion
+    lateinit var fields:List<Place.Field>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
         presenter = MapPresenter(this)
-        posicionInicio = InfoPosicion(etInicio, ivLimpiarInicio, R.drawable.casa, R.string.inicio)
+        posicionInicio = InfoPosicion(etInicio, ivLimpiarInicio, R.drawable.estrella_rellena, R.string.inicio)
         posicionDestino = InfoPosicion(etDestino, ivLimpiarDestino, R.drawable.bandera, R.string.destino)
 
         val mapFragment = supportFragmentManager
@@ -63,16 +64,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         if (!Places.isInitialized())
             Places.initialize(this.applicationContext, getString(R.string.google_maps_key))
 
-        var fields= listOf(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG)
+        fields= listOf(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG)
 
 
         etInicio.setOnClickListener {
             currentPosicion = posicionInicio
-            presenter.autocompletar(fields, RC_PLACE_AUTOCOMPLETE)
+            presenter.autocompletar(RC_PLACE_AUTOCOMPLETE)
         }
         etDestino.setOnClickListener {
             currentPosicion = posicionDestino
-            presenter.autocompletar(fields, RC_PLACE_AUTOCOMPLETE)
+            presenter.autocompletar(RC_PLACE_AUTOCOMPLETE)
         }
 
         btnAceptarMap.setOnClickListener {
@@ -81,7 +82,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         btnUbicacionActual.setOnClickListener {
             if(seleccionarPosicion())
-                cargarUbicacion(false)
+                cargarUbicacion(FunUbicacion.POSICION)
         }
 
         ivLimpiarInicio.setOnClickListener {
@@ -95,16 +96,17 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         btnCasa.setOnClickListener {
-            presenter.cargarCasa(fields)
+            presenter.cargarCasa()
         }
 
         btnCasa.setOnLongClickListener {
-            presenter.autocompletar(fields, RC_PLACE_AUTOCOMPLETE_CASA)
+            vibrateDevice()
+            dialogUtilizarUbicacionActual("Cambiar dirección de casa")
             true
         }
     }
 
-    fun autocompletar(fields: List<Place.Field>, clave:Int) {
+    fun autocompletar(clave:Int) {
         var intent =
             Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
         startActivityForResult(intent, clave)
@@ -113,7 +115,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (resultCode == Activity.RESULT_OK) {
-
             val place = Autocomplete.getPlaceFromIntent(data!!)
             val coordenadas = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
             val nombre = place.name
@@ -150,6 +151,20 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .icon(bitmapDescriptorFromVector(this, currentPosicion.icono))
         )
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosicion.marker!!.position))
+
+        visibilidadBotones()
+    }
+
+    private fun visibilidadBotones() {
+        if(etInicio.text.toString().isEmpty() || etDestino.text.toString().isEmpty()){
+            btnAceptarMap.hide()
+            btnUbicacionActual.show()
+            btnCasa.show()
+        } else{
+            btnAceptarMap.show()
+            btnUbicacionActual.hide()
+            btnCasa.hide()
+        }
     }
 
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
@@ -166,7 +181,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         if(tienePermisos())
-            cargarUbicacion(true)
+            cargarUbicacion(FunUbicacion.INICIO)
 
         mMap.setOnMapLongClickListener {
             if (seleccionarPosicion())
@@ -179,6 +194,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         currentPosicion.limpiarCampo.visibility = View.GONE
         currentPosicion.marker?.remove()
         currentPosicion.marker = null
+
+        visibilidadBotones()
     }
 
     fun seleccionarPosicion():Boolean {
@@ -217,7 +234,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         when (requestCode) {
             RC_PLACE_AUTOCOMPLETE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    cargarUbicacion(true)
+                    cargarUbicacion(FunUbicacion.INICIO)
                 } else {
 //                    PERMISOS RECHAZADOS
                 }
@@ -229,47 +246,58 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun cargarUbicacion(iniciando:Boolean) {
+    private fun cargarUbicacion(funUbicacion: FunUbicacion) {
         val location = LocationServices.getFusedLocationProviderClient(this)
 
         location.lastLocation
             .addOnSuccessListener { location: Location ->
-                val ubicacion = LatLng(location.latitude, location.longitude)
+                val coordenadas = LatLng(location.latitude, location.longitude)
 
-                if(iniciando){
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16f))
-                } else{
-                    cargarPosición("Ubicación actual", ubicacion)
+                when(funUbicacion){
+                    FunUbicacion.INICIO -> mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 16f))
+                    FunUbicacion.POSICION -> cargarPosición("Ubicación actual", coordenadas)
+                    FunUbicacion.CASA -> presenter.guardarCasa(Lugar(0, getString(R.string.casa_nombre), presenter.coordenadasToString(coordenadas), coordenadas))
                 }
             }
             .addOnFailureListener {
-                this.toast("FAIL")
+                toast("FAIL")
             }
             .addOnCanceledListener {
-                this.toast("CANCEL")
+                toast("CANCEL")
             }
     }
 
     fun returnDistancia(distancia: String) {
-        val intent= Intent()
-        intent.putExtra(DISTANCIA, distancia);
-        setResult(RC_GET_DISTANCIA, intent);
+        val intent= Intent().apply {
+            putExtra(DISTANCIA, distancia)
+            putExtra(INICIO, etInicio.text.toString())
+            putExtra(DESTINO, etDestino.text.toString())
+        }
+        setResult(RC_GET_DISTANCIA, intent)
     }
+
+
 
     fun cerrarMapa() {
         finish()
     }
-
+/*
     fun dialogConfirmUpdate(newCasa: Lugar) {
         AlertDialog.Builder(this).apply {
-            setTitle("Actualizar")
-            setMessage("¿Deseas actualizar la dirección de tu casa?")
-            setPositiveButton("Sí"){_,_ ->
-                presenter.updateCasa(newCasa)
-            }
-            setNegativeButton("No"){_, _ ->
+            setTitle("Cambiar dirección")
+            setMessage("¿Deseas cambiar la dirección de tu casa?")
+            setPositiveButton("Sí"){_,_ -> presenter.updateCasa(newCasa) }
+            setNegativeButton("No"){_, _ -> }
+        }.create().show()
+    }
+    */
 
-            }
+    fun dialogUtilizarUbicacionActual(titulo:String) {
+        AlertDialog.Builder(this).apply {
+            setTitle(titulo)
+            setMessage("¿Deseas utilizar tu ubicación actual como dirección de tu casa?")
+            setPositiveButton("Mi ubicación"){_,_ -> cargarUbicacion(FunUbicacion.CASA) }
+            setNeutralButton("Escribir dirección"){_,_ -> presenter.autocompletar(RC_PLACE_AUTOCOMPLETE_CASA) }
         }.create().show()
     }
 }

@@ -1,10 +1,10 @@
-package com.miguelmartin.tuconsumo
+package com.miguelmartin.tuconsumo.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.miguelmartin.tuconsumo.view.MainActivity
+import com.miguelmartin.tuconsumo.R
 
 class SplashActivity : AppCompatActivity() {
 
@@ -12,11 +12,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        //1 second splash time
         Handler().postDelayed({
-            //start main activity
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            //finish this activity
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         },1000)
     }

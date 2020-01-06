@@ -4,6 +4,8 @@ package com.miguelmartin.tuconsumo.Common
 const val PREFS_NAME = "DatosUsuario"
 const val COMUNIDAD = "comunidad"
 const val DISTANCIA = "distancia"
+const val INICIO = "inicio"
+const val DESTINO = "destino"
 const val EXISTE = "existe"
 
 val LISTA_COMUNIDADES = hashMapOf(

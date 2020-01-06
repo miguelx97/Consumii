@@ -6,12 +6,12 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
-import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.miguelmartin.tuconsumo.Entities.Lugar
 import com.miguelmartin.tuconsumo.db.PersistenciaLugares
 import com.miguelmartin.tuconsumo.presenter.MapPresenter
 import com.miguelmartin.tuconsumo.view.MapActivity
+import java.text.DecimalFormat
 
 
 class MapModel(context: Context) {
@@ -45,6 +45,12 @@ class MapModel(context: Context) {
     fun getCasaBd() = persistencia.getHome()
 
     fun actualizarCasaBd(lugar: Lugar) = persistencia.update(lugar)
+
+    fun coordenadasToString(coordenadas:LatLng):String{
+        val df = DecimalFormat("#.###")
+        return "${df.format(coordenadas.latitude)}, ${df.format(coordenadas.longitude)}"
+    }
+
 
 
 }

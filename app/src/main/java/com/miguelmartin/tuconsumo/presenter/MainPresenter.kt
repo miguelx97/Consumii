@@ -65,10 +65,9 @@ class MainPresenter(view: MainActivity) {
         view.crearDialogCombustibles(arrElementos, arrCombustibles)
     }
 
-    fun cargarConsumoCoche(consumo: Float, nombreCoche:String? = "") {
-        if(consumo == 0f) return
-        if(nombreCoche.isNullOrEmpty()) view.rellenarConsumoCoche(consumo)
-        else view.rellenarConsumoCoche(consumo, " ($nombreCoche)")
+    fun cargarConsumoCoche(coche: Coche) {
+        if(coche.consumo == 0f) return
+        view.rellenarConsumoCoche(coche)
     }
 
     fun cargarPrecioCombustible(combustible: Combustible, comunidad:String) {
@@ -88,7 +87,7 @@ class MainPresenter(view: MainActivity) {
     }
 
     fun rellenarDatosByCoche(cocheSeleccionado: Coche, arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario){
-        cargarConsumoCoche(cocheSeleccionado.consumo, cocheSeleccionado.nombre!!)
+        cargarConsumoCoche(cocheSeleccionado)
 
         if(arrCombustibles != null && datosUsuario != null) {
             val combustible = arrCombustibles.filter{it.tipo == cocheSeleccionado.combustible.tipo}[0]

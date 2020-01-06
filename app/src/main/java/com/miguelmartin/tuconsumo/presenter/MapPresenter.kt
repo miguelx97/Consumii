@@ -27,19 +27,18 @@ class MapPresenter(view:MapActivity) {
         view.cerrarMapa()
     }
 
-    fun cargarCasa(fields: List<Place.Field>){
+    fun cargarCasa(){
         val casa = model.getCasaBd()
         if(casa != null){
             if(view.seleccionarPosicion())
                 view.cargarPosición("Casa", casa.coordenadas!!)
         } else{
-            view.toast("Guarda la dirección de tu casa", Toast.LENGTH_LONG)
-            autocompletar(fields, RC_PLACE_AUTOCOMPLETE_CASA)
+            view.dialogUtilizarUbicacionActual("Guardar casa")
         }
     }
 
-    fun autocompletar(fields: List<Place.Field>, clave:Int) {
-        view.autocompletar(fields, clave)
+    fun autocompletar(clave:Int) {
+        view.autocompletar(clave)
     }
 
     fun guardarCasa(newCasa: Lugar) {
@@ -53,7 +52,7 @@ class MapPresenter(view:MapActivity) {
             view.toast("Casa Guardada")
         } else{
             newCasa.id = oldCasa.id
-            view.dialogConfirmUpdate(newCasa)
+            updateCasa(newCasa)
         }
 
     }
@@ -64,8 +63,9 @@ class MapPresenter(view:MapActivity) {
             return
         }
 
-        view.toast("Casa Actualizada")
+        view.toast("Dirección cambiada")
     }
 
+    fun coordenadasToString(coordenadas:LatLng) = model.coordenadasToString(coordenadas)
 
 }
