@@ -200,12 +200,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_GET_DISTANCIA) {
             val distancia = data?.getStringExtra(DISTANCIA)
+            if(distancia.isNullOrEmpty())return
             val inicio = data?.getStringExtra(INICIO)
             val destino = data?.getStringExtra(DESTINO)
-            if(distancia.isNullOrEmpty()){
-                toast("Error al calcular la distancia", Toast.LENGTH_LONG)
-                return
-            }
             rellenarDistancia(distancia.toDouble(), inicio!!, destino!!)
         } else if(requestCode == RC_ADMIN_COCHES){
             datosUsuario = presenter.getDatosUsuario()

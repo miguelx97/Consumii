@@ -250,8 +250,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         val location = LocationServices.getFusedLocationProviderClient(this)
 
         location.lastLocation
-            .addOnSuccessListener { location: Location ->
-                val coordenadas = LatLng(location.latitude, location.longitude)
+            .addOnSuccessListener { coordenadas: Location ->
+                val coordenadas = LatLng(coordenadas.latitude, coordenadas.longitude)
 
                 when(funUbicacion){
                     FunUbicacion.INICIO -> mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 16f))
