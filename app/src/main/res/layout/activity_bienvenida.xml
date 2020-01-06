@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Bienvenido a"
+            android:text="@string/bienvenido"
             android:textSize="25dp" />
 
         <TextView
@@ -73,24 +73,24 @@
             <TextView
                 android:id="@+id/tvEntrada"
                 style="@style/textViewInicio"
-                android:text="Unas preguntas para empezar" />
+                android:text="@string/preguntas" />
 
             <TextView
                 android:id="@+id/tvConsumoInicio"
                 style="@style/textViewInicio"
-                android:text="¿Cuánto cunsume su coche? (Opcional)" />
+                android:text="@string/pregunta_consumo" />
 
             <EditText
                 android:id="@+id/etConsumo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Litros por 100 km"
+                android:hint="@string/hint_consumo"
                 android:inputType="none|numberDecimal" />
 
             <TextView
                 android:id="@+id/tvCombustibleInicio"
                 style="@style/textViewInicio"
-                android:text="¿Qué combustible usa? (Opcional)" />
+                android:text="@string/pregunta_combustible" />
 
             <EditText
                 android:id="@+id/spCombustible"
@@ -103,7 +103,7 @@
             <TextView
                 android:id="@+id/tvComunidad"
                 style="@style/textViewInicio"
-                android:text="¿Dónde vives? (Opcional)" />
+                android:text="@string/pregunta_comunidad" />
 
             <EditText
                 android:id="@+id/spComunidad"
@@ -131,7 +131,7 @@
                 style="@style/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aceptar" />
+                android:text="@string/aceptar" />
 
         </LinearLayout>
 

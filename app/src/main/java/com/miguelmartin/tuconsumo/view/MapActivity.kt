@@ -101,7 +101,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         btnCasa.setOnLongClickListener {
             vibrateDevice()
-            dialogUtilizarUbicacionActual("Cambiar dirección de casa")
+            dialogUtilizarUbicacionActual(getString(R.string.cambiar_casa))
             true
         }
     }
@@ -185,7 +185,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setOnMapLongClickListener {
             if (seleccionarPosicion())
-                cargarPosición("Ubicación personalizada", it)
+                cargarPosición(presenter.coordenadasToString(it), it)
         }
     }
 
@@ -204,7 +204,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         } else if(etDestino.text.toString().isEmpty()) {
             currentPosicion = posicionDestino
         } else{
-            toast("Inicio y destino están seleccinados", Toast.LENGTH_LONG)
+            toast(getString(R.string.inicio_destino_seleccionados), Toast.LENGTH_LONG)
             return false
         }
         return true
@@ -255,15 +255,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 when(funUbicacion){
                     FunUbicacion.INICIO -> mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 16f))
-                    FunUbicacion.POSICION -> cargarPosición("Ubicación actual", coordenadas)
+                    FunUbicacion.POSICION -> cargarPosición(getString(R.string.tu_ubicacion), coordenadas)
                     FunUbicacion.CASA -> presenter.guardarCasa(Lugar(0, getString(R.string.casa_nombre), presenter.coordenadasToString(coordenadas), coordenadas))
                 }
             }
             .addOnFailureListener {
-                toast("FAIL")
+                toast(getString(R.string.err_ubicacion))
             }
             .addOnCanceledListener {
-                toast("CANCEL")
+//                toast("CANCEL")
             }
     }
 
@@ -295,9 +295,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     fun dialogUtilizarUbicacionActual(titulo:String) {
         AlertDialog.Builder(this).apply {
             setTitle(titulo)
-            setMessage("¿Deseas utilizar tu ubicación actual como dirección de tu casa?")
-            setPositiveButton("Mi ubicación"){_,_ -> cargarUbicacion(FunUbicacion.CASA) }
-            setNeutralButton("Escribir dirección"){_,_ -> presenter.autocompletar(RC_PLACE_AUTOCOMPLETE_CASA) }
+            setMessage(getString(R.string.ubicacion_casa))
+            setPositiveButton(getString(R.string.mi_ubicacion)){_,_ -> cargarUbicacion(FunUbicacion.CASA) }
+            setNeutralButton(getString(R.string.escribir_direccion)){_,_ -> presenter.autocompletar(RC_PLACE_AUTOCOMPLETE_CASA) }
         }.create().show()
     }
 }

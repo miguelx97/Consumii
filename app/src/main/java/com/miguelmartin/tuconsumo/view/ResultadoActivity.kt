@@ -39,9 +39,9 @@ class ResultadoActivity() : AppCompatActivity() {
 
         val resultados = presenter.getResultados(viaje)
 
-        tvCombustible.text = resultados.combustible.toString() + " l"
-        tvDistancia.text = resultados.distancia.toString() + " Km"
-        tvCoste.text = resultados.costo.toString() + " €"
+        tvCombustible.text = "${resultados.combustible} ${getString(R.string.m_liquido)}"
+        tvDistancia.text = "${resultados.distancia} ${getString(R.string.m_distancia)}"
+        tvCoste.text = "${resultados.costo} ${getString(R.string.m_moneda)}"
 
         cocheCuardado = presenter.existeCoche(viaje.coche)
 
@@ -81,7 +81,7 @@ class ResultadoActivity() : AppCompatActivity() {
     }
 
     fun setPagoPorPasajero(pagoPorPasajero:Double){
-        tvPagoPorPasajero.text = "$pagoPorPasajero €" //pagoPorPasajero.toString()
+        tvPagoPorPasajero.text = "$pagoPorPasajero ${getString(R.string.m_moneda)}"
     }
 
 
@@ -102,9 +102,9 @@ class ResultadoActivity() : AppCompatActivity() {
         val view = inflater.inflate(R.layout.guardar_coche_dialog, null)
         val builder = AlertDialog.Builder(this).apply {
             setView(view)
-            setTitle("Añadir coche")
-            setPositiveButton("Aceptar"){_, _ ->}
-            setNegativeButton("Cancelar"){_, _ ->}
+            setTitle(getString(R.string.anadir_coche))
+            setPositiveButton(getString(R.string.aceptar)){_, _ ->}
+            setNegativeButton(getString(R.string.cancelar)){_, _ ->}
         }
 
         val dialog = builder.create()
@@ -145,13 +145,13 @@ class ResultadoActivity() : AppCompatActivity() {
     fun camposRellenos(view: View):Boolean{
         var ok = true
         if(view.etNombre.text.toString().isEmpty()){
-            view.etNombre.error = "Debe seleccioniar un nombre"
+            view.etNombre.error = getString(R.string.err_nombre_coche)
             view.etNombre.requestFocus()
             ok =  false
         } else view.etNombre.error = null
 
         if (view.etConsumo.text.toString().isEmpty()){
-            view.etConsumo.error = "Debe introducir el consumo"
+            view.etConsumo.error = getString(R.string.err_consumo_coche)
             view.etConsumo.requestFocus()
             ok =  false
         } else view.etConsumo.error = null

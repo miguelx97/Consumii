@@ -7,6 +7,7 @@ import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
 import com.miguelmartin.tuconsumo.Enums.TipoCombustible
+import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.db.PersistenciaCoche
 
 class BienvenidaModel {
@@ -28,7 +29,7 @@ class BienvenidaModel {
     fun guardarCocheBd(coche: Coche, context: Context):Boolean{
         if(coche.combustible.tipo == null || coche.consumo == 0F) return false
 
-        coche.nombre = "Mi Coche"
+        coche.nombre = context.getString(R.string.mi_coche)
         coche.default = true
         return PersistenciaCoche(context).insert(coche)
     }

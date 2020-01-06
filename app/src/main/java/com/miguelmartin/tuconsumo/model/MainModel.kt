@@ -81,10 +81,10 @@ class MainModel() {
 
     fun getCochesBd(context: Context) = PersistenciaCoche(context).getAll()
 
-    fun getFormatCoches(lCoches: List<Coche>): Array<String> {
+    fun getFormatCoches(lCoches: List<Coche>, strMedidaConsumo:String): Array<String> {
         var lFormatCoches = Array(lCoches.size){""}
         lCoches.forEachIndexed { i, it ->
-            lFormatCoches[i] = "${it.nombre} (${it.consumo} l/100km)"
+            lFormatCoches[i] = "${it.nombre} (${it.consumo} $strMedidaConsumo)"
         }
         return lFormatCoches
     }

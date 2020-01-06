@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     fun rellenarPrecioCombustible(combustible: Combustible, comunidad:String){
         etPrecioFuel.setText("")
-        etPrecioFuel.hint = "${combustible.precio}€ (${combustible.tipo!!.nombre} en $comunidad)"
+        etPrecioFuel.hint = "${combustible.precio}${getString(R.string.m_moneda)} (${combustible.tipo!!.nombre} - $comunidad)"
         viajeAyudas.coche.combustible = combustible
     }
 
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         etConsumo.setText("")
         var nombre = ""
         if(!coche.nombre.isNullOrEmpty())  nombre = "(${coche.nombre})"
-        etConsumo.hint = "${coche.consumo} l/100Km $nombre"
+        etConsumo.hint = "${coche.consumo} ${getString(R.string.m_consumo)} $nombre"
         viajeAyudas.coche = coche
     }
 
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 //        var inicio = acortar(inicio, 9)
 //        var destino = acortar(destino, 9)
         etDistancia.setText("")
-        etDistancia.hint = "${distancia}Km ($inicio - $destino)"
+        etDistancia.hint = "${distancia}${getString(R.string.m_distancia)} ($inicio - $destino)"
         viajeAyudas.distanciaTrayecto = distancia
     }
 
@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
                 presenter.cargarPrecioCombustible(arrValores[i], datosUsuario!!.comunidad)
                 dialogInterface.dismiss()
             }
-            setNeutralButton("Cancel") { dialog, _ -> dialog.cancel() }
+            setNeutralButton(getString(R.string.cancelar)) { dialog, _ -> dialog.cancel() }
         }.create().show()
     }
 
@@ -155,8 +155,8 @@ class MainActivity : AppCompatActivity() {
                 presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario!!)
                 dialogInterface.dismiss()
             }
-            setNeutralButton("Administrar"){_, _ ->presenter.administrarCoches()}
-            setNegativeButton("Cancelar"){_, _ ->}
+            setNeutralButton(getString(R.string.administrar)){_, _ ->presenter.administrarCoches()}
+            setNegativeButton(getString(R.string.cancelar)){_, _ ->}
         }.create().show()
     }
 
@@ -164,25 +164,25 @@ class MainActivity : AppCompatActivity() {
         var ok = true
 
         if(viaje.numeroTrayectos == 0){
-            etCustomTrayectos.error = "Debe introducir el número de trayectos"
+            etCustomTrayectos.error = getString(R.string.err_num_trayectos)
             etCustomTrayectos.requestFocus()
             ok =  false
         } else etCustomTrayectos.error = null
 
         if(viaje.coche.combustible.precio == 0F){
-            etPrecioFuel.error = "Debe introducir el precio del combustible"
+            etPrecioFuel.error = getString(R.string.err_combustible)
             etPrecioFuel.requestFocus()
             ok =  false
         } else etPrecioFuel.error = null
 
         if(viaje.coche.consumo == 0F){
-            etConsumo.error = "Debe introducir el consumo del coche"
+            etConsumo.error = getString(R.string.err_consumo)
             etConsumo.requestFocus()
             ok =  false
         } else etConsumo.error = null
 
         if(viaje.distanciaTrayecto == 0.0){
-            etDistancia.error = "Debe introducir la distancia del trayecto"
+            etDistancia.error = getString(R.string.err_distancia)
             etDistancia.requestFocus()
             ok =  false
         } else etDistancia.error = null
@@ -201,8 +201,8 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == RC_GET_DISTANCIA) {
             val distancia = data?.getStringExtra(DISTANCIA)
             if(distancia.isNullOrEmpty())return
-            val inicio = data?.getStringExtra(INICIO)
-            val destino = data?.getStringExtra(DESTINO)
+            val inicio = data.getStringExtra(INICIO)
+            val destino = data.getStringExtra(DESTINO)
             rellenarDistancia(distancia.toDouble(), inicio!!, destino!!)
         } else if(requestCode == RC_ADMIN_COCHES){
             datosUsuario = presenter.getDatosUsuario()

@@ -23,7 +23,11 @@ class ResultadoPresenter(view: ResultadoActivity) {
     }
 
     fun compartirReparto(resultados: Resultados, numPasajeros: Int) {
-        val textoParaCompartir = model.generarTextoParaCompartir(resultados, numPasajeros, view.getString(R.string.app_name))
+        val textoParaCompartir = view.getString(R.string.mensaje_compartir,
+            resultados.distancia.toString(),
+            resultados.costo.toString(),
+            numPasajeros.toString(),
+            model.calcularCostoPorPasajero(resultados.costo, numPasajeros).toString())
         view.shareChooser(textoParaCompartir)
     }
 
@@ -34,14 +38,14 @@ class ResultadoPresenter(view: ResultadoActivity) {
             if(!coche.default)
                 eliminarCoche(coche, imageButton)
             else
-                view.toast("El coche principal no puede ser eliminado")
+                view.toast(view.getString(R.string.no_eliminar_coche_principal))
         }
     }
 
     private fun mostrarGuardarCocheDialog(coche: Coche) {
         val dialogView = view.mostrarGuardarCocheDialog(coche)
         val combustibleNombres:MutableList<String> = TipoCombustible.values().map { it.nombre }.toMutableList()
-        combustibleNombres.add(0, "Combustible")
+        combustibleNombres.add(0, view.getString(R.string.seleccione_combustible))
         val combustibleNames = TipoCombustible.values().map { it.name }.toMutableList()
         combustibleNames.add(0, "")
         view.cargarSpinnerCombustibles(combustibleNombres.toTypedArray(), combustibleNames.toTypedArray(), dialogView)
@@ -55,7 +59,7 @@ class ResultadoPresenter(view: ResultadoActivity) {
             view.setCoche(coche)
             return true
         } else{
-            view.toast("Error al guardar")
+            view.toast(view.getString(R.string.err_guardar))
             return false
         }
 
@@ -67,7 +71,7 @@ class ResultadoPresenter(view: ResultadoActivity) {
             view.estadoBoton(imageButton, false)
             view.cocheCuardado = false
         } else{
-            view.toast("Error al eliminar")
+            view.toast(view.getString(R.string.err_eliminar))
         }
     }
 

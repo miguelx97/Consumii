@@ -4,6 +4,7 @@ import com.miguelmartin.tuconsumo.Common.toast
 import com.miguelmartin.tuconsumo.Entities.Coche
 import com.miguelmartin.tuconsumo.Entities.Combustible
 import com.miguelmartin.tuconsumo.Entities.DatosUsuario
+import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.model.MainModel
 import com.miguelmartin.tuconsumo.view.MainActivity
 
@@ -37,7 +38,7 @@ class MainPresenter(view: MainActivity) {
     fun cargarPrecioCombustible(datosUsuario: DatosUsuario?) {
         if(datosUsuario?.comunidad.isNullOrEmpty()) return
         val idComunidad = model.getIdByNombreComunidad(datosUsuario!!.comunidad)
-        model.getInfoCombustiblesRest(view, datosUsuario!!, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
+        model.getInfoCombustiblesRest(view, datosUsuario, "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/$idComunidad?Accept=application/json&Content-Type=application/json")
     }
 
     fun llamadaExitosa(jsonInfoGasolineras: String, datosUsuario: DatosUsuario){
@@ -51,15 +52,18 @@ class MainPresenter(view: MainActivity) {
     }
 
     fun mostrarDialogCombustibles(arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario?) {
+        if(datosUsuario!!.comunidad.isNullOrEmpty()){
+            view.toast(view.getString(R.string.sin_comunidad))
+        }
         if (arrCombustibles == null) {
-            view.toast("Datos no disponibles")
+            view.toast(view.getString(R.string.sin_datos))
             if (datosUsuario?.comunidad != null)cargarPrecioCombustible(datosUsuario)
             return
         }
         val arrElementos = Array(arrCombustibles.size){""}
 
         arrCombustibles.forEachIndexed { i, it ->
-            arrElementos[i] = "${it.tipo!!.nombre} (${it.precio}€)"
+            arrElementos[i] = "${it.tipo!!.nombre} (${it.precio}${view.getString(R.string.m_moneda)})"
         }
 
         view.crearDialogCombustibles(arrElementos, arrCombustibles)
@@ -81,7 +85,7 @@ class MainPresenter(view: MainActivity) {
 
     fun getCoches() {
         val lCoches = model.getCochesBd(view)
-        val lFormatCoches = model.getFormatCoches(lCoches)
+        val lFormatCoches = model.getFormatCoches(lCoches, view.getString(R.string.m_consumo))
         val lValoresConsumos = lCoches.toTypedArray()
         view.crearDialogCoches(lFormatCoches, lValoresConsumos)
     }
@@ -89,7 +93,7 @@ class MainPresenter(view: MainActivity) {
     fun rellenarDatosByCoche(cocheSeleccionado: Coche, arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario){
         cargarConsumoCoche(cocheSeleccionado)
 
-        if(arrCombustibles != null && datosUsuario != null) {
+        if(arrCombustibles != null) {
             val combustible = arrCombustibles.filter{it.tipo == cocheSeleccionado.combustible.tipo}[0]
             cargarPrecioCombustible(combustible, datosUsuario.comunidad)
         }

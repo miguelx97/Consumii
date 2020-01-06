@@ -31,7 +31,7 @@
                     android:id="@+id/etDistancia"
                     style="@style/editText"
                     android:layout_weight="1"
-                    android:hint="@string/distancia"
+                    android:hint="@string/distanciaTrayecto"
                     android:inputType="numberDecimal" />
 
                 <ImageButton

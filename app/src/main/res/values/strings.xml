@@ -1,3 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY moneda "€">
+    <!ENTITY distancia "Km">
+    <!ENTITY consumo "l/100Km">
+    <!ENTITY combustible "€/l">
+    <!ENTITY liquido "l">
+]>
 <resources>
 
     <!--REAL-->
@@ -11,41 +19,89 @@
     <string name="title_activity_map">Mapa</string>
     <string name="seleccione_coche">Seleccione Coche</string>
     <string name="title_administracion_coches">Coches favoritos</string>
-    <string name="title_activity_resultado">ResultadoActivity</string>
+    <string name="title_activity_resultado">Resultados</string>
     <string name="titulo_main">Datos del trayecto</string>
 
     <!--MEDIDAS-->
-    <string name="med_moneda">€</string>
-    <string name="med_distancia">Km</string>
-    <string name="med_consumo">l/100Km</string>
+    <string name="m_moneda">&moneda;</string>
+    <string name="m_distancia">&distancia;</string>
+    <string name="m_consumo">&consumo;</string>
+    <string name="m_combustible">&combustible;</string>
+    <string name="m_liquido">&liquido;</string>
+
+    <!--GENERALES-->
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
+    <string name="err_guardar">No se ha podido guardar</string>
+    <string name="err_eliminar">No se ha podido eliminar</string>
+    <string name="err_actualizar">No se ha podido realizar el cambio</string>
+
+
+    <!--BIENVENIDA-->
+    <string name="bienvenido">Bienvenido a</string>
+    <string name="preguntas">Unas preguntas para empezar</string>
+    <string name="pregunta_consumo">¿Cuánto cunsume su coche? (Opcional)</string>
+    <string name="pregunta_combustible">¿Qué combustible usa? (Opcional)</string>
+    <string name="pregunta_comunidad">¿Dónde vives? (Opcional)</string>
+    <string name="hint_consumo">Litros por 100 km</string>
+    <string name="mi_coche">Mi Coche</string>
+
 
     <!--MAIN-->
-    <string name="distanciaTrayecto">Distancia del trayecto (Km)</string>
-    <string name="precio_combustible">Precio combustible (€/l)</string>
-    <string name="consumo_coche"> Consumo coche (l/100km)</string>
+    <string name="distanciaTrayecto">Distancia del trayecto (&distancia;)</string>
+    <string name="consumo_coche"> Consumo coche (&consumo;)</string>
+    <string name="precio_combustible">Precio combustible (&combustible;)</string>
 
     <string name="solo_ida">Solo ida</string>
     <string name="ida_vuelta">Ida y vuelta</string>
     <string name="definir_viajes">Definir número de trayectos</string>
     <string name="num_viajes">Número de trayectos</string>
 
-    <string name="ok">OK</string>
-    <string name="titulo_resultados">Tu consumo</string>
-    <string name="compartir_costo">Repartir coste entre los pasajeros</string>
-    <string name="calcular">CALCULAR</string>
-    <string name="pasajeros">Pasajeros</string>
-    <string name="gestion_consumo">Gestión del consumo</string>
-    <string name="idioma">Idioma: ES</string>
-
-    <string name="action_settings">Settings</string>
     <string name="seleccione_combustible">Combustibles</string>
     <string name="seleccione_comunidad">Comunidades autónomas</string>
-    <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    <string name="administrar">Administrar</string>
 
+    <string name="err_num_trayectos">Debe introducir el número de trayectos</string>
+    <string name="err_combustible">Debe introducir el precio del combustible</string>
+    <string name="err_consumo">Debe introducir el consumo del coche</string>
+    <string name="err_distancia">Debe introducir la distancia del trayecto</string>
+
+    <string name="sin_comunidad">No ha introducido ninguna comunidad autónoma</string>
+    <string name="sin_datos">Datos no disponibles</string>
+    <string name="calcular">Calcular</string>
+
+
+    <!--RESULTADOS-->
+    <string name="repartir_coste">Repartir coste</string>
+    <string name="coche">Coche</string>
+    <string name="anadir_coche">Añadir coche</string>
+    <string name="err_nombre_coche">Debe seleccioniar un nombre</string>
+    <string name="err_consumo_coche">Debe introducir el consumo</string>
+    <string name="no_eliminar_coche_principal">El coche principal no puede ser eliminado</string>
+    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\n El consumo ha costado %2$s&moneda;.\n Entre %3$s pasajeros, %4$s&moneda; cada uno.</string>
+
+
+    <!--MAPA-->
+    <string name="cambiar_casa">Cambiar dirección de casa</string>
+    <string name="inicio_destino_seleccionados">Inicio y destino están seleccinados</string>
+    <string name="tu_ubicacion">Tu ubicación</string>
+    <string name="err_ubicacion">No se ha podido encontrar tu ubicación</string>
+    <string name="ubicacion_casa">¿Deseas utilizar tu ubicación actual como dirección de tu casa?</string>
+    <string name="mi_ubicacion">Mi ubicación</string>
+    <string name="escribir_direccion">Escribir dirección</string>
+    <string name="casa">Casa</string>
+    <string name="guardar_casa">Guardar casa</string>
+    <string name="casa_guardada">Su dirección ha sido guardada</string>
+    <string name="casa_actualizar">Su dirección ha sido cambiada</string>
     <string name="inicio">Inicio</string>
     <string name="destino">Destino</string>
     <string name="casa_nombre">{{CASA_CONSUMII}}</string>
 
 
-    <string name="coches_favoritos">Coches favoritos</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+
+    <!--<string name=""></string>-->
 </resources>

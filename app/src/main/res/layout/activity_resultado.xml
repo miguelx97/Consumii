@@ -35,7 +35,7 @@
             <TextView
                 android:id="@+id/tvTituloResultados"
                 style="@style/textView"
-                android:text="Resultados"/>
+                android:text="@string/title_activity_resultado"/>
 
             <TextView
                 android:id="@+id/tvCombustible"
@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/tvTituloDividir"
                 style="@style/textView"
-                android:text="Repartir Gasolina"/>
+                android:text="@string/repartir_coste"/>
 
             <LinearLayout
                 android:id="@+id/lyPasajeros"
@@ -114,7 +114,6 @@
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-
                 <TextView
                     android:id="@+id/tvPagoPorPasajero"
                     style="@style/textView"
@@ -134,11 +133,6 @@
                     android:scaleType="fitCenter"
                     ads:srcCompat="@drawable/compartir" />
 
-                <!--<Space
-                    android:id="@+id/espacio"
-                    android:layout_width="17dp"
-                    android:layout_height="wrap_content" />-->
-
             </LinearLayout>
 
         </LinearLayout>
@@ -153,7 +147,7 @@
             <TextView
                 android:id="@+id/tvGuardar"
                 style="@style/textView"
-                android:text="Guardar" />
+                android:text="@string/guardar" />
 
     <!--
             <LinearLayout
@@ -196,7 +190,7 @@
                     android:drawableLeft="@drawable/coche"
                     android:drawablePadding="@dimen/margens_items"
                     android:drawableTint="@color/colorPrimary"
-                    android:text="Coche" />
+                    android:text="@string/coche" />
 
                 <ImageButton
                     android:id="@+id/btnGuardarCoche"

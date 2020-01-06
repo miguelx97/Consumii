@@ -31,9 +31,9 @@ class MapPresenter(view:MapActivity) {
         val casa = model.getCasaBd()
         if(casa != null){
             if(view.seleccionarPosicion())
-                view.cargarPosición("Casa", casa.coordenadas!!)
+                view.cargarPosición(view.getString(R.string.casa), casa.coordenadas!!)
         } else{
-            view.dialogUtilizarUbicacionActual("Guardar casa")
+            view.dialogUtilizarUbicacionActual(view.getString(R.string.guardar_casa))
         }
     }
 
@@ -45,11 +45,11 @@ class MapPresenter(view:MapActivity) {
         val oldCasa = model.getCasaBd()
         if(oldCasa == null){
             if(!model.guardarCasaBd(newCasa)){
-                view.toast("Error al guardar")
+                view.toast(view.getString(R.string.err_guardar))
                 return
             }
 
-            view.toast("Casa Guardada")
+            view.toast(view.getString(R.string.casa_guardada))
         } else{
             newCasa.id = oldCasa.id
             updateCasa(newCasa)
@@ -59,11 +59,11 @@ class MapPresenter(view:MapActivity) {
 
     fun updateCasa(newCasa: Lugar) {
         if(!model.actualizarCasaBd(newCasa)){
-            view.toast("Error al actualizar")
+            view.toast(view.getString(R.string.err_actualizar))
             return
         }
 
-        view.toast("Dirección cambiada")
+        view.toast(view.getString(R.string.casa_actualizar))
     }
 
     fun coordenadasToString(coordenadas:LatLng) = model.coordenadasToString(coordenadas)

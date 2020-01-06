@@ -40,7 +40,7 @@ class BienvenidaActivity : AppCompatActivity() {
                 combustible = arrNamesCombustibles[i]
                 dialogInterface.dismiss()
             }
-            setNeutralButton("Cancel") { dialog, _ ->
+            setNeutralButton(getString(R.string.cancelar)) { dialog, _ ->
                 dialog.cancel()
             }
         }.create().show()
@@ -53,7 +53,7 @@ class BienvenidaActivity : AppCompatActivity() {
                 spComunidad.setText(arrComunidades[i])
                 dialogInterface.dismiss()
             }
-            setNeutralButton("Cancel") { dialog, _ ->
+            setNeutralButton(getString(R.string.cancelar)) { dialog, _ ->
                 dialog.cancel()
             }
         }.create().show()
@@ -71,26 +71,5 @@ class BienvenidaActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-
-/*
-    fun camposRellenos(datosUsuario: DatosUsuario):Boolean {
-        var ok = true
-        if(datosUsuario.combustible.isEmpty()){
-            spCombustible.error = "Debe seleccioniar un combustible"
-            spCombustible.requestFocus()
-            ok =  false
-        } else{
-            spCombustible.error = null
-        }
-        if (datosUsuario.consumo == 0F){
-            etConsumo.error = "Debe introducir el consumo de su coche"
-            etConsumo.requestFocus()
-            ok =  false
-        } else{
-            etConsumo.error = null
-        }
-        return ok
-    }
-*/
 
 }
