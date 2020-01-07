@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         if(etConsumo.text.toString().isNotEmpty()){
             viaje.coche.consumo = etConsumo.text.toString().toFloat()
             viaje.coche.id = 0
+            vaje.coche.nombre=""
         } else{
             viaje.coche = viajeAyudas.coche
         }
