@@ -8,10 +8,6 @@
 ]>
 <resources>
 
-    <!--REAL-->
-    <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
-    <!--TEST-->
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="app_name">Consumii</string>
 
@@ -101,7 +97,11 @@
 
 
     <string name="action_settings">Settings</string>
-    <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    
+    
+    <!--REAL--> <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
+    <!--TEST--> <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <!--API MAPA--> <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
 
     <!--<string name=""></string>-->
 </resources>
