@@ -30,13 +30,18 @@
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/enunciado_main"
+                android:text="@string/enun_trayecto" />
+
             <LinearLayout style="@style/basic_layout">
 
                 <EditText
                     android:id="@+id/etDistancia"
                     style="@style/editText"
                     android:layout_weight="1"
-                    android:hint="@string/distanciaTrayecto"
+                    android:hint="@string/distancia_trayecto"
                     android:inputType="numberDecimal" />
 
                 <ImageButton
@@ -47,6 +52,11 @@
                     android:layout_margin="0dp"
                     android:src="@drawable/flecha_abajo" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/enunciado_main"
+                android:text="@string/enun_consumo_coche" />
 
             <LinearLayout style="@style/basic_layout">
 
@@ -65,6 +75,11 @@
                     android:layout_margin="0dp"
                     android:src="@drawable/flecha_abajo" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/enunciado_main"
+                android:text="@string/enun_precio_combustible" />
 
             <LinearLayout style="@style/basic_layout">
 
@@ -90,6 +105,7 @@
             android:id="@+id/lyNumeroTrayectos"
             style="@style/layout"
             android:layout_below="@+id/lyDatosPrincipales"
+            android:layout_margin="0dp"
             android:orientation="vertical">
 
             <RadioGroup

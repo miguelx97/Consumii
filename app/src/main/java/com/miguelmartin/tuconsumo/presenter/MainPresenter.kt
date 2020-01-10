@@ -57,7 +57,7 @@ class MainPresenter(view: MainActivity) {
         }
         if (arrCombustibles == null) {
             view.toast(view.getString(R.string.sin_datos))
-            if (datosUsuario?.comunidad != null)cargarPrecioCombustible(datosUsuario)
+            if (datosUsuario.comunidad != null)cargarPrecioCombustible(datosUsuario)
             return
         }
         val arrElementos = Array(arrCombustibles.size){""}

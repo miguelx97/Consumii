@@ -13,8 +13,7 @@ import com.miguelmartin.tuconsumo.Common.*
 import com.miguelmartin.tuconsumo.Entities.*
 import com.miguelmartin.tuconsumo.R
 import com.miguelmartin.tuconsumo.presenter.MainPresenter
-import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.content_main.etConsumo
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         if(etConsumo.text.toString().isNotEmpty()){
             viaje.coche.consumo = etConsumo.text.toString().toFloat()
             viaje.coche.id = 0
-            vaje.coche.nombre=""
+            viaje.coche.nombre=""
         } else{
             viaje.coche = viajeAyudas.coche
         }

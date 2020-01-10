@@ -5,18 +5,22 @@
     <!ENTITY consumo "l/100Km">
     <!ENTITY combustible "€/l">
     <!ENTITY liquido "l">
-]>
+    ]>
 <resources>
 
+    <!--REAL-->
+    <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
+    <!--TEST-->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="app_name">Consumii</string>
 
     <!--NOMBRES ACTIVITIES-->
-    <string name="title_activity_map">Mapa</string>
-    <string name="seleccione_coche">Seleccione Coche</string>
-    <string name="title_administracion_coches">Coches favoritos</string>
-    <string name="title_activity_resultado">Resultados</string>
-    <string name="titulo_main">Datos del trayecto</string>
+    <string name="title_activity_map">Map</string>
+    <string name="seleccione_coche">Choose car</string>
+    <string name="title_administracion_coches">Favourite cars</string>
+    <string name="title_activity_resultado">Results</string>
+    <string name="titulo_main">Trip data</string>
 
     <!--MEDIDAS-->
     <string name="m_moneda">&moneda;</string>
@@ -26,82 +30,82 @@
     <string name="m_liquido">&liquido;</string>
 
     <!--GENERALES-->
-    <string name="aceptar">Aceptar</string>
-    <string name="cancelar">Cancelar</string>
-    <string name="guardar">Guardar</string>
-    <string name="err_guardar">No se ha podido guardar</string>
-    <string name="err_eliminar">No se ha podido eliminar</string>
-    <string name="err_actualizar">No se ha podido realizar el cambio</string>
+    <string name="aceptar">Ok</string>
+    <string name="cancelar">Cancel</string>
+    <string name="guardar">Save</string>
+    <string name="err_guardar">Saving failed</string>
+    <string name="err_eliminar">Deleting failed</string>
+    <string name="err_actualizar">Updating failed</string>
 
 
     <!--BIENVENIDA-->
-    <string name="bienvenido">Bienvenido a</string>
-    <string name="preguntas">Unas preguntas para empezar</string>
-    <string name="pregunta_consumo">¿Cuánto cunsume su coche? (Opcional)</string>
-    <string name="pregunta_combustible">¿Qué combustible usa? (Opcional)</string>
-    <string name="pregunta_comunidad">¿Dónde vives? (Opcional)</string>
-    <string name="hint_consumo">Litros por 100 km</string>
-    <string name="mi_coche">Mi Coche</string>
+    <string name="bienvenido">Wellcome to</string>
+    <string name="preguntas">A couple of cuestions to start</string>
+    <string name="pregunta_consumo">How much does your car consume? (Optional)</string>
+    <string name="pregunta_combustible">What fuel does it use? (Optional)</string>
+    <string name="pregunta_comunidad">¿Where do you live? (Only for Spain - Optional)</string>
+    <string name="hint_consumo">Liters per 100 km</string>
+    <string name="mi_coche">My car</string>
 
 
     <!--MAIN-->
-    <string name="distanciaTrayecto">Distancia del trayecto (&distancia;)</string>
-    <string name="consumo_coche"> Consumo coche (&consumo;)</string>
-    <string name="precio_combustible">Precio combustible (&combustible;)</string>
+    <string name="enun_trayecto">Distancia del trayecto (&distancia;)</string>
+    <string name="enun_consumo_coche"> Consumo coche (&consumo;)</string>
+    <string name="enun_precio_combustible">Precio combustible (&combustible;)</string>
 
-    <string name="solo_ida">Solo ida</string>
-    <string name="ida_vuelta">Ida y vuelta</string>
-    <string name="definir_viajes">Definir número de trayectos</string>
-    <string name="num_viajes">Número de trayectos</string>
+    <string name="distancia_trayecto">Kilometers</string>
+    <string name="consumo_coche">Liters per 100 km</string>
+    <string name="precio_combustible">€ per liter</string>
 
-    <string name="seleccione_combustible">Combustibles</string>
-    <string name="seleccione_comunidad">Comunidades autónomas</string>
-    <string name="administrar">Administrar</string>
+    <string name="solo_ida">One trip</string>
+    <string name="ida_vuelta">Round trip</string>
+    <string name="definir_viajes">Custom trips number</string>
+    <string name="num_viajes">Trips number</string>
 
-    <string name="err_num_trayectos">Debe introducir el número de trayectos</string>
-    <string name="err_combustible">Debe introducir el precio del combustible</string>
-    <string name="err_consumo">Debe introducir el consumo del coche</string>
-    <string name="err_distancia">Debe introducir la distancia del trayecto</string>
+    <string name="seleccione_combustible">Fuel types</string>
+    <string name="seleccione_comunidad">Spanish autonomous communities</string>
+    <string name="administrar">Management</string>
 
-    <string name="sin_comunidad">No ha introducido ninguna comunidad autónoma</string>
-    <string name="sin_datos">Datos no disponibles</string>
-    <string name="calcular">Calcular</string>
+    <string name="err_num_trayectos">Trips number is required</string>
+    <string name="err_combustible">Fuel price is required</string>
+    <string name="err_consumo">Car consumption is required</string>
+    <string name="err_distancia">Route distance is required</string>
+
+    <string name="sin_comunidad">This feature is only available in Spain</string>
+    <string name="sin_datos">No data</string>
+    <string name="calcular">Calculate</string>
 
 
     <!--RESULTADOS-->
-    <string name="repartir_coste">Repartir coste</string>
-    <string name="coche">Coche</string>
-    <string name="anadir_coche">Añadir coche</string>
-    <string name="err_nombre_coche">Debe seleccioniar un nombre</string>
-    <string name="err_consumo_coche">Debe introducir el consumo</string>
-    <string name="no_eliminar_coche_principal">El coche principal no puede ser eliminado</string>
-    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\n El consumo ha costado %2$s&moneda;.\n Entre %3$s pasajeros, %4$s&moneda; cada uno.</string>
+    <string name="repartir_coste">Share cost</string>
+    <string name="coche">Car</string>
+    <string name="anadir_coche">Add car</string>
+    <string name="err_nombre_coche">Name is required</string>
+    <string name="err_consumo_coche">Consumption is required</string>
+    <string name="no_eliminar_coche_principal">Main car cannot be deleted</string>
+    <string name="mensaje_compartir">%1$s&distancia; have been traveled.\n Fuel cost has been %2$s&moneda;.\n Between %3$s passengers, %4$s&moneda; each.</string>
 
 
     <!--MAPA-->
-    <string name="cambiar_casa">Cambiar dirección de casa</string>
-    <string name="inicio_destino_seleccionados">Inicio y destino están seleccinados</string>
-    <string name="tu_ubicacion">Tu ubicación</string>
-    <string name="err_ubicacion">No se ha podido encontrar tu ubicación</string>
-    <string name="ubicacion_casa">¿Deseas utilizar tu ubicación actual como dirección de tu casa?</string>
-    <string name="mi_ubicacion">Mi ubicación</string>
-    <string name="escribir_direccion">Escribir dirección</string>
-    <string name="casa">Casa</string>
-    <string name="guardar_casa">Guardar casa</string>
-    <string name="casa_guardada">Su dirección ha sido guardada</string>
-    <string name="casa_actualizar">Su dirección ha sido cambiada</string>
-    <string name="inicio">Inicio</string>
-    <string name="destino">Destino</string>
+    <string name="cambiar_casa">Change home address</string>
+    <string name="inicio_destino_seleccionados">Starting point and destination are filled</string>
+    <string name="tu_ubicacion">Your location</string>
+    <string name="err_ubicacion">Your location couldn\'t be found</string>
+    <string name="ubicacion_casa">Would you like to use your current location as home address</string>
+    <string name="mi_ubicacion">My location</string>
+    <string name="escribir_direccion">Write address</string>
+    <string name="casa">Home</string>
+    <string name="guardar_casa">Save home</string>
+    <string name="casa_guardada">Your address has been saved</string>
+    <string name="casa_actualizar">Your address has been updated</string>
+    <string name="inicio">Starting point</string>
+    <string name="destino">Destination</string>
     <string name="casa_nombre">{{CASA_CONSUMII}}</string>
 
 
 
     <string name="action_settings">Settings</string>
-    
-    
-    <!--REAL--> <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
-    <!--TEST--> <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <!--API MAPA--> <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
 
     <!--<string name=""></string>-->
 </resources>
