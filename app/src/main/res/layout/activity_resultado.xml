@@ -38,16 +38,16 @@
                 android:text="@string/title_activity_resultado"/>
 
             <TextView
-                android:id="@+id/tvCombustible"
+                android:id="@+id/tvDistancia"
                 style="@style/textView"
-                android:drawableLeft="@drawable/gota"
+                android:drawableLeft="@drawable/distancia"
                 android:drawablePadding="@dimen/margens_items"
                 android:drawableTint="@color/colorPrimary" />
 
             <TextView
-                android:id="@+id/tvDistancia"
+                android:id="@+id/tvCombustible"
                 style="@style/textView"
-                android:drawableLeft="@drawable/distancia"
+                android:drawableLeft="@drawable/gota"
                 android:drawablePadding="@dimen/margens_items"
                 android:drawableTint="@color/colorPrimary" />
 

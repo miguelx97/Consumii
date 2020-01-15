@@ -48,7 +48,7 @@ class MainPresenter(view: MainActivity) {
         val lUnCombustible = arrMediasCombustibles.filter { it.tipo == datosUsuario.coche.combustible.tipo }
         if(lUnCombustible.isEmpty()) return
         val combustible = lUnCombustible[0]
-        cargarPrecioCombustible(combustible, datosUsuario.comunidad)
+        cargarPrecioCombustible(combustible)
     }
 
     fun mostrarDialogCombustibles(arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario?) {
@@ -66,7 +66,7 @@ class MainPresenter(view: MainActivity) {
             arrElementos[i] = "${it.tipo!!.nombre} (${it.precio}${view.getString(R.string.m_moneda)})"
         }
 
-        view.crearDialogCombustibles(arrElementos, arrCombustibles)
+        view.crearDialogCombustibles(arrElementos, arrCombustibles, datosUsuario.comunidad)
     }
 
     fun cargarConsumoCoche(coche: Coche) {
@@ -74,9 +74,9 @@ class MainPresenter(view: MainActivity) {
         view.rellenarConsumoCoche(coche)
     }
 
-    fun cargarPrecioCombustible(combustible: Combustible, comunidad:String) {
+    fun cargarPrecioCombustible(combustible: Combustible) {
         if(combustible != Combustible())
-            view.rellenarPrecioCombustible(combustible, comunidad)
+            view.rellenarPrecioCombustible(combustible)
     }
 
     fun getDistancia() {
@@ -85,17 +85,17 @@ class MainPresenter(view: MainActivity) {
 
     fun getCoches() {
         val lCoches = model.getCochesBd(view)
-        val lFormatCoches = model.getFormatCoches(lCoches, view.getString(R.string.m_consumo))
+        val lFormatCoches = model.getFormatCoches(lCoches, view.getString(R.string.m_liquido))
         val lValoresConsumos = lCoches.toTypedArray()
         view.crearDialogCoches(lFormatCoches, lValoresConsumos)
     }
 
-    fun rellenarDatosByCoche(cocheSeleccionado: Coche, arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario){
+    fun rellenarDatosByCoche(cocheSeleccionado: Coche, arrCombustibles: Array<Combustible>?){
         cargarConsumoCoche(cocheSeleccionado)
 
         if(arrCombustibles != null) {
             val combustible = arrCombustibles.filter{it.tipo == cocheSeleccionado.combustible.tipo}[0]
-            cargarPrecioCombustible(combustible, datosUsuario.comunidad)
+            cargarPrecioCombustible(combustible)
         }
     }
 

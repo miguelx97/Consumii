@@ -2,9 +2,11 @@
 <!DOCTYPE resources [
     <!ENTITY moneda "€">
     <!ENTITY distancia "Km">
+    <!ENTITY distancia_completo "Kilometros">
     <!ENTITY consumo "l/100Km">
     <!ENTITY combustible "€/l">
     <!ENTITY liquido "l">
+    <!ENTITY consumo_coche "Litros por 100 km">
     ]>
 <resources>
 
@@ -40,7 +42,7 @@
     <string name="pregunta_consumo">¿Cuánto cunsume su coche? (Opcional)</string>
     <string name="pregunta_combustible">¿Qué combustible usa? (Opcional)</string>
     <string name="pregunta_comunidad">¿Dónde vives? (Opcional)</string>
-    <string name="hint_consumo">Litros por 100 km</string>
+    <string name="hint_consumo">&consumo_coche;</string>
     <string name="mi_coche">Mi Coche</string>
 
 
@@ -49,8 +51,8 @@
     <string name="enun_consumo_coche"> Consumo coche:</string>
     <string name="enun_precio_combustible">Precio combustible:</string>
 
-    <string name="distancia_trayecto">Kilometros</string>
-    <string name="consumo_coche">Litros por 100 km</string>
+    <string name="distancia_trayecto">&distancia_completo;</string>
+    <string name="consumo_coche">&consumo_coche;</string>
     <string name="precio_combustible">Euros por litro</string>
 
     <string name="solo_ida">Solo ida</string>
@@ -99,12 +101,11 @@
     <string name="casa_nombre">{{CASA_CONSUMII}}</string>
 
 
+    <!--REAL-->
+    <string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>
+    <!--TEST-->
+    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
 
-    <string name="action_settings">Settings</string>
-
-
-    <!--REAL--> <!--<string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>-->
-    <!--TEST--> <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <!--API MAPA--> <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
 
     <!--<string name=""></string>-->

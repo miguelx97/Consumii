@@ -62,11 +62,13 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-        </activity> <!-- REAL: ca-app-pub-1711656823604701~1106868195 -->
+        </activity>
+        <!-- REAL: ca-app-pub-1711656823604701~1106868195 -->
         <!-- TEST: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-1711656823604701~1106868195" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -84,19 +84,6 @@ class ResultadoActivity() : AppCompatActivity() {
         tvPagoPorPasajero.text = "$pagoPorPasajero ${getString(R.string.m_moneda)}"
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_resultado, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) =
-        when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-
     fun mostrarGuardarCocheDialog(coche: Coche):View {
         val inflater = LayoutInflater.from(this)
         val view = inflater.inflate(R.layout.guardar_coche_dialog, null)

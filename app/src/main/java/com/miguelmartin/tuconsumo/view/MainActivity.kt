@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
         this.arrCombustibles = arrCombustibles
     }
 
-    fun rellenarPrecioCombustible(combustible: Combustible, comunidad:String){
+    fun rellenarPrecioCombustible(combustible: Combustible){
         etPrecioFuel.setText("")
-        etPrecioFuel.hint = "${combustible.precio}${getString(R.string.m_moneda)} (${combustible.tipo!!.nombre} - $comunidad)"
+        etPrecioFuel.hint = "${combustible.precio}${getString(R.string.m_moneda)} (${combustible.tipo!!.nombre})"
         viajeAyudas.coche.combustible = combustible
     }
 
@@ -124,23 +124,11 @@ class MainActivity : AppCompatActivity() {
         return viaje
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    fun crearDialogCombustibles(arrNombres:Array<String>, arrValores: Array<Combustible>){
+    fun crearDialogCombustibles(arrNombres:Array<String>, arrValores: Array<Combustible>, comunidad: String){
         AlertDialog.Builder(this).apply {
-            setTitle(getString(R.string.seleccione_combustible))
+            setTitle("${getString(R.string.seleccione_combustible)} - $comunidad")
             setSingleChoiceItems(arrNombres, -1) { dialogInterface, i ->
-                presenter.cargarPrecioCombustible(arrValores[i], datosUsuario!!.comunidad)
+                presenter.cargarPrecioCombustible(arrValores[i])
                 dialogInterface.dismiss()
             }
             setNeutralButton(getString(R.string.cancelar)) { dialog, _ -> dialog.cancel() }
@@ -152,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             setTitle(getString(R.string.title_administracion_coches))
             setSingleChoiceItems(arrNombresCoches, -1) { dialogInterface, i ->
                 viaje.coche = arrValores[i]
-                presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles, datosUsuario!!)
+                presenter.rellenarDatosByCoche(arrValores[i], arrCombustibles)
                 dialogInterface.dismiss()
             }
             setNeutralButton(getString(R.string.administrar)){_, _ ->presenter.administrarCoches()}
@@ -206,7 +194,7 @@ class MainActivity : AppCompatActivity() {
             rellenarDistancia(distancia.toDouble(), inicio!!, destino!!)
         } else if(requestCode == RC_ADMIN_COCHES){
             datosUsuario = presenter.getDatosUsuario()
-            presenter.rellenarDatosByCoche(datosUsuario!!.coche, arrCombustibles, datosUsuario!!)
+            presenter.rellenarDatosByCoche(datosUsuario!!.coche, arrCombustibles)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

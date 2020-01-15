@@ -54,13 +54,13 @@ class PersistenciaLugares(context: Context) {
     }
 
     fun insert(lugar: Lugar):Boolean{
-        Log.w("insertar",lugar.toString())
+//        Log.w("insertar",lugar.toString())
         val res = dbManager.insertar(getValues(lugar))
         return res > 0
     }
 
     fun eliminar(lugar: Lugar): Boolean {
-        Log.w("eliminar" , lugar.toString())
+//        Log.w("eliminar" , lugar.toString())
         val selectionArgs= arrayOf(lugar.id.toString())
         val res = dbManager.eliminar("$COL_ID=?", selectionArgs)
         return res > 0
@@ -68,7 +68,7 @@ class PersistenciaLugares(context: Context) {
 
 
     fun update(lugar: Lugar):Boolean{
-        Log.w("modificar ${lugar.id}:", lugar.toString())
+//        Log.w("modificar ${lugar.id}:", lugar.toString())
 
         val cv = getValues(lugar)
         val res = dbManager.modificar(cv, "$COL_ID=?", arrayOf(lugar.id.toString()))

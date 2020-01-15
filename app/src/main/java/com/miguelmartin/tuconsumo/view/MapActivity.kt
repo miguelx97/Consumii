@@ -53,8 +53,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_map)
 
         presenter = MapPresenter(this)
-        posicionInicio = InfoPosicion(etInicio, ivLimpiarInicio, R.drawable.estrella_rellena, R.string.inicio)
-        posicionDestino = InfoPosicion(etDestino, ivLimpiarDestino, R.drawable.bandera, R.string.destino)
+        posicionInicio = InfoPosicion(etInicio, ivLimpiarInicio, R.drawable.punto_inicio, R.string.inicio)
+        posicionDestino = InfoPosicion(etDestino, ivLimpiarDestino, R.drawable.punto_destino, R.string.destino)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -133,7 +133,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
             var status = Autocomplete.getStatusFromIntent(data!!)
-            Log.i("address", status.statusMessage);
+//            Log.i("address", status.statusMessage);
         }
 
 
@@ -141,7 +141,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun cargarPosición(nombre: String?,coordenadas: LatLng) {
+    fun cargarPosición(nombre: String?,coordenadas: LatLng, centarEnPantalla:Boolean=true) {
         currentPosicion.campo.setText(nombre)
         currentPosicion.limpiarCampo.visibility = View.VISIBLE
         currentPosicion.marker?.remove()
@@ -150,7 +150,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .title(getString(currentPosicion.etiqueta))
                 .icon(bitmapDescriptorFromVector(this, currentPosicion.icono))
         )
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosicion.marker!!.position))
+        if(centarEnPantalla)
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosicion.marker!!.position))
 
         visibilidadBotones()
     }
@@ -185,7 +186,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setOnMapLongClickListener {
             if (seleccionarPosicion())
-                cargarPosición(presenter.coordenadasToString(it), it)
+                cargarPosición(presenter.coordenadasToString(it), it, false)
         }
     }
 

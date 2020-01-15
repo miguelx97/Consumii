@@ -57,20 +57,20 @@ class PersistenciaCoche(context: Context) {
     }
 
     fun insert(coche: Coche):Boolean{
-        Log.w("insertar",coche.toString())
+//        Log.w("insertar",coche.toString())
         val res = dbManager.insertar(getValues(coche))
         return res > 0
     }
 
     fun eliminar(coche: Coche): Boolean {
-        Log.w("eliminar" , coche.toString())
+//        Log.w("eliminar" , coche.toString())
         val selectionArgs= arrayOf(coche.id.toString())
         val res = dbManager.eliminar("$COL_ID=?", selectionArgs)
         return res > 0
     }
 
     fun update(coche: Coche):Boolean{
-        Log.w("modificar ${coche.id}:", coche.toString())
+//        Log.w("modificar ${coche.id}:", coche.toString())
 
         val cv = getValues(coche)
         val res = dbManager.modificar(cv, "$COL_ID=?", arrayOf(coche.id.toString()))
