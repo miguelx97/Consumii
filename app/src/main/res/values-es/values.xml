@@ -39,7 +39,7 @@
     <!--BIENVENIDA-->
     <string name="bienvenido">Bienvenido a</string>
     <string name="preguntas">Unas preguntas para empezar</string>
-    <string name="pregunta_consumo">¿Cuánto cunsume su coche? (Opcional)</string>
+    <string name="pregunta_consumo">¿Cuánto consume su coche? (Opcional)</string>
     <string name="pregunta_combustible">¿Qué combustible usa? (Opcional)</string>
     <string name="pregunta_comunidad">¿Dónde vives? (Opcional)</string>
     <string name="hint_consumo">&consumo_coche;</string>
@@ -80,8 +80,9 @@
     <string name="anadir_coche">Añadir coche</string>
     <string name="err_nombre_coche">Debe seleccioniar un nombre</string>
     <string name="err_consumo_coche">Debe introducir el consumo</string>
+    <string name="err_consumo_cero">El consumo no puede ser 0</string>
     <string name="no_eliminar_coche_principal">El coche principal no puede ser eliminado</string>
-    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\n El consumo ha costado %2$s&moneda;.\n Entre %3$s pasajeros, %4$s&moneda; cada uno.</string>
+    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\nEl consumo ha costado %2$s&moneda;.\nEntre %3$s pasajeros, *%4$s&moneda;* cada uno.\nhttp://bit.do/consumii</string>
 
 
     <!--MAPA-->

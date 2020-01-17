@@ -8,7 +8,7 @@ android {
     testOptions.unitTests.includeAndroidResources = true
 
     defaultConfig {
-        applicationId "com.miguelmartin.consumii"
+        applicationId "com.martin.miguel.tuconsumo"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 4

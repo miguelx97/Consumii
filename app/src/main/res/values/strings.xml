@@ -79,8 +79,10 @@
     <string name="anadir_coche">Add car</string>
     <string name="err_nombre_coche">Name is required</string>
     <string name="err_consumo_coche">Consumption is required</string>
+    <string name="err_consumo_cero">Consumption cannot be z
+        ero</string>
     <string name="no_eliminar_coche_principal">Primary car cannot be deleted</string>
-    <string name="mensaje_compartir">%1$s&distancia; have been traveled.\n Fuel cost has been %2$s&moneda;.\n Between %3$s passengers, %4$s&moneda; each.</string>
+    <string name="mensaje_compartir">%1$s&distancia; have been traveled.\nFuel cost has been %2$s&moneda;.\nBetween %3$s passengers, %4$s&moneda; each.\nhttp://bit.do/consumii</string>
 
 
     <!--MAPA-->
