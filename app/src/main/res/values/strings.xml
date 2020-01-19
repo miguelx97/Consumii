@@ -79,10 +79,9 @@
     <string name="anadir_coche">Add car</string>
     <string name="err_nombre_coche">Name is required</string>
     <string name="err_consumo_coche">Consumption is required</string>
-    <string name="err_consumo_cero">Consumption cannot be z
-        ero</string>
+    <string name="err_consumo_cero">Consumption cannot be zero</string>
     <string name="no_eliminar_coche_principal">Primary car cannot be deleted</string>
-    <string name="mensaje_compartir">%1$s&distancia; have been traveled.\nFuel cost has been %2$s&moneda;.\nBetween %3$s passengers, %4$s&moneda; each.\nhttp://bit.do/consumii</string>
+    <string name="mensaje_compartir">\n%1$s&distancia; have been traveled.\nFuel cost has been %2$s&moneda;.\nBetween %3$s passengers, %4$s&moneda; each.\nhttps://qrco.de/consumii</string>
 
 
     <!--MAPA-->
@@ -99,13 +98,13 @@
     <string name="casa_actualizar">Your address has been updated</string>
     <string name="inicio">Starting point</string>
     <string name="destino">Destination</string>
-    <string name="casa_nombre">{{CASA_CONSUMII}}</string>
+    <string name="casa_nombre" translatable="false">{{CASA_CONSUMII}}</string>
 
 
     <!--REAL-->
-    <string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1711656823604701/5196827458</string>
     <!--TEST-->
-    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
 
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
 

@@ -82,7 +82,7 @@
     <string name="err_consumo_coche">Debe introducir el consumo</string>
     <string name="err_consumo_cero">El consumo no puede ser 0</string>
     <string name="no_eliminar_coche_principal">El coche principal no puede ser eliminado</string>
-    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\nEl consumo ha costado %2$s&moneda;.\nEntre %3$s pasajeros, *%4$s&moneda;* cada uno.\nhttp://bit.do/consumii</string>
+    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\nEl consumo ha costado %2$s&moneda;.\nEntre %3$s pasajeros, *%4$s&moneda;* cada uno.\nhttps://qrco.de/consumii</string>
 
 
     <!--MAPA-->
@@ -99,13 +99,6 @@
     <string name="casa_actualizar">Su dirección ha sido cambiada</string>
     <string name="inicio">Inicio</string>
     <string name="destino">Destino</string>
-    <string name="casa_nombre">{{CASA_CONSUMII}}</string>
-
-
-    <!--REAL-->
-    <string name="banner_ad_unit_id">ca-app-pub-1711656823604701/5196827458</string>
-    <!--TEST-->
-    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
 
     <!--API MAPA--> <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
 
