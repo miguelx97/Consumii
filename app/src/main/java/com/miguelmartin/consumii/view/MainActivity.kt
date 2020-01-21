@@ -44,12 +44,18 @@ class MainActivity : AppCompatActivity() {
         btnAyudaConsumo.setOnClickListener { presenter.getCoches() }
 
         btnCalcular.setOnClickListener { presenter.calcularResultados() }
+        ivSettings.setOnClickListener { irSettings() }
     }
 
     fun irResultadoActivity(viaje: Viaje){
         val intent = Intent(this, ResultadoActivity::class.java).apply {
             putExtra("viaje", viaje)
         }
+        startActivity(intent)
+    }
+
+    fun irSettings(){
+        val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
 

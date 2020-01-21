@@ -1,13 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources [
-    <!ENTITY moneda "€">
-    <!ENTITY distancia "Km">
-    <!ENTITY distancia_completo "Kilometers">
-    <!ENTITY consumo "l/100Km">
-    <!ENTITY combustible "€/l">
-    <!ENTITY liquido "l">
-    <!ENTITY consumo_coche "Liters per 100 km">
-    ]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY moneda "€"><!ENTITY distancia "Km"><!ENTITY distancia_completo "Kilometers"><!ENTITY consumo "l/100Km"><!ENTITY combustible "€/l"><!ENTITY liquido "l"><!ENTITY consumo_coche "Liters per 100 km">]>
 <resources>
 
     <string name="app_name">Consumii</string>
@@ -81,7 +72,8 @@
     <string name="err_consumo_coche">Consumption is required</string>
     <string name="err_consumo_cero">Consumption cannot be zero</string>
     <string name="no_eliminar_coche_principal">Primary car cannot be deleted</string>
-    <string name="mensaje_compartir">\n%1$s&distancia; have been traveled.\nFuel cost has been %2$s&moneda;.\nBetween %3$s passengers, %4$s&moneda; each.\nqrco.de/consumii</string>
+    <string name="mensaje_compartir">\n%1$s&distancia; have been traveled.\nFuel cost has been %2$s&moneda;.\nBetween %3$s passengers, %4$s&moneda;
+        each.\nqrco.de/consumii</string>
 
 
     <!--MAPA-->
@@ -107,6 +99,22 @@
     <!--<string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
 
     <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="ajustes_usuario">Messages</string>
+    <string name="ajustes_generales">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <!--<string name=""></string>-->
 </resources>
