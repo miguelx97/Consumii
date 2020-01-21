@@ -106,8 +106,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun autocompletar(clave:Int) {
-        var intent =
-            Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
+        var intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
         startActivityForResult(intent, clave)
     }
 
