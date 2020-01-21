@@ -1,3 +1,4 @@
 <resources>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCtUUXVGQfl43MLKpgjh6c9OlwrnFteyQw</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1711656823604701/5196827458</string>
 </resources>

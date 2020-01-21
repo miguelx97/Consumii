@@ -100,7 +100,18 @@
     <string name="inicio">Inicio</string>
     <string name="destino">Destino</string>
 
-    <!--API MAPA--> <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    <!--CONFIGURACIÓN-->
+    <string name="title_activity_settings">Configuración</string>
+
+    <!-- Preference Titles -->
+    <string name="ajustes_usuario">Datos de usuario</string>
+    <string name="ajustes_generales">General</string>
+
+    <string name="settings_consumo">Consumo de tu coche por 100&distancia;</string>
+    <string name="settings_combustible">Combustible de tu coche</string>
+    <string name="settings_comunidad">Tu comunidad autónoma</string>
+    <string name="idioma">Idioma</string>
+    <string name="acerca_de">Acerca de</string>
 
     <!--<string name=""></string>-->
 </resources>

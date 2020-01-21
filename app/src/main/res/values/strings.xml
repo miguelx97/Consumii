@@ -92,29 +92,21 @@
     <string name="destino">Destination</string>
     <string name="casa_nombre" translatable="false">{{CASA_CONSUMII}}</string>
 
-
-    <!--REAL-->
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1711656823604701/5196827458</string>
-    <!--TEST-->
-    <!--<string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
-
-    <string name="api_maps">AIzaSyC9kgCtj2L5W-DIzEC6Um7kSv0_47vsAFY</string>
+    <!--CONFIGURACIÓN-->
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="ajustes_usuario">Messages</string>
-    <string name="ajustes_generales">Sync</string>
+    <string name="ajustes_usuario">Datos de usuario</string>
+    <string name="ajustes_generales">General</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="settings_consumo">Fuel eficiency of your car</string>
+    <string name="settings_combustible">Fuel type of your car</string>
+    <string name="settings_comunidad">Spanish autonomous communities</string>
+    <string name="idioma">Languaje</string>
+    <string name="acerca_de">About</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+
 
     <!--<string name=""></string>-->
 </resources>
