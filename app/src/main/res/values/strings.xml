@@ -104,8 +104,11 @@
     <string name="settings_comunidad">Spanish autonomous communities</string>
     <string name="idioma">Languaje</string>
     <string name="acerca_de">About</string>
+    <string name="español">Spanish</string>
+    <string name="ingles">English</string>
+    <string name="idiomaActual">English</string>
 
-
+    <string name="idioma_id" translatable="false">idioma</string>
 
 
     <!--<string name=""></string>-->
