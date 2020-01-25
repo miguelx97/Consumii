@@ -1,6 +1,7 @@
 package com.miguelmartin.consumii.model
 
 import android.content.Context
+import androidx.preference.PreferenceManager
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -18,7 +19,7 @@ import com.miguelmartin.consumii.view.MainActivity
 class MainModel(context: Context) {
     val context = context
     val persistencia = PersistenciaCoche(context)
-    val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     fun getInfoCombustiblesRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
         val queue = Volley.newRequestQueue(context)
@@ -71,10 +72,10 @@ class MainModel(context: Context) {
 
     fun comprobarUser() = sharedPreferences.contains(EXISTE)
 
-    fun getComunidadFromPrefferences() = sharedPreferences.getString(COMUNIDAD, "")
+    fun getComunidadFromPrefferences() = sharedPreferences.getString(context.getString(R.string.preffs_comunidad_id), "")
 
-    fun getIdByNombreComunidad(comunidad: String): String {
-        return LISTA_COMUNIDADES.filterValues { it == comunidad }.keys.elementAt(0)
+    fun getIdByNombreComunidad(comunidad: String): Int {
+        return context.resources.getStringArray(R.array.comunidades).indexOf(comunidad)+1
     }
 
     fun getCochesBd() = persistencia.getAll()

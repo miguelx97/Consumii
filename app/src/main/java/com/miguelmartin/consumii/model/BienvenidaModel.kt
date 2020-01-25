@@ -1,7 +1,7 @@
 package com.miguelmartin.consumii.model
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import com.miguelmartin.consumii.Common.*
 import com.miguelmartin.consumii.Entities.Coche
 import com.miguelmartin.consumii.R
@@ -10,15 +10,15 @@ import com.miguelmartin.consumii.db.PersistenciaCoche
 class BienvenidaModel(context: Context) {
     val context = context
 
-    val editor = context.getSharedPreferences(PREFS_NAME, 0).edit()
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
 
     fun guardarComunidadPrefferences(comunidad: String){
 
         if(comunidad.isNotEmpty())
-            editor.putString(COMUNIDAD, comunidad)
+            sharedPreferences.putString(context.getString(R.string.preffs_comunidad_id), comunidad)
 
-        editor.putBoolean(EXISTE, true)
-        editor.commit()
+        sharedPreferences.putBoolean(EXISTE, true)
+        sharedPreferences.commit()
     }
 
     fun guardarCocheBd(coche: Coche):Boolean{

@@ -16,4 +16,26 @@
         <item>Reply to all</item>
     </string-array>
 
+    <string-array name="comunidades">
+        <item>Andalucía</item>
+        <item>Aragón</item>
+        <item>Asturias</item>
+        <item>Islas Baleares</item>
+        <item>Islas Canarias</item>
+        <item>Cantabria</item>
+        <item>Castilla y León</item>
+        <item>Castilla La Mancha</item>
+        <item>Cataluña</item>
+        <item>Valencia</item>
+        <item>Extremadura</item>
+        <item>Galicia</item>
+        <item>Madrid</item>
+        <item>Murcia</item>
+        <item>Navarra</item>
+        <item>País Vasco</item>
+        <item>La Rioja</item>
+        <item>Ceuta</item>
+        <item>Melilla</item>
+    </string-array>
+
 </resources>

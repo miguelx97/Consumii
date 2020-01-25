@@ -82,8 +82,6 @@ class MainActivity : BaseActivity() {
     }
 
     fun rellenarDistancia(distancia:Double, inicio:String, destino:String){
-//        var inicio = acortar(inicio, 9)
-//        var destino = acortar(destino, 9)
         etDistancia.setText("")
         etDistancia.hint = "${distancia}${getString(R.string.m_distancia)} ($inicio - $destino)"
         viajeAyudas.distanciaTrayecto = distancia

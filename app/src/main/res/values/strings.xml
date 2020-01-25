@@ -1,7 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY moneda "€"><!ENTITY distancia "Km"><!ENTITY distancia_completo "Kilometers"><!ENTITY consumo "l/100Km"><!ENTITY combustible "€/l"><!ENTITY liquido "l"><!ENTITY consumo_coche "Liters per 100 km">]>
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY app_name "Consumii">
+    <!ENTITY moneda "€">
+    <!ENTITY distancia "Km">
+    <!ENTITY distancia_completo "Kilometers">
+    <!ENTITY consumo "l/100Km">
+    <!ENTITY combustible "€/l">
+    <!ENTITY liquido "l">
+    <!ENTITY consumo_coche "Liters per 100 km">
+    ]>
 
-    <string name="app_name">Consumii</string>
+<resources>
+    <string name="app_name" translatable="false">&app_name;</string>
 
     <!--NOMBRES ACTIVITIES-->
     <string name="title_activity_map">Map</string>
@@ -9,6 +19,8 @@
     <string name="title_administracion_coches">Favourite cars</string>
     <string name="title_activity_resultado">Results</string>
     <string name="titulo_main">Trip data</string>
+    <string name="title_activity_settings">Settings</string>
+
 
     <!--MEDIDAS-->
     <string name="m_moneda">&moneda;</string>
@@ -91,28 +103,34 @@
     <string name="inicio">Starting point</string>
     <string name="destino">Destination</string>
     <string name="casa_nombre" translatable="false">{{CASA_CONSUMII}}</string>
+    <string name="ubicacion_desactivada">Turn on device location</string>
 
     <!--CONFIGURACIÓN-->
-    <string name="title_activity_settings">Settings</string>
-
-    <!-- Preferences -->
     <string name="ajustes_usuario">Datos de usuario</string>
     <string name="ajustes_generales">General</string>
 
     <string name="settings_consumo">Fuel eficiency of your car</string>
     <string name="settings_combustible">Fuel type of your car</string>
-    <string name="settings_comunidad">Spanish autonomous communities</string>
+    <string name="settings_comunidad">Spanish autonomous community</string>
+    <string name="preffs_comunidad_id" translatable="false">comunidad</string>
     <string name="idioma">Languaje</string>
     <string name="acerca_de">About</string>
-
     <string name="español">Spanish</string>
     <string name="español_abrev" translatable="false">es</string>
     <string name="ingles">English</string>
     <string name="ingles_abrev" translatable="false">en</string>
     <string name="idioma_actual">English</string>
-
     <string name="idioma_id" translatable="false">idioma</string>
+    <string name="aplicacion">This app</string>
+    <string name="programador">Developer</string>
 
+    <string name="aplicacion_id" translatable="false">aplicacion</string>
+    <string name="programador_id" translatable="false">programador</string>
+    <string name="mi_nombre" translatable="false">Miguel Martín</string>
+    <string name="sobre_mi_titulo">About me</string>
+    <string name="sobre_mi">Hello, it\'s Miguel.\nI\'m the developer of &app_name;. Programming is my work and my hobby.\nI\'m %1$s years old and I\'m living in Madrid.\nYou can know more about me in my web.</string>
+    <string name="ver_web">Show web</string>
+    <string name="url" translatable="false">https://miguelmartinprogramador.netlify.com/</string>
 
     <!--<string name=""></string>-->
 </resources>

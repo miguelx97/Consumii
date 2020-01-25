@@ -50,7 +50,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="0dp"
-                    android:src="@drawable/flecha_abajo" />
+                    android:src="@drawable/mapa" />
             </LinearLayout>
 
             <TextView

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -18,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.location.LocationManagerCompat
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -246,8 +248,15 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     private fun cargarUbicacion(funUbicacion: FunUbicacion) {
-        val location = LocationServices.getFusedLocationProviderClient(this)
+        if(!isLocationEnabled()){
+            AlertDialog.Builder(this).apply {
+                setTitle(R.string.ubicacion_desactivada)
+                setPositiveButton(R.string.aceptar){_,_ ->}
+            }.create().show()
+            return
+        }
 
+        val location = LocationServices.getFusedLocationProviderClient(this)
         location.lastLocation
             .addOnSuccessListener { coordenadas: Location ->
                 val coordenadas = LatLng(coordenadas.latitude, coordenadas.longitude)
@@ -262,8 +271,13 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                 toast(getString(R.string.err_ubicacion))
             }
             .addOnCanceledListener {
-//                toast("CANCEL")
+                print("Localizacion cancelada")
             }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return LocationManagerCompat.isLocationEnabled(locationManager)
     }
 
     fun returnDistancia(distancia: String) {
