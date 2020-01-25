@@ -1,11 +1,13 @@
 package com.miguelmartin.consumii.presenter
 
+import android.widget.Toast
 import com.google.android.gms.maps.model.LatLng
 import com.miguelmartin.consumii.Common.toast
 import com.miguelmartin.consumii.Entities.Lugar
 import com.miguelmartin.consumii.R
 import com.miguelmartin.consumii.model.MapModel
 import com.miguelmartin.consumii.view.MapActivity
+import java.lang.Exception
 
 class MapPresenter(view:MapActivity) {
     val view = view
@@ -19,7 +21,14 @@ class MapPresenter(view:MapActivity) {
     }
 
     fun llamadaExitosa(json:String){
-        val distancia = model.getDistanciaFromJson(json)
+        var distancia = ""
+        try {
+            distancia = model.getDistanciaFromJson(json)
+        } catch (e:IndexOutOfBoundsException){
+            view.toast(view.getString(R.string.err_ruta), Toast.LENGTH_LONG)
+            return
+        }
+
         view.returnDistancia(distancia)
         view.cerrarMapa()
     }

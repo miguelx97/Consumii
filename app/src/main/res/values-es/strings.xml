@@ -101,6 +101,7 @@
     <string name="destino">Destino</string>
     <string name="ubicacion_desactivada">Encienda la ubicación del dispositivo</string>
     <string name="err_ubicacion_2">No se pudo encontrar tu ubicación. Reinicie la ubicación del dispositivo y pulse aceptar.</string>
+    <string name="err_ruta">No fue posible calcular distancia de ruta</string>
 
     <!--CONFIGURACIÓN-->
     <string name="ajustes_usuario">Datos de usuario</string>

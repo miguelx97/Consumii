@@ -96,6 +96,7 @@
     <string name="casa_nombre" translatable="false">{{CASA_CONSUMII}}</string>
     <string name="ubicacion_desactivada">Turn on device location</string>
     <string name="err_ubicacion_2">Your location couldn\'t be found. Restart device location and press Ok</string>
+    <string name="err_ruta">Distance couldn\'t be calculated</string>
 
     <!--CONFIGURACIÓN-->
     <string name="ajustes_usuario">Datos de usuario</string>

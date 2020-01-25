@@ -191,10 +191,11 @@ class MainActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_GET_DISTANCIA) {
-            val distancia = data?.getStringExtra(DISTANCIA)
+            var distancia = data?.getStringExtra(DISTANCIA)
             if(distancia.isNullOrEmpty())return
-            val inicio = data.getStringExtra(INICIO)
-            val destino = data.getStringExtra(DESTINO)
+            val inicio = data!!.getStringExtra(INICIO)
+            val destino = data!!.getStringExtra(DESTINO)
+            distancia = distancia.replace(",","")
             rellenarDistancia(distancia.toDouble(), inicio!!, destino!!)
         } else if(requestCode == RC_ADMIN_COCHES){
             datosUsuario = presenter.getDatosUsuario()
