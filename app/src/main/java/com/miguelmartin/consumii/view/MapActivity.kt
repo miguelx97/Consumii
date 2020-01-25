@@ -12,11 +12,11 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat
@@ -180,7 +180,6 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
-
         if(tienePermisos())
             cargarUbicacion(FunUbicacion.INICIO)
 
@@ -250,16 +249,30 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     private fun cargarUbicacion(funUbicacion: FunUbicacion) {
         if(!isLocationEnabled()){
             AlertDialog.Builder(this).apply {
-                setTitle(R.string.ubicacion_desactivada)
-                setPositiveButton(R.string.aceptar){_,_ ->}
+                setTitle(getString(R.string.ubicacion_desactivada))
+                setPositiveButton(R.string.aceptar) { _, _ -> }
             }.create().show()
             return
         }
 
         val location = LocationServices.getFusedLocationProviderClient(this)
         location.lastLocation
-            .addOnSuccessListener { coordenadas: Location ->
-                val coordenadas = LatLng(coordenadas.latitude, coordenadas.longitude)
+            .addOnSuccessListener { coordenadasServ: Location? ->
+                if(coordenadasServ == null){
+                    AlertDialog.Builder(this).apply {
+                        setMessage(getString(R.string.err_ubicacion_2))
+                        setPositiveButton(R.string.aceptar) { _, _ ->
+                            progressBar.visibility = View.VISIBLE
+                            Handler().postDelayed({
+                                recreate()
+                                progressBar.visibility = View.GONE
+                            },3000)
+                        }
+                        setNegativeButton(R.string.cancelar) { _, _ -> }
+                    }.create().show()
+                    return@addOnSuccessListener
+                }
+                val coordenadas = LatLng(coordenadasServ.latitude, coordenadasServ.longitude)
 
                 when(funUbicacion){
                     FunUbicacion.INICIO -> mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 16f))
@@ -294,16 +307,6 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     fun cerrarMapa() {
         finish()
     }
-/*
-    fun dialogConfirmUpdate(newCasa: Lugar) {
-        AlertDialog.Builder(this).apply {
-            setTitle("Cambiar dirección")
-            setMessage("¿Deseas cambiar la dirección de tu casa?")
-            setPositiveButton("Sí"){_,_ -> presenter.updateCasa(newCasa) }
-            setNegativeButton("No"){_, _ -> }
-        }.create().show()
-    }
-    */
 
     fun dialogUtilizarUbicacionActual(titulo:String) {
         AlertDialog.Builder(this).apply {

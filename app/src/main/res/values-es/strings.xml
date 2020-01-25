@@ -17,6 +17,8 @@
     <string name="title_administracion_coches">Coches favoritos</string>
     <string name="title_activity_resultado">Resultados</string>
     <string name="titulo_main">Datos del trayecto</string>
+    <string name="title_activity_settings">Configuración</string>
+    <string name="title_activity_tutorial">Acerca de &app_name;</string>
 
     <!--MEDIDAS-->
     <string name="m_moneda">&moneda;</string>
@@ -98,11 +100,9 @@
     <string name="inicio">Inicio</string>
     <string name="destino">Destino</string>
     <string name="ubicacion_desactivada">Encienda la ubicación del dispositivo</string>
+    <string name="err_ubicacion_2">No se pudo encontrar tu ubicación. Reinicie la ubicación del dispositivo y pulse aceptar.</string>
 
     <!--CONFIGURACIÓN-->
-    <string name="title_activity_settings">Configuración</string>
-
-    <!-- Preference Titles -->
     <string name="ajustes_usuario">Datos de usuario</string>
     <string name="ajustes_generales">General</string>
 
@@ -121,4 +121,17 @@
     <string name="sobre_mi_titulo">Sobre mí</string>
     <string name="sobre_mi">Hola, me llamo Miguel.\nSoy el desarrollador de &app_name;. Me dedico a la programación, tanto profesionalemnte, como por hobbie. Tengo %1$s años y estoy viviendo en Madrid.\nPuedes saber mucho más sobre mí a traves de mi web.</string>
     <string name="ver_web">Ver web</string>
+
+
+    <!-- TUTORIAL-->
+    <string name="tutorial_introduccion_titulo">Introducción</string>
+    <string name="tutorial_mapa_titulo">Mapa</string>
+    <string name="tutorial_favoritos_titulo">Coches favoritos</string>
+    <string name="tutorial_combustibles_titulo">Precio del combustible</string>
+    <string name="tutorial_introduccion">Consumii te permite calcular lo que gastas en combustible en un viaje y, si lo deseas, dividir el coste entre los pasajeros. No es simplemente una calculadora, sino que dispone de ayudas para realizar el cálculo lo más rápido, fácil y exacto posible. Para determinar el coste, es necesario introducir la distancia recorrida, el consumo de su coche y el precio del combustible.</string>
+    <string name="tutorial_mapa"></string>
+    <string name="tutorial_favoritos"></string>
+    <string name="tutorial_combustibles"></string>
+
+
 </resources>

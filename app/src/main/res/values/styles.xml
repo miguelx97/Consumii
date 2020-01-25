@@ -99,6 +99,17 @@
         <item name="android:layout_marginTop">@dimen/margen_top_layout</item>
     </style>
 
+    <style name="tarjetaTutorial" parent="tarjeta">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginBottom">25dp</item>
+    </style>
+
+    <style name="titulosTutorial" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">italic</item>
+    </style>
+
     <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

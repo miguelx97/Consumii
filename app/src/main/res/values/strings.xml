@@ -1,14 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources [
-    <!ENTITY app_name "Consumii">
-    <!ENTITY moneda "€">
-    <!ENTITY distancia "Km">
-    <!ENTITY distancia_completo "Kilometers">
-    <!ENTITY consumo "l/100Km">
-    <!ENTITY combustible "€/l">
-    <!ENTITY liquido "l">
-    <!ENTITY consumo_coche "Liters per 100 km">
-    ]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY app_name "Consumii"><!ENTITY moneda "€"><!ENTITY distancia "Km"><!ENTITY distancia_completo "Kilometers"><!ENTITY consumo "l/100Km"><!ENTITY combustible "€/l"><!ENTITY liquido "l"><!ENTITY consumo_coche "Liters per 100 km">]>
 
 <resources>
     <string name="app_name" translatable="false">&app_name;</string>
@@ -20,6 +10,7 @@
     <string name="title_activity_resultado">Results</string>
     <string name="titulo_main">Trip data</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_tutorial">About &app_name;</string>
 
 
     <!--MEDIDAS-->
@@ -104,6 +95,7 @@
     <string name="destino">Destination</string>
     <string name="casa_nombre" translatable="false">{{CASA_CONSUMII}}</string>
     <string name="ubicacion_desactivada">Turn on device location</string>
+    <string name="err_ubicacion_2">Your location couldn\'t be found. Restart device location and press Ok</string>
 
     <!--CONFIGURACIÓN-->
     <string name="ajustes_usuario">Datos de usuario</string>
@@ -131,6 +123,17 @@
     <string name="sobre_mi">Hello, it\'s Miguel.\nI\'m the developer of &app_name;. Programming is my work and my hobby.\nI\'m %1$s years old and I\'m living in Madrid.\nYou can know more about me in my web.</string>
     <string name="ver_web">Show web</string>
     <string name="url" translatable="false">https://miguelmartinprogramador.netlify.com/</string>
+
+    <!-- TUTORIAL-->
+    <string name="tutorial_introduccion_titulo">Introduction</string>
+    <string name="tutorial_mapa_titulo">Map</string>
+    <string name="tutorial_favoritos_titulo">Favourite cars</string>
+    <string name="tutorial_combustibles_titulo">Fuel prices</string>
+    <string name="tutorial_introduccion">Consumii allows you to calculate what you spend on fuel on a trip and, if you like, you can divide the cost among the passengers. It is not a simple calculator, provides you a several tools to make it easier and faster. To perform the calculation, it is necessary to enter the trip distance, the fuel efficiency of your car and the price of fuel.</string>
+    <string name="tutorial_mapa">Map calculates your trip distance just by introducing the starting point and the destination.</string>
+    <string name="tutorial_favoritos">You can save the car of your friends and family in favorites to access their consumption and fuel data in one tap.</string>
+    <string name="tutorial_combustibles">Consumii has the current prices of all fuels in the Spanish autonomous communities.</string>
+
 
     <!--<string name=""></string>-->
 </resources>

@@ -45,7 +45,8 @@ class SettingsActivity : BaseActivity() {
             }
 
             btnAplicacion?.setOnPreferenceClickListener{
-                
+                val intent = Intent(activity, TutorialActivity::class.java)
+                startActivity(intent)
                 return@setOnPreferenceClickListener true
             }
 
@@ -71,8 +72,6 @@ class SettingsActivity : BaseActivity() {
             }
         }
     }
-
-
 
 
 }
