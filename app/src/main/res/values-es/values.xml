@@ -112,9 +112,10 @@
     <string name="settings_comunidad">Tu comunidad autónoma</string>
     <string name="idioma">Idioma</string>
     <string name="acerca_de">Acerca de</string>
+
     <string name="español">Español</string>
     <string name="ingles">Ingles</string>
-    <string name="idiomaActual">Español</string>
+    <string name="idioma_actual">Español</string>
 
     <!--<string name=""></string>-->
 </resources>

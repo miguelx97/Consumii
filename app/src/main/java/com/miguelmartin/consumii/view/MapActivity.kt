@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.activity_map.*
 data class InfoPosicion (var campo:EditText, var limpiarCampo: ImageView, var icono:Int, var etiqueta:Int, var marker: Marker? = null)
 enum class FunUbicacion {INICIO, POSICION, CASA}
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     lateinit var presenter:MapPresenter
     private lateinit var mMap: GoogleMap

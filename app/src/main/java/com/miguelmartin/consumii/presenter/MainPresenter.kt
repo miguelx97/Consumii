@@ -10,7 +10,7 @@ import com.miguelmartin.consumii.view.MainActivity
 
 class MainPresenter(view: MainActivity) {
     val view = view
-    val model = MainModel()
+    val model = MainModel(view)
 
     fun calcularResultados(){
         val viaje = view.getInfoViaje()
@@ -18,7 +18,7 @@ class MainPresenter(view: MainActivity) {
         view.irResultadoActivity(viaje)
     }
 
-    fun userExiste() = model.comprobarUser(view)
+    fun userExiste() = model.comprobarUser()
 
     fun bienvenidaSiNuevoUsuario(userExiste: Boolean):Boolean {
         if(!userExiste) {
@@ -30,8 +30,8 @@ class MainPresenter(view: MainActivity) {
 
     fun getDatosUsuario() :DatosUsuario{
         val datosUsuario = DatosUsuario()
-        datosUsuario.comunidad = model.getComunidadFromPrefferences(view)
-        datosUsuario.coche = model.getDefaultCocheBd(view)
+        datosUsuario.comunidad = model.getComunidadFromPrefferences()
+        datosUsuario.coche = model.getDefaultCocheBd()
         return datosUsuario
     }
 
@@ -84,7 +84,7 @@ class MainPresenter(view: MainActivity) {
     }
 
     fun getCoches() {
-        val lCoches = model.getCochesBd(view)
+        val lCoches = model.getCochesBd()
         val lFormatCoches = model.getFormatCoches(lCoches, view.getString(R.string.m_liquido))
         val lValoresConsumos = lCoches.toTypedArray()
         view.crearDialogCoches(lFormatCoches, lValoresConsumos)
@@ -102,6 +102,5 @@ class MainPresenter(view: MainActivity) {
     fun administrarCoches() {
         view.irAdministradorCoches()
     }
-
 
 }

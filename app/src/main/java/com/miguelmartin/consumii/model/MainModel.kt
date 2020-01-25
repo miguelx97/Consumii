@@ -9,12 +9,16 @@ import com.google.gson.JsonObject
 import com.miguelmartin.consumii.Common.*
 import com.miguelmartin.consumii.Entities.*
 import com.miguelmartin.consumii.Enums.TipoCombustible
+import com.miguelmartin.consumii.R
 import com.miguelmartin.consumii.db.PersistenciaCoche
 import com.miguelmartin.consumii.presenter.MainPresenter
 import com.miguelmartin.consumii.view.MainActivity
 
 
-class MainModel() {
+class MainModel(context: Context) {
+    val context = context
+    val persistencia = PersistenciaCoche(context)
+    val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
 
     fun getInfoCombustiblesRest(context: MainActivity, datosUsuario:DatosUsuario, url:String){
         val queue = Volley.newRequestQueue(context)
@@ -65,21 +69,15 @@ class MainModel() {
         return mediasCombustible
     }
 
-    fun comprobarUser(context: Context): Boolean {
-        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-        return sharedPreferences.contains(EXISTE)
-    }
+    fun comprobarUser() = sharedPreferences.contains(EXISTE)
 
-    fun getComunidadFromPrefferences(context:Context):String{
-        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-        return sharedPreferences.getString(COMUNIDAD, "")
-    }
+    fun getComunidadFromPrefferences() = sharedPreferences.getString(COMUNIDAD, "")
 
     fun getIdByNombreComunidad(comunidad: String): String {
         return LISTA_COMUNIDADES.filterValues { it == comunidad }.keys.elementAt(0)
     }
 
-    fun getCochesBd(context: Context) = PersistenciaCoche(context).getAll()
+    fun getCochesBd() = persistencia.getAll()
 
     fun getFormatCoches(lCoches: List<Coche>, strMedida:String): Array<String> {
         var lFormatCoches = Array(lCoches.size){""}
@@ -89,7 +87,6 @@ class MainModel() {
         return lFormatCoches
     }
 
-    fun getDefaultCocheBd(context: Context) = PersistenciaCoche(context).getCocheDefault()
-
+    fun getDefaultCocheBd() = persistencia.getCocheDefault()
 
 }

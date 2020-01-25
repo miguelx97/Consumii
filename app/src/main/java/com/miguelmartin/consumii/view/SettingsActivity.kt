@@ -1,14 +1,13 @@
 package com.miguelmartin.consumii.view
 
-import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.miguelmartin.consumii.Common.ApplicationLanguageHelper
+import com.miguelmartin.consumii.Common.ApplicationLanguageHelper.Companion.IDIOMA
+import com.miguelmartin.consumii.Common.BaseActivity
 import com.miguelmartin.consumii.R
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,19 +17,23 @@ class SettingsActivity : AppCompatActivity() {
             .replace(R.id.settings, SettingsFragment())
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
+            val lIdiomas = findPreference(getString(R.string.idioma_id)) as Preference?
+
+            lIdiomas!!.setOnPreferenceChangeListener { preference, newValue ->
+                IDIOMA = newValue.toString()
+                activity!!.recreate()
+                return@setOnPreferenceChangeListener true
+            }
         }
 
-        val lIdiomas = findPreference(getString(R.string.idioma)) as Preference?
-
-
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(ApplicationLanguageHelper.wrap(newBase!!, "fa"))
-    }
+
 }

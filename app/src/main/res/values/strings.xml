@@ -95,7 +95,7 @@
     <!--CONFIGURACIÓN-->
     <string name="title_activity_settings">Settings</string>
 
-    <!-- Preference Titles -->
+    <!-- Preferences -->
     <string name="ajustes_usuario">Datos de usuario</string>
     <string name="ajustes_generales">General</string>
 
@@ -104,9 +104,12 @@
     <string name="settings_comunidad">Spanish autonomous communities</string>
     <string name="idioma">Languaje</string>
     <string name="acerca_de">About</string>
+
     <string name="español">Spanish</string>
+    <string name="español_abrev" translatable="false">es</string>
     <string name="ingles">English</string>
-    <string name="idiomaActual">English</string>
+    <string name="ingles_abrev" translatable="false">en</string>
+    <string name="idioma_actual">English</string>
 
     <string name="idioma_id" translatable="false">idioma</string>
 

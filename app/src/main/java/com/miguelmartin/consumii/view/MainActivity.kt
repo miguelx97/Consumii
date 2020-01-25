@@ -1,18 +1,22 @@
 package com.miguelmartin.consumii.view
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.miguelmartin.consumii.Common.*
+import com.miguelmartin.consumii.Common.ApplicationLanguageHelper.Companion.IDIOMA
 import com.miguelmartin.consumii.Entities.*
 import com.miguelmartin.consumii.R
 import com.miguelmartin.consumii.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var presenter:MainPresenter
     val viaje = Viaje()

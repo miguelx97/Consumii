@@ -3,6 +3,7 @@ package com.miguelmartin.consumii.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.miguelmartin.consumii.Common.BaseActivity
 import com.miguelmartin.consumii.R
 import com.miguelmartin.organizame.data.AdapterCoche
 import com.miguelmartin.consumii.Common.RC_ADMIN_COCHES
@@ -10,7 +11,7 @@ import com.miguelmartin.consumii.Entities.Coche
 import com.miguelmartin.consumii.presenter.AdministradorCochesPresenter
 import kotlinx.android.synthetic.main.activity_administrador_coches.*
 
-class AdministradorCochesActivity : AppCompatActivity() {
+class AdministradorCochesActivity : BaseActivity() {
 
     lateinit var presenter:AdministradorCochesPresenter
 

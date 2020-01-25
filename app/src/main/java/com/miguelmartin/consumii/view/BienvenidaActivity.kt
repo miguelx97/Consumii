@@ -31,7 +31,7 @@ class BienvenidaActivity : AppCompatActivity() {
 
         spCombustible.setOnClickListener { presenter.cargarCombustibles() }
         spComunidad.setOnClickListener { presenter.cargarComunidades() }
-        btnAceptarInicio.setOnClickListener { presenter.accionBotones() }
+        btnAceptarInicio.setOnClickListener { presenter.ocBtnAceptar() }
 //        btnNoCoche.setOnClickListener { presenter.accionBotones(false) }
     }
 

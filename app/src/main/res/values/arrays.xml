@@ -5,6 +5,10 @@
         <item>@string/español</item>
         <item>@string/ingles</item>
     </string-array>
+    <string-array name="idiomas_abrev">
+        <item>@string/español_abrev</item>
+        <item>@string/ingles_abrev</item>
+    </string-array>
 
 
     <string-array name="combustibles">

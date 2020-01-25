@@ -7,14 +7,12 @@ import com.miguelmartin.consumii.Entities.Coche
 import com.miguelmartin.consumii.R
 import com.miguelmartin.consumii.db.PersistenciaCoche
 
-class BienvenidaModel {
+class BienvenidaModel(context: Context) {
+    val context = context
 
-    lateinit var sharedPreferences:SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
+    val editor = context.getSharedPreferences(PREFS_NAME, 0).edit()
 
-    fun guardarComunidadPrefferences(comunidad: String, context: Context){
-        sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-        editor = sharedPreferences.edit()
+    fun guardarComunidadPrefferences(comunidad: String){
 
         if(comunidad.isNotEmpty())
             editor.putString(COMUNIDAD, comunidad)
@@ -23,7 +21,7 @@ class BienvenidaModel {
         editor.commit()
     }
 
-    fun guardarCocheBd(coche: Coche, context: Context):Boolean{
+    fun guardarCocheBd(coche: Coche):Boolean{
         if(coche.combustible.tipo == null || coche.consumo == 0F) return false
 
         coche.nombre = context.getString(R.string.mi_coche)

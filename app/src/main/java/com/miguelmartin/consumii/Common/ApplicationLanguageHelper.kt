@@ -10,7 +10,7 @@ import java.util.*
 
 class ApplicationLanguageHelper(base: Context) : ContextThemeWrapper(base, R.style.AppTheme) {
     companion object {
-
+        var IDIOMA = ""
         fun wrap(context: Context, language: String): ContextThemeWrapper {
             var context = context
             val config = context.resources.configuration

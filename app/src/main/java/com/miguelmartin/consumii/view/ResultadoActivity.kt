@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
+import com.miguelmartin.consumii.Common.BaseActivity
 import com.miguelmartin.consumii.Entities.Coche
 import com.miguelmartin.consumii.Entities.Combustible
 import com.miguelmartin.consumii.Entities.Viaje
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_resultado.*
 import kotlinx.android.synthetic.main.guardar_coche_dialog.*
 import kotlinx.android.synthetic.main.guardar_coche_dialog.view.*
 
-class ResultadoActivity() : AppCompatActivity() {
+class ResultadoActivity() : BaseActivity() {
 
     lateinit var presenter: ResultadoPresenter
     lateinit var arrCombustibleNames:Array<String>
