@@ -122,6 +122,9 @@
     <string name="sobre_mi_titulo">Sobre mí</string>
     <string name="sobre_mi">Hola, me llamo Miguel.\nSoy el desarrollador de &app_name;. Me dedico a la programación, tanto profesionalemnte, como por hobbie. Tengo %1$s años y estoy viviendo en Madrid.\nPuedes saber mucho más sobre mí a traves de mi web.</string>
     <string name="ver_web">Ver web</string>
+    <string name="politicas_privacidad">Políticas de privacidad</string>
+    <string name="legal">Aviso legal</string>
+    <string name="url_politicas_privacidad">https://consumii.netlify.com/politicas_privacidad.html</string>
 
 
     <!-- TUTORIAL-->

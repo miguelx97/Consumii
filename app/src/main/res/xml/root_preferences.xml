@@ -33,7 +33,12 @@
             app:title="@string/programador"
             app:summary="@string/mi_nombre"/>
 
-
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/legal">
+        <Preference
+            app:key="@string/politicas_privacidad_id"
+            app:icon="@drawable/hoja"
+            app:title="@string/politicas_privacidad"/>
+    </PreferenceCategory>
 </PreferenceScreen>

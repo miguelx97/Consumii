@@ -45,6 +45,7 @@ class SettingsActivity : BaseActivity() {
             val lIdiomas = findPreference(getString(R.string.idioma_id)) as Preference?
             val btnAplicacion = findPreference(getString(R.string.aplicacion_id)) as Preference?
             val btnProgramador = findPreference(getString(R.string.programador_id)) as Preference?
+            val btnPoliticasPrivacidad = findPreference(getString(R.string.politicas_privacidad_id)) as Preference?
 
             lIdiomas?.setOnPreferenceChangeListener { _, newValue ->
                 IDIOMA = newValue.toString()
@@ -71,11 +72,18 @@ class SettingsActivity : BaseActivity() {
                     setMessage(getString(R.string.sobre_mi, years.toInt().toString()))
                     setPositiveButton(R.string.ver_web){_,_ ->
                         val intent = Intent(Intent.ACTION_VIEW)
-                        intent.data = Uri.parse(getString(R.string.url))
+                        intent.data = Uri.parse(getString(R.string.url_web_personal))
                         startActivity(intent)
                     }
                     setNegativeButton(R.string.cancelar){_,_ ->}
                 }.create().show()
+                return@setOnPreferenceClickListener true
+            }
+
+            btnPoliticasPrivacidad?.setOnPreferenceClickListener{
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(getString(R.string.url_politicas_privacidad))
+                startActivity(intent)
                 return@setOnPreferenceClickListener true
             }
         }

@@ -123,7 +123,12 @@
     <string name="sobre_mi_titulo">About me</string>
     <string name="sobre_mi">Hello, it\'s Miguel.\nI\'m the developer of &app_name;. Programming is my work and my hobby.\nI\'m %1$s years old and I\'m living in Madrid.\nYou can know more about me in my web.</string>
     <string name="ver_web">Show web</string>
-    <string name="url" translatable="false">https://miguelmartinprogramador.netlify.com/</string>
+    <string name="url_web_personal" translatable="false">https://miguelmartinprogramador.netlify.com/</string>
+    <string name="politicas_privacidad">Privacy Policy</string>
+    <string name="politicas_privacidad_id" translatable="false">politicas_privacidad_id</string>
+    <string name="legal">Legal notice</string>
+    <string name="url_politicas_privacidad">https://consumii.netlify.com/privacy-policy.html</string>
+
 
     <!-- TUTORIAL-->
     <string name="tutorial_introduccion_titulo">Introduction</string>
