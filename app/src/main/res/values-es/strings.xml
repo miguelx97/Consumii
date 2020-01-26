@@ -129,10 +129,14 @@
     <string name="tutorial_mapa_titulo">Mapa</string>
     <string name="tutorial_favoritos_titulo">Coches favoritos</string>
     <string name="tutorial_combustibles_titulo">Precio del combustible</string>
-    <string name="tutorial_introduccion">Consumii te permite calcular lo que gastas en combustible en un viaje y, si lo deseas, dividir el coste entre los pasajeros. No es simplemente una calculadora, sino que dispone de ayudas para realizar el cálculo lo más rápido, fácil y exacto posible. Para determinar el coste, es necesario introducir la distancia recorrida, el consumo de su coche y el precio del combustible.</string>
-    <string name="tutorial_mapa"></string>
-    <string name="tutorial_favoritos"></string>
-    <string name="tutorial_combustibles"></string>
+    <string name="tutorial_introduccion">
+        Consumii te permite calcular lo que gastas en combustible en un viaje y, si lo deseas, dividir el coste entre los pasajeros.
+        No es simplemente una calculadora, sino que dispone de ayudas para realizar el cálculo lo más rápido, fácil y exacto posible.
+        Para determinar el coste, es necesario introducir la distancia recorrida, el consumo de su coche y el precio del combustible.
+    </string>
+    <string name="tutorial_mapa">Dispone de un mapa, en el cual solo tienes que introducir el inicio y destino de tu viaje para que te calcule la distancia recorrida.</string>
+    <string name="tutorial_favoritos">Puedes guardar, tanto tu coche, como el de tus familiares y amigos en favoritos para acceder a sus datos de consumo y combustible con un toque.</string>
+    <string name="tutorial_combustibles">Consumii dispone de los precios actuales de todos los combustibles en las comunidades autónomas españolas.</string>
 
 
 </resources>
