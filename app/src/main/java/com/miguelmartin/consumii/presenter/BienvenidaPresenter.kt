@@ -23,6 +23,7 @@ class BienvenidaPresenter(view: BienvenidaActivity) {
         val datosUsuario = view.getDatos()
         model.guardarComunidadPrefferences(datosUsuario.comunidad)
         model.guardarCocheBd(datosUsuario.coche)
+        model.guardarIdiomaActual()
         view.irMain()
 
     }

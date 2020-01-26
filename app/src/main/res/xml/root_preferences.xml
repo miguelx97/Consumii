@@ -16,7 +16,7 @@
             app:key="@string/idioma_id"
             app:title="@string/idioma"
             app:icon="@drawable/language"
-            app:summary="@string/idioma_actual"/>
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 

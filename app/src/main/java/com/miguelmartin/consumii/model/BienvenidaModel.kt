@@ -28,4 +28,9 @@ class BienvenidaModel(context: Context) {
         coche.default = true
         return PersistenciaCoche(context).insert(coche)
     }
+
+    fun guardarIdiomaActual() { //Para que el settings activity lo coga del preferences
+        sharedPreferences.putString(context.getString(R.string.idioma_id), context.getString(R.string.idioma_actual))
+        sharedPreferences.commit()
+    }
 }

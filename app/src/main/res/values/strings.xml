@@ -112,7 +112,7 @@
     <string name="español_abrev" translatable="false">es</string>
     <string name="ingles">English</string>
     <string name="ingles_abrev" translatable="false">en</string>
-    <string name="idioma_actual">English</string>
+    <string name="idioma_actual">en</string>
     <string name="idioma_id" translatable="false">idioma</string>
     <string name="aplicacion">This app</string>
     <string name="programador">Developer</string>

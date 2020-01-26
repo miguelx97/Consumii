@@ -114,8 +114,8 @@
     <string name="acerca_de">Acerca de</string>
 
     <string name="español">Español</string>
-    <string name="ingles">Ingles</string>
-    <string name="idioma_actual">Español</string>
+    <string name="ingles">Inglés</string>
+    <string name="idioma_actual">es</string>
 
     <string name="aplicacion">Esta aplicación</string>
     <string name="programador">Desarrollador</string>
