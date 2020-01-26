@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import com.google.android.gms.ads.MobileAds
 import com.miguelmartin.consumii.Entities.Coche
 import com.miguelmartin.consumii.Entities.Combustible
 import com.miguelmartin.consumii.Entities.DatosUsuario
@@ -21,8 +20,6 @@ class BienvenidaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bienvenida)
-
-        MobileAds.initialize(this) {}
 
 //        CochePersistencia(this).insert(Coche(0, "Mi coche", 7f, Combustible(TipoCombustible.DIESEL_MEJORADO, 1.5f)))
 //        Log.w("Coches", CochePersistencia(this).getAll().toString())

@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.miguelmartin.consumii.Common.BaseActivity
 import com.miguelmartin.consumii.Entities.Coche
 import com.miguelmartin.consumii.Entities.Combustible
@@ -25,17 +27,24 @@ class ResultadoActivity() : BaseActivity() {
     lateinit var arrCombustibleNames:Array<String>
     lateinit var viaje: Viaje
     var cocheCuardado = false
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultado)
 
+        MobileAds.initialize(this) {}
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         // Load an ad into the AdMob banner view.
+        /*
         val adRequest = AdRequest.Builder()
             .setRequestAgent("android_studio:ad_template")
             .build()
         adView.loadAd(adRequest)
-
+*/
         presenter = ResultadoPresenter(this)
 
         viaje = intent.getSerializableExtra("viaje") as Viaje
