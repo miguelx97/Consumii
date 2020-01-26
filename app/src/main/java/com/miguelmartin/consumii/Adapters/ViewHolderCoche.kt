@@ -108,13 +108,16 @@ class ViewHolderCoche(inflater: LayoutInflater, parent: ViewGroup, adapter: Adap
     }
 
     private fun cambioCocheDefault(coche: Coche) {
-        val cocheDefault = AdministradorCochesActivity.listaCoches.filter { it.default }[0]
-        val cocheDefaultPosicion = AdministradorCochesActivity.listaCoches.indexOf(cocheDefault)
-        cocheDefault.default = false
-        if (!persistencia.update(cocheDefault)) return
+        if(AdministradorCochesActivity.listaCoches.filter { it.default }.isNotEmpty()){ //Si hay un coche por defecto
+            val cocheDefault = AdministradorCochesActivity.listaCoches.filter { it.default }[0]
+            val cocheDefaultPosicion = AdministradorCochesActivity.listaCoches.indexOf(cocheDefault)
+            cocheDefault.default = false
+            if (!persistencia.update(cocheDefault)) return
+            adapter.notifyItemRangeChanged(cocheDefaultPosicion, adapter.itemCount)
+        }
+
         coche.default = true
         if (!persistencia.update(coche)) return
-        adapter.notifyItemRangeChanged(cocheDefaultPosicion, adapter.itemCount)
         adapter.notifyItemRangeChanged(adapterPosition, adapter.itemCount)
     }
 

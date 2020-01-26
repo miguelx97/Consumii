@@ -30,6 +30,14 @@ class SettingsActivity : BaseActivity() {
         supportActionBar?.title = getString(R.string.title_activity_settings)
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent)
+        finish()
+        super.onBackPressed()
+    }
+
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)

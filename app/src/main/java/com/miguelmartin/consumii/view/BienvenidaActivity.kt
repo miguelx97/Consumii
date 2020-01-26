@@ -73,6 +73,7 @@ class BienvenidaActivity : AppCompatActivity() {
     fun irMain(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 }
