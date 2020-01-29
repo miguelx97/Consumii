@@ -11,8 +11,8 @@ android {
         applicationId "com.martin.miguel.tuconsumo"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 10
-        versionName "3.3"
+        versionCode 11
+        versionName "3.4"
 
     }
     buildTypes {
