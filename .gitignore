@@ -14,4 +14,4 @@
 .cxx
 /Archivos
 /app/release
-/app/src/release/res/values/strings_entorno.xml
+strings_entorno.xml
