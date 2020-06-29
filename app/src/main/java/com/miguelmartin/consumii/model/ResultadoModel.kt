@@ -15,8 +15,6 @@ class ResultadoModel {
 
     fun calcularCostoPorPasajero(costo: Double, pasajeros: Int): Double = Math.round(costo/pasajeros * 100.0) / 100.0
 
-    fun guardarCocheBd(coche: Coche, context: Context) = PersistenciaCoche(context).insert(coche)
-
     fun getResultados(viaje: Viaje): Resultados {
         //Datos del viaje
         val distanciaTrayecto = viaje.distanciaTrayecto

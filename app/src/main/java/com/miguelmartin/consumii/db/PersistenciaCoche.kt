@@ -94,8 +94,14 @@ class PersistenciaCoche(context: Context) {
     }
 
     fun existeCoche(coche: Coche): Boolean {
-        val cursor = dbManager.customQuery(sqlEsisteCoche, arrayOf(coche.id.toString()))
+        val cursor = dbManager.customQuery(sqlExisteCoche, arrayOf(coche.id.toString()))
         return cursor.moveToFirst()
+    }
+
+    fun hayCoches(): Boolean {
+        val cursor = dbManager.customQuery(sqlNumCoches, null)
+        cursor.moveToFirst()
+        return cursor.getInt(0) > 0
     }
 
     fun parseDefault(default: Boolean):Int{

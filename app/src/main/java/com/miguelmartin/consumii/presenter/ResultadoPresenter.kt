@@ -8,12 +8,14 @@ import com.miguelmartin.consumii.Entities.Resultados
 import com.miguelmartin.consumii.Entities.Viaje
 import com.miguelmartin.consumii.Enums.TipoCombustible
 import com.miguelmartin.consumii.R
+import com.miguelmartin.consumii.model.AdministradorCochesModel
 import com.miguelmartin.consumii.model.ResultadoModel
 import com.miguelmartin.consumii.view.ResultadoActivity
 
 class ResultadoPresenter(view: ResultadoActivity) {
     val view = view
     val model = ResultadoModel()
+    val modelCoches = AdministradorCochesModel(view)
 
     fun tratarPasajerosYCostos(oldPasajeros: Int, cambio: Int, costo:Double) {
         val newPasajeros = model.sumarRestarPasajeros(oldPasajeros, cambio)
@@ -54,7 +56,7 @@ class ResultadoPresenter(view: ResultadoActivity) {
     fun guardarCoche(dialogView: View, btnGuardarCoche: ImageButton):Boolean {
         if (!view.camposRellenos(dialogView)) return false
         val coche = view.getDataCoche(dialogView)
-        if(model.guardarCocheBd(coche, view)){
+        if(modelCoches.guardarCoche(coche)){
             view.estadoBoton(btnGuardarCoche, true)
             view.setCoche(coche)
             return true

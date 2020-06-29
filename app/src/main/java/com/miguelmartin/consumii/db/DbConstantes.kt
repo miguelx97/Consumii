@@ -35,5 +35,6 @@ const val sqlEliminarUltimoRegistro =
        " WHERE $COL_ID = (SELECT MAX($COL_ID)" +
             " from $DB_TABLE_COCHES)"
 
-const val sqlEsisteCoche =
-    "SELECT 1 FROM $DB_TABLE_COCHES WHERE $COL_ID = ?"
+const val sqlExisteCoche = "SELECT 1 FROM $DB_TABLE_COCHES WHERE $COL_ID = ?"
+
+const val sqlNumCoches = "SELECT count(*) FROM $DB_TABLE_COCHES"

@@ -68,7 +68,7 @@ class DbManager {
         return count
     }
 
-    fun customQuery(query:String, array:Array<String>):Cursor{
+    fun customQuery(query:String, array:Array<String>?):Cursor{
         var qb=SQLiteQueryBuilder()
         qb.tables = currentTable
 
