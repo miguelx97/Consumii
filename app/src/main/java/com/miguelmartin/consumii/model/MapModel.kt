@@ -18,7 +18,7 @@ class MapModel(context: Context) {
     val persistencia = PersistenciaLugares(context)
 
     fun getUrl(ubicacionInicio: LatLng, ubicacionDestino: LatLng, key:String)=
-        "https://maps.google.com/maps/api/directions/json?origin=${ubicacionInicio.latitude},${ubicacionInicio.longitude}&destination=${ubicacionDestino.latitude},${ubicacionDestino.longitude}&sensor=false&key=$key"
+        "https://maps.google.com/maps/api/directions/json?origin=${ubicacionInicio.latitude},${ubicacionInicio.longitude}&destination=${ubicacionDestino.latitude},${ubicacionDestino.longitude}&sensor=false&key=$key&units=metric"
 
     fun getInfoDistanciasRest(context: MapActivity, url:String){
         val queue = Volley.newRequestQueue(context)
@@ -36,8 +36,9 @@ class MapModel(context: Context) {
     fun getDistanciaFromJson(json: String): String {
         val gson = Gson()
         val jsonObject = gson.fromJson(json, JsonObject::class.java)
-        val distanciaString = ((jsonObject.getAsJsonArray("routes")[0] as JsonObject).getAsJsonArray("legs")[0] as JsonObject).getAsJsonObject("distance").getAsJsonPrimitive("text").asString
-        return distanciaString.removeSuffix(" km")
+        var distancia = ((jsonObject.getAsJsonArray("routes")[0] as JsonObject).getAsJsonArray("legs")[0] as JsonObject).getAsJsonObject("distance").getAsJsonPrimitive("text").asString
+        distancia = distancia.removeSuffix(" km").replace(",","")
+        return distancia
     }
 
     fun guardarCasaBd(lugar: Lugar) = persistencia.insert(lugar)

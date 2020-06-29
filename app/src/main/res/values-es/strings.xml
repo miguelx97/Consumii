@@ -82,7 +82,7 @@
     <string name="err_consumo_coche">Debe introducir el consumo</string>
     <string name="err_consumo_cero">El consumo no puede ser 0</string>
     <string name="no_eliminar_coche_principal">El coche principal no puede ser eliminado</string>
-    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\nEl consumo ha costado %2$s&moneda;.\nEntre %3$s pasajeros, *%4$s&moneda;* cada uno.\nqrco.de/consumii</string>
+    <string name="mensaje_compartir">Se han recorrido %1$s&distancia;.\nEl consumo ha costado %2$s&moneda;.\nEntre %3$s pasajeros, *%4$s&moneda;* cada uno.\nbit.ly/Consumii</string>
 
 
     <!--MAPA-->

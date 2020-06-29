@@ -36,35 +36,40 @@ class MainModel(context: Context) {
 
     data class MediaPrecioCombustible (var lPrecios:MutableList<Float> = mutableListOf(), var nombre:String = "")
 
-    fun getMediasCombustibles(json:String):Array<Combustible>{
+    fun getMediasCombustibles(json:String): Array<Combustible> {
 
-        val gson = Gson()
-        val jsonObject = gson.fromJson(json, JsonObject::class.java)
-        val arrJoListaEESSPrecio = gson.fromJson(jsonObject.get("ListaEESSPrecio"), Array<JsonObject>::class.java)
+        var mediasCombustible: Array<Combustible> = emptyArray();
+        try {
+            val gson = Gson()
+            val jsonObject = gson.fromJson(json, JsonObject::class.java)
+            val arrJoListaEESSPrecio = gson.fromJson(jsonObject.get("ListaEESSPrecio"), Array<JsonObject>::class.java)
 
-        val arrPreciosByCombustible = Array(TipoCombustible.values().size){ MediaPrecioCombustible() }
+            var arrPreciosByCombustible =
+                Array(TipoCombustible.values().size) { MediaPrecioCombustible() }
 
-        TipoCombustible.values().forEachIndexed { i, it ->
-            arrPreciosByCombustible[i].nombre = it.nombreJson
-        }
+            TipoCombustible.values().forEachIndexed { i, it ->
+                arrPreciosByCombustible[i].nombre = it.nombreJson
+            }
 
-        arrJoListaEESSPrecio.forEach { js ->
-            arrPreciosByCombustible.forEach {
-                if(!js.get(it.nombre).isJsonNull){
-                    it.lPrecios.add(js.get(it.nombre).asString.replace(",", ".").toFloat())
+            arrJoListaEESSPrecio.forEach { js ->
+                arrPreciosByCombustible.forEach {
+                    if (js.get(it.nombre) != null && !js.get(it.nombre).isJsonNull) {
+                        it.lPrecios.add(js.get(it.nombre).asString.replace(",", ".").toFloat())
+                    }
                 }
             }
-        }
 
-        val mediasCombustible = Array(arrPreciosByCombustible.filter { it.lPrecios.isNotEmpty() }.size){ Combustible() }
+            arrPreciosByCombustible = (arrPreciosByCombustible.filter { it.lPrecios.isNotEmpty() }).toTypedArray()
 
-        arrPreciosByCombustible.forEachIndexed{ i, it ->
-            if(it.lPrecios.isNotEmpty()){
-                it.lPrecios.sort()
-                mediasCombustible[i].tipo = TipoCombustible.fromNombreJson(it.nombre)
-                mediasCombustible[i].precio = it.lPrecios.get(it.lPrecios.size/2)
+            mediasCombustible = Array(arrPreciosByCombustible.size) { Combustible() }
+
+            arrPreciosByCombustible.forEachIndexed { i, it ->
+                    it.lPrecios.sort()
+                    mediasCombustible[i].tipo = TipoCombustible.fromNombreJson(it.nombre)
+                    mediasCombustible[i].precio = it.lPrecios.get(it.lPrecios.size / 2)
             }
-
+        } catch (ex:Exception) {
+            return emptyArray()
         }
 
         return mediasCombustible
@@ -74,8 +79,10 @@ class MainModel(context: Context) {
 
     fun getComunidadFromPrefferences() = sharedPreferences.getString(context.getString(R.string.preffs_comunidad_id), "")
 
-    fun getIdByNombreComunidad(comunidad: String): Int {
-        return context.resources.getStringArray(R.array.comunidades).indexOf(comunidad)+1
+    fun getIdByNombreComunidad(comunidad: String): String {
+        var idComu = (context.resources.getStringArray(R.array.comunidades).indexOf(comunidad)+1).toString();
+        if (idComu.length < 2) idComu = "0$idComu"
+        return idComu;
     }
 
     fun getCochesBd() = persistencia.getAll()

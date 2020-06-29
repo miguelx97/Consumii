@@ -1,7 +1,7 @@
 package com.miguelmartin.consumii.Enums
 
 enum class TipoCombustible(val nombre: String, val nombreJson: String) {
-    GASOLINA_95("Gasolina 95", "Precio Gasolina 95 Protección"),
+    GASOLINA_95("Gasolina 95", "Precio Gasolina 95"),
     GASOLINA_98("Gasolina 98", "Precio Gasolina  98"),
     DIESEL("Diesel", "Precio Gasoleo A"),
     DIESEL_MEJORADO("Diesel Plus", "Precio Nuevo Gasoleo A"),

@@ -56,6 +56,7 @@ class MapPresenter(view:MapActivity) {
             }
 
             view.toast(view.getString(R.string.casa_guardada))
+            view.cargarPosición(view.getString(R.string.casa), newCasa.coordenadas!!)
         } else{
             newCasa.id = oldCasa.id
             updateCasa(newCasa)
@@ -70,6 +71,7 @@ class MapPresenter(view:MapActivity) {
         }
 
         view.toast(view.getString(R.string.casa_actualizar))
+        view.cargarPosición(view.getString(R.string.casa), newCasa.coordenadas!!)
     }
 
     fun coordenadasToString(coordenadas:LatLng) = model.coordenadasToString(coordenadas)

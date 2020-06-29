@@ -145,7 +145,7 @@
     <style name="button" parent="@android:style/Widget.Material.Light.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/boton_circular</item>
+        <item name="android:background">@drawable/boton_ripple</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">18dp</item>
     </style>

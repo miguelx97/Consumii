@@ -44,7 +44,7 @@ class MainPresenter(view: MainActivity) {
     fun llamadaExitosa(jsonInfoGasolineras: String, datosUsuario: DatosUsuario){
         val arrMediasCombustibles = model.getMediasCombustibles(jsonInfoGasolineras)
         view.cargarListaCombustibles(arrMediasCombustibles)
-        if(datosUsuario.coche.combustible.tipo == null) return
+        if(datosUsuario.coche.combustible.tipo == null || arrMediasCombustibles.isEmpty()) return
         val lUnCombustible = arrMediasCombustibles.filter { it.tipo == datosUsuario.coche.combustible.tipo }
         if(lUnCombustible.isEmpty()) return
         val combustible = lUnCombustible[0]
@@ -54,8 +54,9 @@ class MainPresenter(view: MainActivity) {
     fun mostrarDialogCombustibles(arrCombustibles: Array<Combustible>?, datosUsuario: DatosUsuario?) {
         if(datosUsuario!!.comunidad.isNullOrEmpty()){
             view.toast(view.getString(R.string.sin_comunidad))
+            return
         }
-        if (arrCombustibles == null) {
+        if (arrCombustibles == null || arrCombustibles.isEmpty()) {
             view.toast(view.getString(R.string.sin_datos))
             if (datosUsuario.comunidad != "")cargarPrecioCombustible(datosUsuario)
             return
