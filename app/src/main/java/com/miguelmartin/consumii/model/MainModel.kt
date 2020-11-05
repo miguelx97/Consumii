@@ -53,7 +53,7 @@ class MainModel(context: Context) {
 
             arrJoListaEESSPrecio.forEach { js ->
                 arrPreciosByCombustible.forEach {
-                    if (js.get(it.nombre) != null && !js.get(it.nombre).isJsonNull) {
+                    if (js.get(it.nombre) != null && !js.get(it.nombre).isJsonNull && !js.get(it.nombre).asString.isEmpty()) {
                         it.lPrecios.add(js.get(it.nombre).asString.replace(",", ".").toFloat())
                     }
                 }

@@ -94,7 +94,7 @@ class MainPresenter(view: MainActivity) {
     fun rellenarDatosByCoche(cocheSeleccionado: Coche, arrCombustibles: Array<Combustible>?){
         cargarConsumoCoche(cocheSeleccionado)
 
-        if(arrCombustibles != null) {
+        if(arrCombustibles != null && arrCombustibles.isNotEmpty()) {
             val combustible = arrCombustibles.filter{it.tipo == cocheSeleccionado.combustible.tipo}[0]
             cargarPrecioCombustible(combustible)
         }
